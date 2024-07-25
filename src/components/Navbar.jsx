@@ -8,14 +8,22 @@ import { ProductsContext } from "../context";
 const Nav = () => {
   const { setProducts } = useContext(ProductsContext);
   const { getImages } = useSearch();
+
   const [photoUrl, setPhotoUrl] = useState("");
+  const [token, setToken] = useState("");
+
   const handleClick = async () => {
-    const items = await getImages(photoUrl);
+    const items = await getImages(token, photoUrl);
     setProducts(items);
   };
 
   return (
     <div style={{ margin: "20px" }}>
+      <Input
+        placeholder="Введите токен..."
+        onChange={(e) => setToken(e.target.value)}
+        style={{ "margin-bottom": "20px" }}
+      />
       <Space.Compact style={{ width: "100%" }}>
         <Input
           prefix={<SearchOutlined />}
