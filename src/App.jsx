@@ -1,14 +1,19 @@
+import { useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import ProductContainer from "./components/ProductContainer.jsx";
+import { ProductsContext } from "./context.js";
 
 function App() {
-  return (
-    <div className="App">
-      <Navbar />
+  const [products, setProducts] = useState([]);
 
-      <ProductContainer />
-    </div>
+  return (
+    <ProductsContext.Provider value={{ products, setProducts }}>
+      <div className="App">
+        <Navbar />
+        <ProductContainer />
+      </div>
+    </ProductsContext.Provider>
   );
 }
 

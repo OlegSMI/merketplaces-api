@@ -1,36 +1,27 @@
 // import axios from "axios";
-import React, { useState } from "react";
-import ProductCard from "./ProductCard";
+import { Col } from "antd";
+import { useContext } from "react";
+import ProductCard from "./ProductCard.jsx";
+import { ProductsContext } from "/src/context.js";
 
 const ProductContainer = () => {
-  const [products, setProducts] = useState([]);
+  const { products } = useContext(ProductsContext);
 
-  // React.useEffect(() => {
-  //   axios
-  //     .get("https://66910f4126c2a69f6e8e426e.mockapi.io/test/products")
-  //     .then((response) => {
-  //       setProducts(response.data);
-  //     })
-  //     .catch((error) => {
-  //       alert("Произошла ошибка при запросе данных");
-  //       console.log(error);
-  //     });
-  // }, []);
-
-  React.useEffect(() => {
-    let url = "/src/data.json";
-    fetch(url)
-      .then((res) => res.json())
-      .then((prod) => setProducts(prod.result.items));
-  }, []);
-
-  return (
-    <>
-      {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
-    </>
-  );
+  if (products.length === 0) {
+    return <div>Нет элементов</div>;
+  } else {
+    return (
+      <ProductsContext.Provider value={products}>
+        <div className="row-products">
+          {products.map((product) => (
+            <Col key={product.item_id} className="gutter-row" span={5}>
+              <ProductCard product={product} />
+            </Col>
+          ))}
+        </div>
+      </ProductsContext.Provider>
+    );
+  }
 };
 
 export default ProductContainer;

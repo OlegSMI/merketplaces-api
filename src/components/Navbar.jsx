@@ -1,14 +1,17 @@
 import { SearchOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useSearch } from "../api/serachApi";
 
 import { Button, Input, Space } from "antd";
+import { ProductsContext } from "../context";
 
 const Nav = () => {
+  const { setProducts } = useContext(ProductsContext);
   const { getImages } = useSearch();
   const [photoUrl, setPhotoUrl] = useState("");
-  const handleClick = () => {
-    console.log(getImages(photoUrl));
+  const handleClick = async () => {
+    const items = await getImages(photoUrl);
+    setProducts(items);
   };
 
   return (

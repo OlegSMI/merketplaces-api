@@ -7,9 +7,10 @@ export const useSearch = () => {
       const res = await axios.get(
         `${url}?api_token=${import.meta.env.VITE_TOKEN}&img_url=${image}`
       );
-      const { data } = res.data;
 
-      return data;
+      const { items } = res.data.result;
+
+      return items;
     } catch (error) {
       console.log(error);
       throw error;
