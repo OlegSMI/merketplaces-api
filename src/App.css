@@ -64,3 +64,25 @@
 .ant-card-cover {
   height: 240px;
 }
+
+.navbar-container {
+  display: grid;
+  grid-gap: 35px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 100px;
+}
+
+.token-search {
+  grid-column: 1 / 4;
+  grid-row: 1;
+}
+.img-preview {
+  grid-column: 4;
+  grid-row: 1 / 4;
+  height: 100px;
+}
+
+.img-search {
+  grid-column: 1 / 4;
+  grid-row: 2;
+}

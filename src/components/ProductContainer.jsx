@@ -11,15 +11,13 @@ const ProductContainer = () => {
     return <div>Нет элементов</div>;
   } else {
     return (
-      <ProductsContext.Provider value={products}>
-        <div className="row-products">
-          {products.map((product) => (
-            <Col key={product.item_id} className="gutter-row" span={5}>
-              <ProductCard product={product} />
-            </Col>
-          ))}
-        </div>
-      </ProductsContext.Provider>
+      <div className="row-products">
+        {products.map((product) => (
+          <Col key={product.item_id} className="gutter-row" span={5}>
+            <ProductCard product={product} />
+          </Col>
+        ))}
+      </div>
     );
   }
 };
