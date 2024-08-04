@@ -1,21 +1,28 @@
 // import axios from "axios";
-import { Col } from "antd";
 import { useContext } from "react";
+import { ErrorContext } from "../context.js";
 import ProductCard from "./ProductCard.jsx";
-import { ProductsContext } from "/src/context.js";
+import { LoadingContext, ProductsContext } from "/src/context.js";
 
 const ProductContainer = () => {
   const { products } = useContext(ProductsContext);
+  const { isLoading } = useContext(LoadingContext);
+  const { isError } = useContext(ErrorContext);
 
-  if (products.length === 0) {
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (isError) {
+    return <div>Ошибка запроса</div>;
+  } else if (products.length === 0) {
     return <div>Нет элементов</div>;
   } else {
     return (
       <div className="row-products">
         {products.map((product) => (
-          <Col key={product.item_id} className="gutter-row" span={5}>
+          <div key={product.item_id} className="gutter-row">
             <ProductCard product={product} />
-          </Col>
+          </div>
         ))}
       </div>
     );

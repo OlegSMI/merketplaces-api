@@ -4,6 +4,10 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #494646;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .logo {
@@ -51,18 +55,23 @@
 }
 
 .card-product {
-  height: 400px;
+  height: 460px;
   width: 100%;
 }
 
 .gutter-row {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 300px;
 }
 
 .ant-card-cover {
-  height: 240px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.ant-card-cover img {
+  height: 300px;
 }
 
 .navbar-container {
@@ -85,4 +94,37 @@
 .img-search {
   grid-column: 1 / 4;
   grid-row: 2;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: space-between;
+  height: 100px;
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.card-price {
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.card-content a {
+  color: #9a9797;
+  font-size: 14px;
+  border-radius: 10px;
+  margin: 0 auto;
+  padding: 5px 10px;
+  transition: all 0.3s ease-in-out;
+}
+
+.card-content a:hover {
+  color: #ffffff;
+  background-color: #9a9797;
 }
