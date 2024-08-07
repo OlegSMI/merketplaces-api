@@ -2,11 +2,11 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: "16px";
-  max-width: "300px";
-  text-align: "center";
-  box-shadow: "0 2px 8px rgba(0; 0; 0; 0.1)";
-  margin: "16px";
+  padding: 16px;
+  // max-width: 300px;
+  // text-align: center;
+  // box-shadow: 0 2px 8px rgba(0 0 0.1);
+  // margin: 16px;
   cursor: pointer;
   box-shadow: 0 2px 7.8px 0 rgba(0, 0, 0, 0.1);
 
@@ -35,38 +35,44 @@
 }
 
 .color {
-  color: "#555";
+  color: #555;
 }
 
 .rating {
-  color: "#FFD700"; // Золотистый цвет для рейтинга
+  color: #ffd700; // Золотистый цвет для рейтинга
 }
 
 .price {
-  font-weight: "bold";
-  margin: "10px 0";
+  font-weight: bold;
+  // margin: 10px 0;
 }
 
 .clientPrice {
-  color: "#E63946"; // Цвет для цены клиента
-  margin-right: "10px";
+  color: #e63946;
+  margin-right: 10px;
 }
 
 .basicPrice {
-  text-decoration: "line-through"; // Зачеркнутая цена
-  color: "#999";
+  text-decoration: line-through;
+  color: #999;
 }
 
 .country {
-  font-size: "0.9em";
-  color: "#777";
+  font-size: 0.9em;
+  color: #777;
 }
 
 .button {
-  padding: "10px 20px";
-  background-color: "#007BFF";
-  color: "#fff";
-  border: "none";
-  border-radius: "4px";
-  cursor: "pointer";
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: transform 0.1s ease, background-color 0.1s ease; /* Добавляем плавный переход */
+
+  &:active {
+    transform: scale(0.95);
+    background-color: #0056b3;
+  }
 }

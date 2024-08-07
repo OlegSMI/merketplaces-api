@@ -33,8 +33,9 @@ function Header() {
       <div className="settings">
         <CiSettings onClick={openModal} />
       </div>
-
-      <SettingsModal isOpen={isModalOpen} onClose={closeModal} />
+      {isModalOpen && (
+        <SettingsModal isOpen={isModalOpen} onClose={closeModal} />
+      )}
     </div>
   );
 }

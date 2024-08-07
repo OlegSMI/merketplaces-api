@@ -3,7 +3,7 @@ const initialState = {
 };
 
 const mpStatProducts = (state = initialState, action) => {
-  if (action.type === "SET_ADD_PRODUCTS") {
+  if (action.type === "SET_ADD_MPSTATS_PRODUCTS") {
     return {
       ...state,
       items: [...action.payload],

@@ -4,14 +4,17 @@ import { useDispatch } from "react-redux";
 
 import { addMpStatProducts } from "../redux/actions/mpStatProducts";
 import { featchMpStats } from "../api";
+import { useState } from "react";
 
 function SettingsModal({ isOpen, onClose }) {
+  const [token, setToken] = useState("");
   const dispatch = useDispatch();
 
-  if (!isOpen) return null;
+  // if (!isOpen) return null;
 
-  const setToken = async (token) => {
+  const onClickButton = async () => {
     dispatch(addMpStatProducts(await featchMpStats(token)));
+    onClose();
   };
 
   return (
@@ -23,11 +26,10 @@ function SettingsModal({ isOpen, onClose }) {
             prefix={<FileProtectOutlined />}
             placeholder="Введите токен..."
             onChange={(e) => setToken(e.target.value)}
-            // onChange={(e) => console.log(e.target.value)}
           />
         </div>
-        <button className="buttonClose" type="button" onClick={onClose}>
-          Закрыть
+        <button className="buttonClose" type="button" onClick={onClickButton}>
+          Отправить
         </button>
       </div>
     </div>
