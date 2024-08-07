@@ -1,33 +1,40 @@
 import { CiSettings } from "react-icons/ci";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { SettingsModal } from "../components";
+import { featchCategories } from "../api";
 
 function Header() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+  const [activeCategory, setActiveCategory] = useState(null);
 
   const openModal = () => setModalOpen(true);
   const closeModal = () => setModalOpen(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setCategories(await featchCategories());
+    };
+    fetchData();
+  }, []);
+
+  console.log(categories);
 
   return (
     <div className="header-container">
       <nav className="filter-navigation">
         <ul>
-          <li>
-            <a>Все</a>
-          </li>
-          <li>
-            <a>Электроника</a>
-          </li>
-          <li>
-            <a>Одежда</a>
-          </li>
-          <li>
-            <a>Для дома</a>
-          </li>
-          <li>
-            <a>Игрушки</a>
-          </li>
+          {categories.map((category) => (
+            <li key={category.path}>
+              <a
+                className={activeCategory === category.path ? "active" : ""}
+                onClick={() => setActiveCategory(category.path)}
+              >
+                {category.name}
+              </a>
+            </li>
+          ))}
         </ul>
       </nav>
       <div className="settings">
