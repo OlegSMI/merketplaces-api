@@ -1,0 +1,1113 @@
+{
+  "errorCode": 0,
+  "message": "Success",
+  "result": {
+    "page": 1,
+    "page_size": 20,
+    "total_count": 700,
+    "sort": "default",
+    "price_start": "",
+    "price_end": "",
+    "items": [
+      {
+        "item_id": 777715039521,
+        "product_url": "https://detail.1688.com/offer/777715039521.html",
+        "title": "超迈轮胎205-55-R16操控耐磨车胎量大优惠轮胎规格全正品车胎发货",
+        "img": "https://cbu01.alicdn.com/O1CN01Auj4P71IxjAJrOaoC_!!2217599090960-0-cib.jpg",
+        "category_path": ["124736046", "124014003", "122916002"],
+        "price": "154.8",
+        "price_info": {
+          "drop_ship_price": "210.0",
+          "wholesale_price": "154.8",
+          "origin_price": "154.8"
+        },
+        "quantity_begin": 2,
+        "quantity_prices": [],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 41,
+          "sale_quantity_month": 0,
+          "orders_count": 7
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["四川", "双流县"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-221759909096032ae9",
+          "company_name": "四川雄州跃华轮胎有限公司",
+          "shop_url": "https://xzyh668.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["四川", "双流县"],
+          "service_tags": [],
+          "tp_member": true,
+          "tp_year": 1,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "30%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 684731216505,
+        "product_url": "https://detail.1688.com/offer/684731216505.html",
+        "title": "二手马牌轮胎225/45R19 96V UC6领克06原配吉利ICON阿特兹红旗H5",
+        "img": "https://cbu01.alicdn.com/O1CN01hvGrdR1n3cZw3mG83_!!3794815034-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "500.0",
+        "price_info": {
+          "drop_ship_price": "500.0",
+          "wholesale_price": "500.0",
+          "origin_price": "500.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 5,
+          "sale_quantity_month": 0,
+          "orders_count": 5
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["广东", "深圳市宝安区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "1.0",
+        "goods_score": 0,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-3794815034d373b",
+          "company_name": "深圳市福田区兴旺轮胎批发商行(个体工商户)",
+          "shop_url": "https://shop48b16p6793l41.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["广东", "深圳市宝安区"],
+          "service_tags": ["48小时发货", "运费险", "先采后付"],
+          "tp_member": true,
+          "tp_year": 7,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "16.4%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 610559471974,
+        "product_url": "https://detail.1688.com/offer/610559471974.html",
+        "title": "固特异轮胎185/60R14",
+        "img": "https://cbu01.alicdn.com/O1CN01zJfwrx1R0wilHymLP_!!2206951982050-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "270.0",
+        "price_info": {
+          "drop_ship_price": "270.0",
+          "wholesale_price": "270.0",
+          "origin_price": "270.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [
+          {
+            "begin_num": "1",
+            "end_num": "",
+            "price": "270.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["山东", "青岛市黄岛区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 3,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-220695198205086c71",
+          "company_name": "青岛三顺汽车配件有限公司",
+          "shop_url": "https://shop5l470g44j1490.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["山东", "青岛市黄岛区"],
+          "service_tags": ["24小时发货", "先采后付"],
+          "tp_member": true,
+          "tp_year": 5,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "0%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 792981952884,
+        "product_url": "https://detail.1688.com/offer/792981952884.html",
+        "title": "汽车轮胎补胎液自动充气补漏真空胎修补电动摩托车自补液工具",
+        "img": "https://cbu01.alicdn.com/O1CN01RcaKuO1LwlBkdZngF_!!2215526481364-0-cib.jpg",
+        "category_path": ["1032182", "79", "122916002"],
+        "price": "7.00",
+        "price_info": {
+          "drop_ship_price": "7.00",
+          "wholesale_price": "7.00",
+          "origin_price": "7.00"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [
+          {
+            "begin_num": "1",
+            "end_num": "23",
+            "price": "7.00"
+          },
+          {
+            "begin_num": "24",
+            "end_num": "239",
+            "price": "6.50"
+          },
+          {
+            "begin_num": "240",
+            "end_num": "",
+            "price": "6.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "300+",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 77,
+          "sale_quantity_month": 37,
+          "orders_count": 14
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["江苏", "溧水县"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-22155264813640eada",
+          "company_name": "南京市嘉凯汽车用品厂",
+          "shop_url": "https://shop1659096400rk1.1688.com",
+          "biz_type": "生产加工",
+          "is_factory": false,
+          "location": ["江苏", "溧水县"],
+          "service_tags": ["先采后付"],
+          "tp_member": true,
+          "tp_year": 1,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "22.8%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 776267835181,
+        "product_url": "https://detail.1688.com/offer/776267835181.html",
+        "title": "金属油漆笔12色轮胎记号漆油笔补漆笔防水不掉色工业用补漆记号笔",
+        "img": "https://cbu01.alicdn.com/O1CN01QfEAiM1Wvo7cIdYzP_!!2216291612851-0-cib.jpg",
+        "category_path": ["1033107", "81", "67"],
+        "price": "1.09",
+        "price_info": {
+          "drop_ship_price": "4.59",
+          "wholesale_price": "1.09",
+          "origin_price": "1.09"
+        },
+        "quantity_begin": 12,
+        "quantity_prices": [
+          {
+            "begin_num": "12",
+            "end_num": "1295",
+            "price": "1.09"
+          },
+          {
+            "begin_num": "1296",
+            "end_num": "12959",
+            "price": "1.07"
+          },
+          {
+            "begin_num": "12960",
+            "end_num": "",
+            "price": "1.05"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "600+",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 11464,
+          "sale_quantity_month": 515,
+          "orders_count": 63
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["广东", "汕头市"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.1429",
+        "goods_score": 4,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-221629161285136a82",
+          "company_name": "汕头市潮阳区和平盾牌文具厂",
+          "shop_url": "https://shop60m63i4e59182.1688.com",
+          "biz_type": "生产加工",
+          "is_factory": true,
+          "location": ["广东", "汕头市"],
+          "service_tags": ["深度验商", "先采后付"],
+          "tp_member": true,
+          "tp_year": 1,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "10.3%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 654810765666,
+        "product_url": "https://detail.1688.com/offer/654810765666.html",
+        "title": "真空胎轮胎补胎胶钉快速工具神器修补电动车摩托车轿车免拆无损",
+        "img": "https://cbu01.alicdn.com/O1CN01CG0wjP1TlmN80UqMD_!!4019332423-0-cib.jpg",
+        "category_path": ["124742028", "3311", "122916002"],
+        "price": "0.28",
+        "price_info": {
+          "drop_ship_price": "2.75",
+          "wholesale_price": "0.28",
+          "origin_price": "0.28"
+        },
+        "quantity_begin": 2,
+        "quantity_prices": [
+          {
+            "begin_num": "2",
+            "end_num": "",
+            "price": "0.25"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "100+",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 89262,
+          "sale_quantity_month": 234,
+          "orders_count": 454
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["广东", "惠州市惠城区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 3,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-40193324237eaf3",
+          "company_name": "惠州市邦合顺汽车服务有限公司",
+          "shop_url": "https://shop1p8491c543751.1688.com",
+          "biz_type": "生产加工",
+          "is_factory": false,
+          "location": ["广东", "惠州市惠城区"],
+          "service_tags": ["7×24H响应", "深度验商", "先采后付"],
+          "tp_member": true,
+          "tp_year": 7,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "22.7%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 639254331427,
+        "product_url": "https://detail.1688.com/offer/639254331427.html",
+        "title": "朝阳轮胎235/50R19 99V奔驰GLK观致昂科威 长安欧尚x7原配2355019",
+        "img": "https://cbu01.alicdn.com/O1CN0103PvH41Z3huevqjGA_!!2200741873139-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "415.0",
+        "price_info": {
+          "drop_ship_price": "415.0",
+          "wholesale_price": "415.0",
+          "origin_price": "415.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [
+          {
+            "begin_num": "1",
+            "end_num": "",
+            "price": "415.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 6,
+          "sale_quantity_month": 0,
+          "orders_count": 2
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["山东", "广饶县"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 2,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-220074187313947e2e",
+          "company_name": "东营赛途商贸有限公司",
+          "shop_url": "https://shop30994770s8737.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["山东", "广饶县"],
+          "service_tags": [],
+          "tp_member": true,
+          "tp_year": 6,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "6%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 662995975528,
+        "product_url": "https://detail.1688.com/offer/662995975528.html",
+        "title": "普利司通轮胎 245/45R18 100Y T005L MO 普通的",
+        "img": "https://cbu01.alicdn.com/O1CN01zMVoR71ZBx6TwA1Re_!!1768013157-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "920.0",
+        "price_info": {
+          "drop_ship_price": "920.0",
+          "wholesale_price": "920.0",
+          "origin_price": "920.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [
+          {
+            "begin_num": "1",
+            "end_num": "",
+            "price": "920.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["广东", "广州市天河区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-1768013157",
+          "company_name": "广州盈汽贸易有限公司",
+          "shop_url": "https://shop1375062485360.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["广东", "广州市天河区"],
+          "service_tags": ["48小时发货"],
+          "tp_member": true,
+          "tp_year": 4,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "5.4%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 729239308178,
+        "product_url": "https://detail.1688.com/offer/729239308178.html",
+        "title": "165/175/185/195/205/215/225/235/245全新玲珑轮胎 汽车轮胎防爆",
+        "img": "https://cbu01.alicdn.com/O1CN01Stw0rw1NU1TQCZXgw_!!2216045091572-0-cib.jpg",
+        "category_path": ["124736046", "124014003", "122916002"],
+        "price": "140.0",
+        "price_info": {
+          "drop_ship_price": "140.0",
+          "wholesale_price": "140.0",
+          "origin_price": "140.0"
+        },
+        "quantity_begin": 2,
+        "quantity_prices": [
+          {
+            "begin_num": "2",
+            "end_num": "",
+            "price": "140.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "900+",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 90,
+          "sale_quantity_month": 5,
+          "orders_count": 21
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["山东", "聊城市"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.2222",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-22160450915726bb65",
+          "company_name": "聊城市江北水城旅游度假区路吉达汽车配件批发经营部",
+          "shop_url": "https://shop6703k53702659.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["山东", "聊城市"],
+          "service_tags": ["包邮", "7×24H响应", "先采后付"],
+          "tp_member": true,
+          "tp_year": 2,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "20%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 641173580535,
+        "product_url": "https://detail.1688.com/offer/641173580535.html",
+        "title": "锦湖轮胎 205/55R16 91H SA01",
+        "img": "https://cbu01.alicdn.com/O1CN01sqBZCd1ZBx3GnJudU_!!1768013157-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "310.0",
+        "price_info": {
+          "drop_ship_price": "310.0",
+          "wholesale_price": "310.0",
+          "origin_price": "310.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [
+          {
+            "begin_num": "1",
+            "end_num": "",
+            "price": "310.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["广东", "广州市天河区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-1768013157",
+          "company_name": "广州盈汽贸易有限公司",
+          "shop_url": "https://shop1375062485360.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["广东", "广州市天河区"],
+          "service_tags": [],
+          "tp_member": true,
+          "tp_year": 4,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "5.4%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 660870103635,
+        "product_url": "https://detail.1688.com/offer/660870103635.html",
+        "title": "汽车便携式车载充气泵电动无线数显电多功能电动打气泵筒",
+        "img": "https://cbu01.alicdn.com/O1CN01CzzSuG1hb9reOu0AD_!!2212887764295-0-cib.jpg",
+        "category_path": ["124746024", "3312", "122916002"],
+        "price": "79.80",
+        "price_info": {
+          "drop_ship_price": "73.00",
+          "wholesale_price": "79.80",
+          "origin_price": "79.80"
+        },
+        "quantity_begin": 2,
+        "quantity_prices": [
+          {
+            "begin_num": "2",
+            "end_num": "",
+            "price": "68.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 1693,
+          "sale_quantity_month": 0,
+          "orders_count": 169
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["浙江", "金华市"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-2212887764295ebeb2",
+          "company_name": "金华古米电器科技有限公司",
+          "shop_url": "https://shop7v750211t0593.1688.com",
+          "biz_type": "生产加工",
+          "is_factory": true,
+          "location": ["浙江", "金华市"],
+          "service_tags": ["先采后付"],
+          "tp_member": true,
+          "tp_year": 3,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "43.7%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 806525358180,
+        "product_url": "https://detail.1688.com/offer/806525358180.html",
+        "title": "二手马牌轮胎245/45R19 102Y PC6 AO SIL静音海绵  奥迪新A6 A7",
+        "img": "https://cbu01.alicdn.com/O1CN01laIM8b1Bs2xuk0X4S_!!0-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "450.0",
+        "price_info": {
+          "drop_ship_price": "450.0",
+          "wholesale_price": "450.0",
+          "origin_price": "450.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["广东", "深圳市宝安区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 0,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-3794815034d373b",
+          "company_name": "深圳市福田区兴旺轮胎批发商行(个体工商户)",
+          "shop_url": "https://shop48b16p6793l41.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["广东", "深圳市宝安区"],
+          "service_tags": ["48小时发货", "运费险", "先采后付"],
+          "tp_member": true,
+          "tp_year": 7,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "16.4%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 735943092086,
+        "product_url": "https://detail.1688.com/offer/735943092086.html",
+        "title": "台阶垫斜坡垫马路牙子橡塑路沿坡汽车上坡爬坡垫门槛三角垫减速带",
+        "img": "https://cbu01.alicdn.com/O1CN01oYZbQv2GL8fesai5w_!!2215580828998-0-cib.jpg",
+        "category_path": ["1033227", "3015", "70"],
+        "price": "40.00",
+        "price_info": {
+          "drop_ship_price": "40.00",
+          "wholesale_price": "40.00",
+          "origin_price": "40.00"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["浙江", "台州市"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-22155808289989fc38",
+          "company_name": "三门县先跃交通设施厂",
+          "shop_url": "https://shop18747h7080e54.1688.com",
+          "biz_type": "生产加工",
+          "is_factory": false,
+          "location": ["浙江", "台州市"],
+          "service_tags": ["48小时发货", "运费险", "先采后付"],
+          "tp_member": true,
+          "tp_year": 2,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "40%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 654368532870,
+        "product_url": "https://detail.1688.com/offer/654368532870.html",
+        "title": "补胎胶钉轮胎修补工具电动车摩托车真空胎自助免拆快速补胎神器",
+        "img": "https://cbu01.alicdn.com/O1CN01XFzMm11xql9Pw1psV_!!2207869556495-0-cib.jpg",
+        "category_path": ["124742028", "3311", "122916002"],
+        "price": "0.25",
+        "price_info": {
+          "drop_ship_price": "2.75",
+          "wholesale_price": "0.25",
+          "origin_price": "0.25"
+        },
+        "quantity_begin": 2,
+        "quantity_prices": [],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 18894,
+          "sale_quantity_month": 0,
+          "orders_count": 48
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["广东", "惠州市惠城区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 3,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-2207869556495e5706",
+          "company_name": "惠州市邦合顺汽车服务有限公司",
+          "shop_url": "https://shop14949463466l4.1688.com",
+          "biz_type": "生产加工",
+          "is_factory": false,
+          "location": ["广东", "惠州市惠城区"],
+          "service_tags": ["深度验商", "先采后付"],
+          "tp_member": true,
+          "tp_year": 5,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "46%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 655392023016,
+        "product_url": "https://detail.1688.com/offer/655392023016.html",
+        "title": "全新正品德国马牌轿车轮胎 TC6 205/60R16 适配科鲁兹福克斯英朗",
+        "img": "https://cbu01.alicdn.com/O1CN01Uyuhgm2MWwcfDJzXO_!!943999836-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "709.0",
+        "price_info": {
+          "drop_ship_price": "558.0",
+          "wholesale_price": "709.0",
+          "origin_price": "709.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [
+          {
+            "begin_num": "1",
+            "end_num": "",
+            "price": "709.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["", "天津市东丽区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "luckytyre",
+          "company_name": "天津乐驰国际贸易有限公司",
+          "shop_url": "https://luckytyre.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["", "天津市东丽区"],
+          "service_tags": ["7×24H响应", "48小时发货", "运费险"],
+          "tp_member": true,
+          "tp_year": 20,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "21.4%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 775937465291,
+        "product_url": "https://detail.1688.com/offer/775937465291.html",
+        "title": "批发轮胎快速修补胶钉自行车摩托车电动车汽车补胎胶钉补胎螺丝钉",
+        "img": "https://cbu01.alicdn.com/O1CN01rHaDf01msApaJLnKz_!!2214922385009-0-cib.jpg",
+        "category_path": ["1032106", "3311", "122916002"],
+        "price": "0.23",
+        "price_info": {
+          "drop_ship_price": "0.22",
+          "wholesale_price": "0.23",
+          "origin_price": "0.23"
+        },
+        "quantity_begin": 2,
+        "quantity_prices": [
+          {
+            "begin_num": "2",
+            "end_num": "",
+            "price": "0.22"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "30+",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 110109,
+          "sale_quantity_month": 5,
+          "orders_count": 7
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["河北", "沧州市"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.25",
+        "goods_score": 2,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-2214922385009b2d9f",
+          "company_name": "献县博鉴汽车工具厂",
+          "shop_url": "https://shop6938455473o63.1688.com",
+          "biz_type": "生产加工",
+          "is_factory": true,
+          "location": ["河北", "沧州市"],
+          "service_tags": ["先采后付"],
+          "tp_member": true,
+          "tp_year": 2,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "33.2%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 670831522720,
+        "product_url": "https://detail.1688.com/offer/670831522720.html",
+        "title": "车载无线充气泵 便携式气球电动打气户外家用汽车无线充气泵 现货",
+        "img": "https://cbu01.alicdn.com/O1CN01ilaITK1uMaFUEY0Fh_!!2212546606023-0-cib.jpg",
+        "category_path": ["124746024", "3312", "122916002"],
+        "price": "100.0",
+        "price_info": {
+          "drop_ship_price": "100.0",
+          "wholesale_price": "100.0",
+          "origin_price": "100.0"
+        },
+        "quantity_begin": 2,
+        "quantity_prices": [
+          {
+            "begin_num": "2",
+            "end_num": "",
+            "price": "100.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 20,
+          "sale_quantity_month": 0,
+          "orders_count": 2
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["广东", "广州市天河区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-22125466060236593d",
+          "company_name": "广州斯赫特科技有限公司",
+          "shop_url": "https://shop411375x8i92x6.1688.com",
+          "biz_type": "生产加工",
+          "is_factory": true,
+          "location": ["广东", "广州市天河区"],
+          "service_tags": ["7×24H响应"],
+          "tp_member": true,
+          "tp_year": 3,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "6.7%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 793141969210,
+        "product_url": "https://detail.1688.com/offer/793141969210.html",
+        "title": "朝阳轮胎225/60R18 100H SU318a 长安CS75歌诗图 吉利博越风神AX7",
+        "img": "https://cbu01.alicdn.com/O1CN01Iksy8H1Z3iCjxxULJ_!!2200741873139-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "385.0",
+        "price_info": {
+          "drop_ship_price": "380.0",
+          "wholesale_price": "385.0",
+          "origin_price": "385.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [
+          {
+            "begin_num": "1",
+            "end_num": "",
+            "price": "385.00"
+          }
+        ],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["山东", "广饶县"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 2,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-220074187313947e2e",
+          "company_name": "东营赛途商贸有限公司",
+          "shop_url": "https://shop30994770s8737.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["山东", "广饶县"],
+          "service_tags": [],
+          "tp_member": true,
+          "tp_year": 6,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "6%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 757527116179,
+        "product_url": "https://detail.1688.com/offer/757527116179.html",
+        "title": "优惠建大轿车轮胎185/65R15215/55R17215/75R16C厂家直供正品全新",
+        "img": "https://cbu01.alicdn.com/O1CN01TkysY42MWwc5Syibg_!!943999836-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "275.0",
+        "price_info": {
+          "drop_ship_price": "305.0",
+          "wholesale_price": "275.0",
+          "origin_price": "275.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["", "天津市东丽区"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "luckytyre",
+          "company_name": "天津乐驰国际贸易有限公司",
+          "shop_url": "https://luckytyre.1688.com",
+          "biz_type": "经销批发",
+          "is_factory": false,
+          "location": ["", "天津市东丽区"],
+          "service_tags": ["7×24H响应", "48小时发货", "运费险"],
+          "tp_member": true,
+          "tp_year": 20,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "21.4%",
+          "super_factory": null
+        }
+      },
+      {
+        "item_id": 807731594668,
+        "product_url": "https://detail.1688.com/offer/807731594668.html",
+        "title": "玲珑轮胎165 175 185 195 205 215/55 60 6570R13R14R15r16r17R18",
+        "img": "https://cbu01.alicdn.com/O1CN01DYmOg51ddfkI2AQ0R_!!2217275693759-0-cib.jpg",
+        "category_path": ["1034944", "10113", "55"],
+        "price": "142.0",
+        "price_info": {
+          "drop_ship_price": "142.0",
+          "wholesale_price": "142.0",
+          "origin_price": "142.0"
+        },
+        "quantity_begin": 1,
+        "quantity_prices": [],
+        "sale_info": {
+          "gmv_fuzzy": "0",
+          "gmv_30days": 0,
+          "gmv_30days_cb": 0,
+          "sale_quantity": 0,
+          "sale_quantity_month": 0,
+          "orders_count": 0
+        },
+        "type": "normal",
+        "delivery_info": {
+          "area_from": ["", "上海市"],
+          "weight": 0,
+          "suttle_weight": 0,
+          "free_postage": false
+        },
+        "item_repurchase_rate": "0.0",
+        "goods_score": 5,
+        "image_dsm_score": 0,
+        "primary_rank_score": 0,
+        "super_new_product": false,
+        "shop_info": {
+          "login_id": null,
+          "member_id": "b2b-2218129928469dc8ea",
+          "company_name": "上海凌宿贸易商行（个人独资）",
+          "shop_url": "https://shop83158a69a4i19.1688.com",
+          "biz_type": "",
+          "is_factory": false,
+          "location": ["", "上海市"],
+          "service_tags": ["48小时发货", "运费险", "先采后付"],
+          "tp_member": true,
+          "tp_year": 1,
+          "factory_inspection": false,
+          "shop_repurchase_rate": "0%",
+          "super_factory": null
+        }
+      }
+    ],
+    "extra": "o:pc;"
+  }
+}

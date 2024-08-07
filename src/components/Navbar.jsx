@@ -1,6 +1,6 @@
 import { FileProtectOutlined, SearchOutlined } from "@ant-design/icons";
 import { useContext, useState } from "react";
-import { useSearch } from "../api/serachApi";
+import { useSearch } from "../api";
 
 import { Button, Image, Input, Space } from "antd";
 import { LoadingContext, ProductsContext } from "../context";
@@ -30,7 +30,8 @@ const Nav = () => {
 
     if (items instanceof Error) {
       Store.addNotification({
-        title: `Ошибка ${items.response.status}`,
+        // title: `Ошибка ${items.response.status}`,
+        title: `Ошибка`,
         message: "Ошибка запроса",
         type: "danger",
         insert: "top",

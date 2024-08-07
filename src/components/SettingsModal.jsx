@@ -1,8 +1,18 @@
 import { Input } from "antd";
 import { FileProtectOutlined } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
+
+import { addMpStatProducts } from "../redux/actions/mpStatProducts";
+import { featchMpStats } from "../api";
 
 function SettingsModal({ isOpen, onClose }) {
+  const dispatch = useDispatch();
+
   if (!isOpen) return null;
+
+  const setToken = async (token) => {
+    dispatch(addMpStatProducts(await featchMpStats(token)));
+  };
 
   return (
     <div className={`modal-overlay ${isOpen ? "open" : ""}`}>
@@ -12,8 +22,8 @@ function SettingsModal({ isOpen, onClose }) {
           <Input
             prefix={<FileProtectOutlined />}
             placeholder="Введите токен..."
-            // onChange={(e) => setToken(e.target.value)}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e) => setToken(e.target.value)}
+            // onChange={(e) => console.log(e.target.value)}
           />
         </div>
         <button className="buttonClose" type="button" onClick={onClose}>

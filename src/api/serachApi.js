@@ -2,7 +2,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { ErrorContext, LoadingContext } from "../context";
 
-export const useSearch = () => {
+const useSearch = () => {
   const { setLoading } = useContext(LoadingContext);
   const { setError } = useContext(ErrorContext);
   const url = "http://51.250.20.233:8090/stand/products";
@@ -25,3 +25,5 @@ export const useSearch = () => {
     getImages,
   };
 };
+
+export default useSearch;

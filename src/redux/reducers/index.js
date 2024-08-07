@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-// import basket from "./basket";
+import mpStatProducts from "./mpStatProducts";
 
 const rootReducer = combineReducers({
-  //   basket,
+  mpStatProducts,
 });
 
 export default rootReducer;
