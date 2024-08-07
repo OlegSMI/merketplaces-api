@@ -1,4 +1,4 @@
-import { Header, Navbar, Card, CardModal } from "../components";
+import { Header, Card, CardModal } from "../components";
 
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -11,7 +11,6 @@ function Home() {
   const closeModal = () => setCardModalOpen(false);
 
   const onClickCard = (id) => {
-    // console.log(products[id]);
     setSelectProduct(products[id]);
     openModal();
   };
