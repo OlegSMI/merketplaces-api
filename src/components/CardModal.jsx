@@ -4,13 +4,13 @@ import { addTmApiProducts } from "../redux/actions/tmApiProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-function CardModal({ isOpen, product, closeModal }) {
+function CardModal({ isOpen, token, selectProduct, closeModal }) {
   const dispatch = useDispatch();
   const products = useSelector(({ tmApiProducts }) => tmApiProducts.items);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await featchTmApi();
+      const data = await featchTmApi(token, selectProduct.thumb);
       dispatch(addTmApiProducts(data));
     };
 
@@ -22,7 +22,7 @@ function CardModal({ isOpen, product, closeModal }) {
       <div className={`modal-content ${isOpen ? "open" : ""}`}>
         <h1>Аналоги в китае</h1>
         <div className="cardModal-container">
-          {console.log("asdas", product.thumb)}
+          {console.log("asdas", selectProduct.thumb)}
           {products.map((product) => (
             <div key={product.item_id} className="cardModal-container__card">
               <img

@@ -2,7 +2,7 @@
 
 import data from "../json/mpStats.json";
 
-const featchMpStats = async (token) => {
+const featchMpStats = async () => {
   try {
     // const res = await axios.get("../json/mpStats.json");
     const items = data.result.products;

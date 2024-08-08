@@ -6,6 +6,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid $textColor;
+  margin-bottom: 15px;
 
   &:hover {
     cursor: default;
@@ -30,7 +32,7 @@
 
   &.active {
     color: $accentColor;
-    border-bottom: 2px solid $accentColor; /* Замените 2px на желаемую толщину */
+    border-bottom: 3px solid $accentColor; /* Замените 2px на желаемую толщину */
     padding-bottom: 2px;
   }
 

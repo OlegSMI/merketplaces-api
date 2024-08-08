@@ -4,16 +4,15 @@ import { useDispatch } from "react-redux";
 
 import { addMpStatProducts } from "../redux/actions/mpStatProducts";
 import { featchMpStats } from "../api";
-import { useState } from "react";
+// import { useState } from "react";
 
-function SettingsModal({ isOpen, onClose }) {
-  const [token, setToken] = useState("");
+function SettingsModal({ isOpen, onClose, setToken }) {
   const dispatch = useDispatch();
 
   // if (!isOpen) return null;
 
   const onClickButton = async () => {
-    dispatch(addMpStatProducts(await featchMpStats(token)));
+    // dispatch(addMpStatProducts(await featchMpStats(token)));
     onClose();
   };
 
@@ -28,8 +27,8 @@ function SettingsModal({ isOpen, onClose }) {
             onChange={(e) => setToken(e.target.value)}
           />
         </div>
-        <button className="buttonClose" type="button" onClick={onClickButton}>
-          Отправить
+        <button className="buttonClose" type="button" onClick={onClose}>
+          Закрыть
         </button>
       </div>
     </div>
