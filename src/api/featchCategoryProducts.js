@@ -8,7 +8,7 @@ const featchCategoryProducts = async (category) => {
         path: category,
         startDate: "2024-08-08",
         endDate: "2024-08-08",
-        limit: 1,
+        limit: 4,
         offset: 2147483647,
       }
     );

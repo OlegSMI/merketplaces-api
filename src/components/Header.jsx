@@ -30,8 +30,8 @@ function Header({ token, setToken, setLoader }) {
   const onClickCategory = async (category) => {
     setActiveCategory(category.path);
     setLoader(true);
-    // dispatch(addMpStatProducts(await featchCategoryProducts(category.path)));
-    dispatch(addMpStatProducts(await featchMpStats()));
+    dispatch(addMpStatProducts(await featchCategoryProducts(category.path)));
+    // dispatch(addMpStatProducts(await featchMpStats()));
     setLoader(false);
   };
 
@@ -40,16 +40,19 @@ function Header({ token, setToken, setLoader }) {
       {token ? (
         <nav className="filter-navigation">
           <ul>
-            {categories.map((category) => (
-              <li key={category.path}>
-                <a
-                  className={activeCategory === category.path ? "active" : ""}
-                  onClick={() => onClickCategory(category)}
-                >
-                  {category.name}
-                </a>
-              </li>
-            ))}
+            {Array.isArray(categories) &&
+              categories.length > 0 &&
+              categories.map((category) => (
+                <li key={category.path}>
+                  <a
+                    className={activeCategory === category.path ? "active" : ""}
+                    onClick={() => onClickCategory(category)}
+                  >
+                    {category.name}
+                  </a>
+                </li>
+              ))}
+            {categories.length === 0 && <li>Категории отсутствуют</li>}
           </ul>
         </nav>
       ) : (
