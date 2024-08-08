@@ -10,7 +10,7 @@ import {
   featchMpStats,
 } from "../api";
 
-function Header({ token, setToken }) {
+function Header({ token, setToken, setLoader }) {
   const dispatch = useDispatch();
 
   const [isModalOpen, setModalOpen] = useState(false);
@@ -28,9 +28,11 @@ function Header({ token, setToken }) {
   }, []);
 
   const onClickCategory = async (category) => {
+    setActiveCategory(category.path);
+    setLoader(true);
     // dispatch(addMpStatProducts(await featchCategoryProducts(category.path)));
     dispatch(addMpStatProducts(await featchMpStats()));
-    setActiveCategory(category.path);
+    setLoader(false);
   };
 
   return (
