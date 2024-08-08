@@ -1,7 +1,7 @@
 // import axios from 'axios'
 import data from "../json/tmApi.json";
 
-const featchTmApi = async () => {
+const featchTmApi = async (token, image) => {
   try {
     const items = data.result.items;
     return items;
