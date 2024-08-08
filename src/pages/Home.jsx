@@ -14,8 +14,8 @@ function Home() {
   const openModal = () => setCardModalOpen(true);
   const closeModal = () => setCardModalOpen(false);
 
-  const onClickCard = (id) => {
-    setSelectProduct(products[id]);
+  const onClickCard = (product) => {
+    setSelectProduct(product);
     openModal();
   };
 
@@ -60,7 +60,7 @@ function Home() {
                   <Card
                     key={product.id}
                     {...product}
-                    selectCard={(id) => onClickCard(id)}
+                    selectCard={(id) => onClickCard(product)}
                   />
                 ))}
               </div>

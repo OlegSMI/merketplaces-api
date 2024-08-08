@@ -5,7 +5,7 @@ import { CardSceleton, Card, ProductDetails } from "./";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-function CardModal({ isOpen, token, selectProduct, closeModal }) {
+function CardModal({ isOpen, token, selectProduct, closeModal, product }) {
   const [loader, setLoader] = useState(true);
   const [selectChinaInfo, setSelectChinaInfo] = useState({});
 
@@ -22,12 +22,12 @@ function CardModal({ isOpen, token, selectProduct, closeModal }) {
     fetchData();
   }, []);
 
+  console.log("select", selectProduct.name);
+
   const onClickProduct = async (product) => {
     console.log("click");
     setSelectChinaInfo(await featchWbProduct());
   };
-
-  console.log("sd", selectChinaInfo);
 
   return (
     <div className={`modal-overlay ${isOpen ? "open" : ""}`}>
