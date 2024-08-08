@@ -2,7 +2,7 @@ import { CiSettings } from "react-icons/ci";
 import { useState, useEffect } from "react";
 
 import { SettingsModal } from "../components";
-import { featchCategories } from "../api";
+import { featchCategories, featchCategoryProducts } from "../api";
 
 function Header() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -19,7 +19,10 @@ function Header() {
     fetchData();
   }, []);
 
-  console.log(categories);
+  const onClickCategory = (category) => {
+    featchCategoryProducts(category.path);
+    setActiveCategory(category.path);
+  };
 
   return (
     <div className="header-container">
@@ -29,7 +32,7 @@ function Header() {
             <li key={category.path}>
               <a
                 className={activeCategory === category.path ? "active" : ""}
-                onClick={() => setActiveCategory(category.path)}
+                onClick={() => onClickCategory(category)}
               >
                 {category.name}
               </a>
