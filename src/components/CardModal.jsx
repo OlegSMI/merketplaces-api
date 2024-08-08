@@ -1,20 +1,21 @@
-import { featchTmApi, featchWbProduct } from "../api";
+import { featchWbProduct, useSearch } from "../api";
 import { addTmApiProducts } from "../redux/actions/tmApiProducts";
-import { CardSceleton, Card, ProductDetails } from "./";
+import { Card, CardSceleton, ProductDetails } from "./";
 
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 function CardModal({ isOpen, token, selectProduct, closeModal, product }) {
   const [loader, setLoader] = useState(true);
   const [selectChinaInfo, setSelectChinaInfo] = useState({});
+  const { getImages } = useSearch();
 
   const dispatch = useDispatch();
   const products = useSelector(({ tmApiProducts }) => tmApiProducts.items);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await featchTmApi(token, selectProduct.thumb);
+      const data = await getImages(token, `http:${selectProduct.thumb}`);
       dispatch(addTmApiProducts(data));
       setLoader(false);
     };
@@ -65,6 +66,10 @@ function CardModal({ isOpen, token, selectProduct, closeModal, product }) {
                   <p className="cardModal-container__rating">
                     Рейтинг: {product.goods_score} / 5
                   </p>
+                  <p className="cardModal-container__rating">
+                    Информация о товаре: {product.goods_score} / 5
+                  </p>
+
                   <a
                     href={product.product_url}
                     className="cardModal-container__button"

@@ -1,14 +1,10 @@
+import { useEffect, useState } from "react";
 import { CiSettings } from "react-icons/ci";
-import { useState, useEffect } from "react";
 
-import { addMpStatProducts } from "../redux/actions/mpStatProducts";
 import { useDispatch } from "react-redux";
+import { featchCategories, featchCategoryProducts } from "../api";
 import { SettingsModal } from "../components";
-import {
-  featchCategories,
-  featchCategoryProducts,
-  featchMpStats,
-} from "../api";
+import { addMpStatProducts } from "../redux/actions/mpStatProducts";
 
 function Header({ token, setToken, setLoader }) {
   const dispatch = useDispatch();

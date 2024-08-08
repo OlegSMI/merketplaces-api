@@ -28,7 +28,7 @@ function Card({
         <span className="basicPrice">{basicPrice}₽</span>
       </p>
       <p className="country">Страна: {country}</p>
-      <button className="button">В карзинку</button>
+      <button className="button">В корзину</button>
     </div>
   );
 }

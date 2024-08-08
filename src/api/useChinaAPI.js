@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useContext } from "react";
-import { ErrorContext, LoadingContext } from "../context";
+// import { useContext } from "react";
+// import { ErrorContext, LoadingContext } from "../context";
 
 const useSearch = () => {
-  const { setLoading } = useContext(LoadingContext);
-  const { setError } = useContext(ErrorContext);
+  //   const { setLoading } = useContext(LoadingContext);
+  //   const { setError } = useContext(ErrorContext);
   const url = "http://51.250.20.233:8090/stand/";
 
   const getImages = async (token, image) => {
@@ -14,13 +14,13 @@ const useSearch = () => {
       );
 
       const { items } = res.data.result;
-      setError(false);
+      //   setError(false);
       return items;
     } catch (error) {
-      setError(true);
+      //   setError(true);
       return error;
     } finally {
-      setLoading(false);
+      //   setLoading(false);
     }
   };
 
@@ -50,13 +50,13 @@ const useSearch = () => {
       const { info } = res;
 
       console.log(info);
-      setError(false);
+      //   setError(false);
       return info;
     } catch (error) {
-      setError(true);
+      //   setError(true);
       return error;
     } finally {
-      setLoading(false);
+      //   setLoading(false);
     }
   };
 
