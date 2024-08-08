@@ -55,18 +55,27 @@
   }
 
   &__buttonClose {
-    width: 200px;
-    height: 100px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    // height: 100px;
     color: white;
     margin: 10px;
     height: 40px;
-    width: 100px;
+    // width: 100px;
     border: none;
     border-radius: 5px;
-    background-color: lighten($accentColor, 20%);
+    background-color: grey;
 
     &:hover {
-      background-color: darken($accentColor, 10%);
+      background-color: darken(grey, 10%);
     }
   }
+}
+
+.cardModal__main-product {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
 }

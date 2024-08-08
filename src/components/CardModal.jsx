@@ -1,12 +1,14 @@
-import { featchTmApi } from "../api";
+import { featchTmApi, featchWbProduct } from "../api";
 import { addTmApiProducts } from "../redux/actions/tmApiProducts";
-import { CardSceleton } from "./";
+import { CardSceleton, Card, ProductDetails } from "./";
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 function CardModal({ isOpen, token, selectProduct, closeModal }) {
   const [loader, setLoader] = useState(true);
+  const [selectChinaInfo, setSelectChinaInfo] = useState({});
+
   const dispatch = useDispatch();
   const products = useSelector(({ tmApiProducts }) => tmApiProducts.items);
 
@@ -20,15 +22,29 @@ function CardModal({ isOpen, token, selectProduct, closeModal }) {
     fetchData();
   }, []);
 
+  const onClickProduct = async (product) => {
+    console.log("click");
+    setSelectChinaInfo(await featchWbProduct());
+  };
+
+  console.log("sd", selectChinaInfo);
+
   return (
     <div className={`modal-overlay ${isOpen ? "open" : ""}`}>
       <div className={`modal-content ${isOpen ? "open" : ""}`}>
+        <div className="cardModal__main-product">
+          <Card {...selectProduct}></Card>
+          {Array.isArray(selectChinaInfo) && selectChinaInfo.length > 0 && (
+            <ProductDetails productProps={selectChinaInfo} />
+          )}
+        </div>
         <h1>Аналоги в китае</h1>
         <div className="cardModal-container">
           {loader
             ? [...Array(8)].map((item, index) => <CardSceleton key={index} />)
             : products.map((product) => (
                 <div
+                  onClick={() => onClickProduct(product)}
                   key={product.item_id}
                   className="cardModal-container__card"
                 >
@@ -62,7 +78,7 @@ function CardModal({ isOpen, token, selectProduct, closeModal }) {
           className="cardModal-container__buttonClose"
           onClick={closeModal}
         >
-          Закрыть
+          X
         </button>
       </div>
     </div>
