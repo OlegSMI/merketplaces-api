@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./Registration.module.scss";
 import { SignHeader } from "../../components";
-import img from "../../assest/Registration.png";
+import img from "../../assets/Registration.png";
 
 const Registration = () => {
   return (

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./Login.module.scss";
 import { SignHeader } from "../../components";
-import img from "../../assest/Login.png";
+import img from "../../assets/Login.png";
 
 const Login = () => {
   return (

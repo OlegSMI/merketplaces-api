@@ -1,0 +1,37 @@
+.container {
+  h3 {
+    margin: 10px 0px 25px 0px;
+    font-size: 28px;
+    font-family: "Inter", system-ui;
+    font-weight: 500;
+    color: #2a2a2a;
+  }
+
+  .combobox {
+    margin: 10px 10px 10px 0px;
+    padding: 10px 5px;
+    background-color: #f2f4f7;
+    border: none;
+    border-radius: 8px;
+    color: #344054;
+    font-size: 12px;
+    font-family: "Inter", system-ui;
+    font-weight: 500;
+
+    &:focus {
+      border: none;
+    }
+
+    &:active {
+      border: none;
+    }
+  }
+
+  button {
+    background-color: #4d4aea;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+  }
+}
