@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 import styles from "./SideBar.module.scss";
 
@@ -9,6 +10,12 @@ import finplan from "../../assets/finplan.svg";
 import profile from "../../assets/profile.svg";
 
 const SideBar = () => {
+  const [active, setActive] = useState("/main");
+
+  const menuLinkClick = (path) => {
+    setActive(path);
+  };
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.logo}>
@@ -16,20 +23,32 @@ const SideBar = () => {
         <span>UStats</span>
       </div>
       <ui>
-        <li className={`${styles.sidebarItem} ${styles.active}`}>
-          <Link to="/user/main/table" className={styles.link}>
+        <li className={active === "/main" ? styles.active : ""}>
+          <Link
+            to="/user/main/table"
+            className={styles.link}
+            onClick={() => menuLinkClick("/main")}
+          >
             <img src={main} />
             <span>Главная</span>
           </Link>
         </li>
-        <li className={styles.sidebarItem}>
-          <Link to="/user/finplan" className={styles.link}>
+        <li className={active === "/finplan" ? styles.active : ""}>
+          <Link
+            to="/user/finplan"
+            className={styles.link}
+            onClick={() => menuLinkClick("/finplan")}
+          >
             <img src={finplan} />
             Фин план
           </Link>
         </li>
-        <li className={styles.sidebarItem}>
-          <Link to="/user/profile" className={styles.link}>
+        <li className={active === "/profile" ? styles.active : ""}>
+          <Link
+            to="/user/profile"
+            className={styles.link}
+            onClick={() => menuLinkClick("/profile")}
+          >
             <img src={profile} />
             Профиль
           </Link>

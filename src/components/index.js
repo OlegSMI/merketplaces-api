@@ -8,3 +8,4 @@ export { default as ProductDetails } from "./ProductDetails";
 export { default as SignHeader } from "./SignHeader";
 export { default as SideBar } from "./SideBar";
 export { default as NavBar } from "./NavBar";
+export { default as Combobox } from "./Combobox";

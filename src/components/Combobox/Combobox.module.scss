@@ -1,0 +1,58 @@
+.customSelect {
+  position: relative;
+  width: max-content;
+  font-size: 14px;
+  font-family: "Inter", system-ui;
+  font-weight: 400;
+  margin: 0px 10px 25px 0px;
+}
+
+.selected {
+  padding: 10px;
+  background-color: #f2f4f7;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  img {
+    margin-left: 10px;
+  }
+}
+
+.options {
+  padding: 5px;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #eaecf0;
+  border-radius: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+  box-shadow: 0 4px 8px rgba(16, 24, 40, 0.2);
+  scrollbar-width: thin;
+  scrollbar-color: #eaecf0 #ffffff;
+}
+
+.input {
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-family: "Inter", system-ui;
+  font-weight: 400;
+}
+
+.options li {
+  border-radius: 6px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.options li:hover {
+  background-color: #f0f0f0;
+}

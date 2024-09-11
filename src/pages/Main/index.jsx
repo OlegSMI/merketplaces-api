@@ -1,85 +1,46 @@
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
 
 import styles from "./Main.module.scss";
-import { NavBar } from "../../components";
+import { NavBar, Combobox } from "../../components";
+
+const categories = [
+  "Электроника",
+  "Мебель",
+  "Товары для детей",
+  "Бытовая химия",
+  "Системы стабилизации",
+  "Штативы/слайдеры",
+];
+
+const options = ["Отция 1", "Отция 2"];
+const filter = ["По дате", "По цене"];
 
 const Main = () => {
-  const [selectedOption, setSelectedOption] = useState("");
-
-  const options = ["Опция 1", "Опция 2", "Опция 3", "Опция 4"];
-
-  const handleSelectChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
-
   return (
-    <div className={styles.container}>
+    <>
       <h3>Подбор товаров</h3>
 
       <NavBar />
 
-      <select
-        value={selectedOption}
-        onChange={handleSelectChange}
-        className={styles.combobox}
-      >
-        <option value="" disabled>
-          Категория
-        </option>
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+      <div className={styles.header}>
+        <div className={styles.filters}>
+          <Combobox name="Категория" options={categories} />
+          <Combobox name="Инвестиции" options={options} />
+          <Combobox name="Проценты годовых" options={options} />
+          <Combobox name="Риск профиль" options={options} />
 
-      <select
-        value={selectedOption}
-        onChange={handleSelectChange}
-        className={styles.combobox}
-      >
-        <option value="" disabled>
-          Инвестиции
-        </option>
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+          <button>Подобрать товары</button>
+        </div>
 
-      <select
-        value={selectedOption}
-        onChange={handleSelectChange}
-        className={styles.combobox}
-      >
-        <option value="" disabled>
-          Проценты годовых
-        </option>
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-
-      <select
-        value={selectedOption}
-        onChange={handleSelectChange}
-        className={styles.combobox}
-      >
-        <option value="" disabled>
-          Риск профиль
-        </option>
-        {options.map((option, index) => (
-          <option key={index} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-
-      <button>Подобрать товары</button>
+        <div className={styles.search}>
+          <Combobox options={filter} />
+          <input
+            className={styles.input}
+            type="text"
+            placeholder="Поиск товаров..."
+          />
+        </div>
+      </div>
 
       <Routes>
         <Route path="table" element={<div>Таблица</div>} />
@@ -87,7 +48,7 @@ const Main = () => {
         <Route path="cards" element={<div>Карточки</div>} />
         <Route path="risk-profile" element={<div>Риск профиль</div>} />
       </Routes>
-    </div>
+    </>
   );
 };
 

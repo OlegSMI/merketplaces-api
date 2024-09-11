@@ -1,37 +1,87 @@
-.container {
-  h3 {
-    margin: 10px 0px 25px 0px;
-    font-size: 28px;
-    font-family: "Inter", system-ui;
-    font-weight: 500;
-    color: #2a2a2a;
-  }
+h3 {
+  margin: 10px 0px 25px 0px;
+  font-size: 28px;
+  font-family: "Inter", system-ui;
+  font-weight: 500;
+  color: #2a2a2a;
+}
 
-  .combobox {
-    margin: 10px 10px 10px 0px;
-    padding: 10px 5px;
-    background-color: #f2f4f7;
-    border: none;
-    border-radius: 8px;
-    color: #344054;
-    font-size: 12px;
-    font-family: "Inter", system-ui;
-    font-weight: 500;
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
 
-    &:focus {
+  .filters {
+    display: flex;
+    flex-direction: row;
+
+    button {
+      background-color: #4d4aea;
+      color: #ffffff;
       border: none;
-    }
+      border-radius: 8px;
+      margin: 0;
+      padding: 10px;
+      height: 40px;
 
-    &:active {
+      &:active {
+        background-color: rgba(108, 99, 255, 1);
+      }
+    }
+  }
+
+  .search {
+    display: flex;
+    flex-direction: row;
+
+    .input {
+      height: 40px;
+      width: 200px;
+      background-color: #f2f4f7;
+      color: #344054;
       border: none;
+      border-radius: 8px;
+      padding-left: 10px;
+      margin-right: 10px;
+
+      &:focus {
+        outline: none;
+      }
     }
   }
+}
 
-  button {
-    background-color: #4d4aea;
-    color: #ffffff;
-    border: none;
-    border-radius: 8px;
-    padding: 10px;
-  }
+.custom-select {
+  position: relative;
+  width: 200px;
+}
+
+.selected {
+  padding: 10px;
+  background-color: #f2f4f7;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.options li {
+  padding: 10px;
+}
+
+.options li:hover {
+  background-color: #f0f0f0; /* Цвет фона при наведении */
 }
