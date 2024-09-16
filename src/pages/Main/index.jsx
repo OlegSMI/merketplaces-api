@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 import styles from "./Main.module.scss";
-import { NavBar, Combobox } from "../../components";
+import { NavBar, Combobox, Table } from "../../components";
 
 const categories = [
   "Электроника",
@@ -14,6 +14,10 @@ const categories = [
 
 const options = ["Отция 1", "Отция 2"];
 const filter = ["По дате", "По цене"];
+
+const Sips = () => {
+  return <div>Список</div>;
+};
 
 const Main = () => {
   return (
@@ -43,8 +47,9 @@ const Main = () => {
       </div>
 
       <Routes>
-        <Route path="table" element={<div>Таблица</div>} />
-        <Route path="list" element={<div>Список</div>} />
+        <Route path="table" element={<Table />} />
+        {/* <Route path="table" element={<div>table</div>} /> */}
+        <Route path="list" element={<Sips />} />
         <Route path="cards" element={<div>Карточки</div>} />
         <Route path="risk-profile" element={<div>Риск профиль</div>} />
       </Routes>
