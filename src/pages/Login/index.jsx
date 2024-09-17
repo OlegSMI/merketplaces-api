@@ -3,7 +3,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 
 import styles from "./Login.module.scss";
-import { login } from "../../api";
+import { login } from "../../axios";
 import { SignHeader } from "../../components";
 import img from "../../assets/Login.png";
 
@@ -15,7 +15,8 @@ const Login = () => {
     e.preventDefault();
     try {
       const data = await login({ name, password });
-      Cookies.set("token", data.token); // Сохраните токен в cookies
+      Cookies.set("token", data.token);
+      <Link to="/user/main/table" />;
       alert("Авторизация успешна!");
     } catch (error) {
       console.error(error);
@@ -33,21 +34,19 @@ const Login = () => {
           <img src={img} alt="img" />
         </div>
         <div className={styles.form}>
-          <form onSubmit={handleLogin}>
-            <input
-              type="email"
-              placeholder="email"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <button type="submit">Войти</button>
-          </form>
+          <input
+            type="email"
+            placeholder="email"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button onClick={handleLogin}>Войти</button>
           <span className={styles.description}>
             Нет аккаунта?{" "}
             <Link className={styles.reg} to="/register">

@@ -10,6 +10,9 @@ export const register = async (userData) => {
 };
 
 export const login = async (userData) => {
-  const response = await api.post("/auth/verify", userData);
+  const response = await api.post("/auth/verify", {
+    login: userData.name,
+    password: userData.password,
+  });
   return response.data;
 };
