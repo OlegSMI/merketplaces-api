@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Cookies from "js-cookie";
 
 import styles from "./Login.module.scss";
-import { login } from "../../axios";
+import { login } from "../../api/authorization";
 import { SignHeader } from "../../components";
 import img from "../../assets/Login.png";
 
@@ -13,15 +12,7 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      const data = await login({ name, password });
-      Cookies.set("token", data.token);
-      <Link to="/user/main/table" />;
-      alert("Авторизация успешна!");
-    } catch (error) {
-      console.error(error);
-      alert("Ошибка авторизации");
-    }
+    await login({ name, password });
   };
 
   return (
