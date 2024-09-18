@@ -17,6 +17,7 @@
     "@mui/x-data-grid": "^7.17.0",
     "@mui/x-data-grid-generator": "^7.17.0",
     "@mui/x-data-grid-pro": "^7.17.0",
+    "@table-library/react-table-library": "^4.1.7",
     "antd": "^5.19.3",
     "axios": "^1.7.2",
     "prop-types": "^15.8.1",
