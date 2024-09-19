@@ -7,7 +7,7 @@ const useSearch = () => {
   //   const { setError } = useContext(ErrorContext);
   const url = "http://51.250.20.233:8090/stand/";
 
-  const getImages = async (token, image) => {
+  const getProductsByImage = async (token, image) => {
     try {
       const res = await axios.get(
         `${url}products?api_token=${token}&img_url=${image}`
@@ -41,7 +41,7 @@ const useSearch = () => {
     }
   };
 
-  const getProductById = async (token, itemID) => {
+  const getInfoProductById = async (token, itemID) => {
     try {
       const res = await axios.get(
         `${url}products/${itemID}?api_token=${token}`
@@ -61,9 +61,9 @@ const useSearch = () => {
   };
 
   return {
-    getImages,
+    getProductsByImage,
     getTranslating,
-    getProductById,
+    getInfoProductById,
   };
 };
 
