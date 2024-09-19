@@ -20,7 +20,9 @@ const SideBar = () => {
     <div className={styles.sidebar}>
       <div className={styles.logo}>
         <img src={logo} alt="logo" />
-        <span>UStats</span>
+        <Link to={"/user/main/table"} onClick={() => menuLinkClick("/main")}>
+          <span>UStats</span>
+        </Link>
       </div>
       <ui>
         <li className={active === "/main" ? styles.active : ""}>

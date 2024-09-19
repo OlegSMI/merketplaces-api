@@ -12,7 +12,7 @@ const User = () => {
       <div className={styles.content}>
         <Routes>
           <Route path="/main/*" element={<Main />} />
-          <Route path="/finplan" element={<FinPlan />} />
+          <Route exact path="/finplan" element={<FinPlan />} />
           <Route path="/profile" element={<div>Profile</div>} />
         </Routes>
       </div>

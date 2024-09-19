@@ -48,7 +48,6 @@ const Main = () => {
 
       <Routes>
         <Route path="table" element={<Table />} />
-        {/* <Route path="table" element={<div>table</div>} /> */}
         <Route path="list" element={<Sips />} />
         <Route path="cards" element={<div>Карточки</div>} />
         <Route path="risk-profile" element={<div>Риск профиль</div>} />
