@@ -111,9 +111,18 @@
       font-style: normal;
       text-align: center;
 
+      @media (max-width: 700px) {
+        font-size: 18px;
+      }
+
       .reg {
         color: #256cd7;
         text-decoration: none;
+        font-size: 18px;
+
+        @media (max-width: 700px) {
+          font-size: 14px;
+        }
 
         &:active {
           color: rgba(37, 108, 215, 0.7);
