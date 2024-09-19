@@ -1,1 +1,3 @@
-export { default as autorization } from "./autorization";
+export * as authAPI from "./auth";
+export * as operatorAPI from "./operator";
+export * as userAPI from "./user";

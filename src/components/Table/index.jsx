@@ -1,259 +1,228 @@
-// import * as React from "react";
-import {
-  randomColor,
-  randomEmail,
-  randomInt,
-  randomName,
-  randomArrayItem,
-  random,
-} from "@mui/x-data-grid-generator";
-import {
-  DataGrid,
-  gridStringOrNumberComparator,
-  GridToolbar,
-} from "@mui/x-data-grid";
-import { renderAvatar } from "./avatar";
-import { renderEmail } from "./email";
-import { renderEditRating, renderRating } from "./rating";
-import {
-  COUNTRY_ISO_OPTIONS,
-  renderCountry,
-  renderEditCountry,
-} from "./country";
-import { renderSparkline } from "./sparkline";
-import { renderEditProgress, renderProgress } from "./progress";
-import { renderEditStatus, renderStatus, STATUS_OPTIONS } from "./status";
-import {
-  INCOTERM_OPTIONS,
-  renderEditIncoterm,
-  renderIncoterm,
-} from "./incoterm";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { Checkbox } from "@mui/material";
+import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
+import Paper from "@mui/material/Paper";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { SparkLineChart } from "@mui/x-charts";
+import PropTypes from "prop-types";
+import * as React from "react";
 
-import { ButtonTable } from "./button";
-import { deleteButton } from "./deleteButton";
-import { editButton } from "./editButton";
-
-import { useState } from "react";
-
-const columns = [
-  {
-    field: "name",
-    headerName: "Продавец",
-    width: 120,
-    editable: true,
-  },
-  {
-    field: "avatar",
-    headerName: "",
-    display: "flex",
-    renderCell: renderAvatar,
-    valueGetter: (value, row) =>
-      row.name == null || row.avatar == null
-        ? null
-        : { name: row.name, color: row.avatar },
-    sortable: false,
-    filterable: false,
-  },
-  {
-    field: "email",
-    headerName: "Почта",
-    renderCell: renderEmail,
-    width: 150,
-    editable: true,
-  },
-  {
-    field: "salary",
-    headerName: "Прибыль за период",
-    type: "number",
-    width: 150,
-    valueFormatter: (value) => {
-      if (!value || typeof value !== "number") {
-        return value;
-      }
-      return `$${value.toLocaleString()}`;
-    },
-    editable: true,
-  },
-  {
-    field: "rating",
-    headerName: "Рейтинг",
-    display: "flex",
-    renderCell: renderRating,
-    renderEditCell: renderEditRating,
-    width: 150,
-    type: "number",
-    editable: true,
-    availableAggregationFunctions: ["avg", "min", "max", "size"],
-  },
-  {
-    field: "comments",
-    headerName: "Комментарии",
-    type: "number",
-    width: 150,
-    valueFormatter: (value) => {
-      if (!value || typeof value !== "number") {
-        return value;
-      }
-      return `${value.toLocaleString()}`;
-    },
-    editable: true,
-  },
-  {
-    field: "sales",
-    headerName: "Продажи",
-    type: "number",
-    width: 150,
-    valueFormatter: (value) => {
-      if (!value || typeof value !== "number") {
-        return value;
-      }
-      return `${value.toLocaleString()}`;
-    },
-    editable: true,
-  },
-  {
-    field: "revenue",
-    headerName: "Выручка",
-    type: "number",
-    width: 150,
-    valueFormatter: (value) => {
-      if (!value || typeof value !== "number") {
-        return value;
-      }
-      return `${value.toLocaleString()}`;
-    },
-    editable: false,
-    disableClickEventBubbling: true,
-  },
-  //   {
-  //     field: "country",
-  //     headerName: "Country",
-  //     type: "singleSelect",
-  //     valueOptions: COUNTRY_ISO_OPTIONS,
-  //     valueFormatter: (value) => value?.label,
-  //     renderCell: renderCountry,
-  //     renderEditCell: renderEditCountry,
-  //     sortComparator: (v1, v2, param1, param2) =>
-  //       gridStringOrNumberComparator(v1.label, v2.label, param1, param2),
-  //     width: 150,
-  //     editable: true,
-  //   },
-
-  {
-    field: "monthlyActivity",
-    headerName: "Динамика продаж",
-    type: "custom",
-    resizable: false,
-    filterable: false,
-    sortable: false,
-    editable: false,
-    groupable: false,
-    display: "flex",
-    renderCell: renderSparkline,
-    width: 150,
-    valueGetter: (value, row) => row.monthlyActivity,
-  },
-  // {
-  //   field: "button",
-  //   headerName: "",
-  //   type: "button",
-  //   renderCell: ButtonTable,
-  // },
-  {
-    field: "delete",
-    headerName: "",
-    type: "button",
-    width: 50,
-    renderCell: deleteButton,
-    editable: false,
-  },
-  {
-    field: "edit",
-    headerName: "",
-    type: "button",
-    width: 50,
-    renderCell: editButton,
-    editable: false,
-  },
-  //   {
-  //     field: "budget",
-  //     headerName: "Budget left",
-  //     renderCell: renderProgress,
-  //     renderEditCell: renderEditProgress,
-  //     availableAggregationFunctions: ["min", "max", "avg", "size"],
-  //     type: "number",
-  //     width: 120,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "status",
-  //     headerName: "Status",
-  //     renderCell: renderStatus,
-  //     renderEditCell: renderEditStatus,
-  //     type: "singleSelect",
-  //     valueOptions: STATUS_OPTIONS,
-  //     width: 150,
-  //     editable: true,
-  //   },
-  //   {
-  //     field: "incoTerm",
-  //     headerName: "Incoterm",
-  //     renderCell: renderIncoterm,
-  //     renderEditCell: renderEditIncoterm,
-  //     type: "singleSelect",
-  //     valueOptions: INCOTERM_OPTIONS,
-  //     editable: true,
-  //   },
-];
-
-const rows = Array.from({ length: 100 }, (_, index) => ({
-  id: index,
-  name: randomName({}, {}),
-  avatar: randomColor(),
-  email: randomEmail(),
-  rating: randomInt(1, 5),
-  comments: randomInt(1, 1000),
-  sales: randomInt(1, 10000),
-  revenue: randomInt(1, 100000),
-  //   country: randomArrayItem(COUNTRY_ISO_OPTIONS),
-  salary: randomInt(35000, 80000),
-  monthlyActivity: Array.from({ length: 30 }, () => randomInt(1, 25)),
-  //   budget: random(0, 1).toPrecision(),
-  //   status: randomArrayItem(STATUS_OPTIONS),
-  //   incoTerm: randomArrayItem(INCOTERM_OPTIONS),
-}));
-
-export default function CustomColumnFullExample() {
-  const [expandedRowId, setExpandedRowId] = useState(null);
-
-  const handleRowClick = (params) => {
-    setExpandedRowId(expandedRowId === params.id ? null : params.id);
+function createData(
+  check,
+  name,
+  profit,
+  rating,
+  comments,
+  sells,
+  revenue,
+  dynamic
+) {
+  return {
+    check,
+    name,
+    profit,
+    rating,
+    comments,
+    sells,
+    revenue,
+    dynamic,
   };
+}
+
+function Row(props) {
+  const { row } = props;
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <div style={{ height: 400, width: "99%" }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        checkboxSelection
-        disableRowSelectionOnClick
-        // pagination
-        onRowClick={handleRowClick}
-        components={{
-          Toolbar: GridToolbar,
-        }}
-      />
-      {expandedRowId !== null && (
-        <div style={{ marginTop: 10 }}>
-          <h3>Дополнительная информация:</h3>
-          <p>Имя: {rows[expandedRowId].name}</p>
-          <p>Почта: {rows[expandedRowId].email}</p>
-          <p>
-            Прибыль за период: ${rows[expandedRowId].salary.toLocaleString()}
-          </p>
-          {/* Вы можете добавить больше информации здесь */}
-        </div>
-      )}
-    </div>
+    <React.Fragment>
+      <TableRow sx={{ "& > *": { borderBottom: "none" } }}>
+        <TableCell component="th" scope="row">
+          <Checkbox value={row.check}></Checkbox>
+        </TableCell>
+        <TableCell component="th" scope="row">
+          {row.name}
+        </TableCell>
+        <TableCell align="center">{row.profit}</TableCell>
+        <TableCell align="center">{row.rating}</TableCell>
+        <TableCell align="center">{row.comments}</TableCell>
+        <TableCell align="center">{row.sells}</TableCell>
+        <TableCell align="center">{row.revenue}</TableCell>
+
+        <TableCell align="center">
+          <SparkLineChart
+            data={row.dynamic}
+            plotType="bar"
+            height={40}
+            width={150}
+          />
+        </TableCell>
+        <TableCell>
+          <IconButton
+            aria-label="expand row"
+            size="small"
+            onClick={() => setOpen(!open)}
+          >
+            {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+          </IconButton>
+        </TableCell>
+      </TableRow>
+      <TableRow>
+        <TableCell
+          style={{ paddingBottom: 0, paddingTop: 0, border: "none" }}
+          colSpan={6}
+        >
+          <Collapse in={open} timeout="auto" unmountOnExit>
+            <Box sx={{ margin: 1 }}>
+              1688 goods
+              {/* <Typography variant="h6" gutterBottom component="div">
+                History
+              </Typography>
+              <Table size="small" aria-label="purchases">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date</TableCell>
+                    <TableCell>Customer</TableCell>
+                    <TableCell align="right">Amount</TableCell>
+                    <TableCell align="right">Total price ($)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {row.dynamic.map((historyRow) => (
+                    <TableRow key={historyRow}>
+                      {/* <TableCell component="th" scope="row">
+                        {historyRow.date}
+                      </TableCell>
+                      <TableCell>{historyRow.customerId}</TableCell>
+                      <TableCell align="right">{historyRow.amount}</TableCell>
+                      <TableCell align="right">
+                        {Math.round(historyRow.amount * row.price * 100) / 100}
+                      </TableCell> */}
+              {/* <div>{historyRow}</div>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table> */}
+            </Box>
+          </Collapse>
+        </TableCell>
+      </TableRow>
+    </React.Fragment>
+  );
+}
+
+Row.propTypes = {
+  row: PropTypes.shape({
+    check: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
+    profit: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    comments: PropTypes.number.isRequired,
+    sells: PropTypes.number.isRequired,
+    revenue: PropTypes.number.isRequired,
+    dynamic: PropTypes.array.isRequired,
+  }).isRequired,
+};
+
+const rows = [
+  createData(
+    false,
+    "Трусы",
+    346346,
+    123,
+    11,
+    23232323,
+    33434,
+    [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
+  ),
+  createData(
+    false,
+    "Носки",
+    346346,
+    123,
+    22,
+    23232323,
+    33434,
+    [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
+  ),
+  createData(
+    false,
+    "Комплект белья",
+    346346,
+    123,
+    33,
+    23232323,
+    33434,
+    [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
+  ),
+  createData(
+    false,
+    "Слюнявчик",
+    346346,
+    123,
+    44,
+    23232323,
+    33434,
+    [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
+  ),
+  createData(
+    false,
+    "Валенки",
+    346346,
+    123,
+    55,
+    23232323,
+    33434,
+    [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
+  ),
+];
+
+export default function CollapsibleTable() {
+  return (
+    <TableContainer
+      component={Paper}
+      elevation={0}
+      sx={{ border: "1px solid #ccc" }}
+    >
+      <Table sx={{ minWidth: 650 }} size="small" aria-label="collapsible table">
+        <TableHead>
+          <TableRow
+            sx={{
+              backgroundColor: "#F9F9FD",
+            }}
+          >
+            <TableCell>
+              <Checkbox></Checkbox>
+            </TableCell>
+            <TableCell>Товар</TableCell>
+            <TableCell>Потенциальная прибыль за период</TableCell>
+            <TableCell>Рейтинг</TableCell>
+            <TableCell>Комментарии</TableCell>
+            <TableCell>Продажи</TableCell>
+            <TableCell>Выручка</TableCell>
+            <TableCell>Динамика продаж</TableCell>
+            <TableCell>Действие</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody
+          sx={{
+            "& > :nth-last-child(2)": {
+              "& > *": { borderBottom: "none" },
+            },
+          }}
+        >
+          {rows.map((row) => (
+            <Row key={row.name} row={row} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
   );
 }

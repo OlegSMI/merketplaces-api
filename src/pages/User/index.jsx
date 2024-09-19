@@ -8,6 +8,7 @@ const User = () => {
   return (
     <div className={styles.container}>
       <SideBar />
+
       <div className={styles.content}>
         <Routes>
           <Route path="/main/*" element={<Main />} />
