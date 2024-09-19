@@ -4,10 +4,10 @@ import { useState } from "react";
 import styles from "./SideBar.module.scss";
 
 import userPhoto from "../../assets/UserPhoto.png";
-import logo from "../../assets/logo.png";
-import main from "../../assets/main.svg";
-import finplan from "../../assets/finplan.svg";
-import profile from "../../assets/profile.svg";
+import logo from "../../assets/sidebar/logo.png";
+import main from "../../assets/sidebar/main.svg";
+import finplan from "../../assets/sidebar/finplan.svg";
+import profile from "../../assets/sidebar/profile.svg";
 
 const SideBar = () => {
   const [active, setActive] = useState("/main");

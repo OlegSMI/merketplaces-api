@@ -1,18 +1,26 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import styles from "./Login.module.scss";
-import { login } from "../../api/authorization";
+import { login } from "../../api/auth";
 import { SignHeader } from "../../components";
-import img from "../../assets/Login.png";
+import img from "../../assets/auth/Login.png";
 
 const Login = () => {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    await login({ name, password });
+    try {
+      await login({ name, password });
+      navigate("/user/main/table");
+    } catch (error) {
+      if (error.response.data.errorCode === 10002) {
+        alert("Не верный логин или пароль");
+      } else alert(error.response?.data?.message || "Ошибка авторизации");
+    }
   };
 
   return (
@@ -24,20 +32,22 @@ const Login = () => {
           <p className={styles.text}>Давайте приступим к работе</p>
           <img src={img} alt="img" />
         </div>
-        <div className={styles.form}>
-          <input
-            type="email"
-            placeholder="email"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button onClick={handleLogin}>Войти</button>
+        <div className={styles.panel}>
+          <form onSubmit={handleLogin} className={styles.form}>
+            <input
+              type="email"
+              placeholder="email"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button onClick={handleLogin}>Войти</button>
+          </form>
           <span className={styles.description}>
             Нет аккаунта?{" "}
             <Link className={styles.reg} to="/register">

@@ -2,8 +2,8 @@ import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 
 import styles from "./Combobox.module.scss";
-import filterUp from "../../assets/filterUp.svg";
-import filterDown from "../../assets/filterDown.svg";
+import filterUp from "../../assets/table/filterUp.svg";
+import filterDown from "../../assets/table/filterDown.svg";
 
 const Combobox = ({ name, options }) => {
   const [selectedOption, setSelectedOption] = useState("");

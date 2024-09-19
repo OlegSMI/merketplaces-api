@@ -56,9 +56,14 @@
     }
   }
 
-  .form {
+  .panel {
     display: flex;
     flex-direction: column;
+
+    .form {
+      display: flex;
+      flex-direction: column;
+    }
 
     input {
       width: 430px;
