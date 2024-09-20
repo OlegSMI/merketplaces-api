@@ -4,20 +4,34 @@ import TableCell from "@mui/material/TableCell";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import PropTypes from "prop-types";
+import Avatar from "@mui/material/Avatar";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./Table.module.scss";
 
 const AnalogRow = ({ item }) => {
+  const navigate = useNavigate();
   const statusClasses = {
     0: styles.status0,
     1: styles.status1,
     2: styles.status2,
   };
 
+  const handleClickRow = () => {
+    navigate("/user/prodinfo", { state: { data: item } });
+  };
+
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "none" } }}>
-        <TableCell align="center">{item.avatar}</TableCell>
+      <TableRow
+        sx={{ "& > *": { borderBottom: "none" } }}
+        onClick={() => handleClickRow()}
+      >
+        <TableCell align="center">
+          <Stack alignItems="center">
+            <Avatar alt="Remy Sharp" src="" />
+          </Stack>
+        </TableCell>
         <TableCell align="center">{item.name}</TableCell>
         <TableCell align="center">{item.price}</TableCell>
         <TableCell align="center">

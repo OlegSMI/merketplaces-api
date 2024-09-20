@@ -8,13 +8,15 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
+import PropTypes from "prop-types";
 import { useState } from "react";
 
 import Row from "./mainRow";
 import styles from "./Table.module.scss";
 
-const CollapsibleTable = () => {
+const CollapsibleTable = ({ search }) => {
   const createData = (
+    id,
     check,
     name,
     profit,
@@ -25,6 +27,7 @@ const CollapsibleTable = () => {
     dynamic
   ) => {
     return {
+      id,
       check,
       name,
       profit,
@@ -37,6 +40,7 @@ const CollapsibleTable = () => {
   };
   const [rows, setRows] = useState([
     createData(
+      0,
       false,
       "Трусы",
       346346,
@@ -47,6 +51,7 @@ const CollapsibleTable = () => {
       [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
     ),
     createData(
+      1,
       false,
       "Носки",
       346346,
@@ -57,6 +62,7 @@ const CollapsibleTable = () => {
       [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
     ),
     createData(
+      2,
       false,
       "Комплект белья",
       346346,
@@ -67,6 +73,7 @@ const CollapsibleTable = () => {
       [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
     ),
     createData(
+      3,
       false,
       "Слюнявчик",
       346346,
@@ -77,6 +84,7 @@ const CollapsibleTable = () => {
       [1, 3, 3, 5, 6, 8, 6, 3, 10, 20, 17, 12, 12, 13]
     ),
     createData(
+      4,
       false,
       "Валенки",
       346346,
@@ -95,16 +103,35 @@ const CollapsibleTable = () => {
     console.log("Текущая страница:", value);
   };
 
-  const deleteRow = (name) => {
-    setRows((rows) => rows.filter((row) => row.name !== name));
+  const deleteRow = (e, id) => {
+    e.stopPropagation();
+    setRows((rows) => rows.filter((row) => row.id !== id));
   };
 
-  const comboChange = (name) => {
+  const comboChange = (e, name) => {
+    e.stopPropagation();
     setRows((rows) =>
       rows.map((row) =>
         row.name === name ? { ...row, check: !row.check } : row
       )
     );
+  };
+
+  const filteredProducts = rows.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const saveEdit = (newData) => {
+    console.log("Новые данные:", newData);
+    const updatedRows = rows.map((item) => {
+      if (item.id === newData.id) {
+        return { ...item, ...newData };
+      }
+      return item;
+    });
+
+    setRows(updatedRows);
+    console.log("Сохраненные данные:", rows);
   };
 
   return (
@@ -150,12 +177,13 @@ const CollapsibleTable = () => {
               },
             }}
           >
-            {rows.map((row) => (
+            {filteredProducts.map((row) => (
               <Row
                 key={row.name}
                 row={row}
-                deleteRow={deleteRow}
+                deleteRow={(e) => deleteRow(e, row.id)}
                 comboChange={comboChange}
+                saveEdit={saveEdit}
               />
             ))}
           </TableBody>
@@ -171,6 +199,10 @@ const CollapsibleTable = () => {
       </Stack>
     </>
   );
+};
+
+CollapsibleTable.propTypes = {
+  search: PropTypes.string,
 };
 
 export default CollapsibleTable;

@@ -17,7 +17,7 @@ const Login = () => {
       await login({ name, password });
       navigate("/user/main/table");
     } catch (error) {
-      if (error.response.data.errorCode === 10002) {
+      if (error?.response?.data?.errorCode === 10002) {
         alert("Не верный логин или пароль");
       } else alert(error.response?.data?.message || "Ошибка авторизации");
     }

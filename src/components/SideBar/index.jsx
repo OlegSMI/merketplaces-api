@@ -24,7 +24,7 @@ const SideBar = () => {
           <span>UStats</span>
         </Link>
       </div>
-      <ui>
+      <ul>
         <li className={active === "/main" ? styles.active : ""}>
           <Link
             to="/user/main/table"
@@ -55,14 +55,18 @@ const SideBar = () => {
             Профиль
           </Link>
         </li>
-      </ui>
-      <div className={styles.userInfo}>
+      </ul>
+      <Link
+        to={"/user/profile"}
+        className={styles.userInfo}
+        onClick={() => menuLinkClick("/profile")}
+      >
         <img src={userPhoto} alt="User" className={styles.userPhoto} />
-        <div className={styles.name}>
+        <div>
           <p className={styles.title}>Алекс Вилкинс</p>
           <p className={styles.text}>@vilkins</p>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

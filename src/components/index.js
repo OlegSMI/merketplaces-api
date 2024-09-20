@@ -4,3 +4,4 @@ export { default as NavBar } from "./NavBar";
 export { default as Combobox } from "./Combobox";
 export { default as Table } from "./Table";
 export { default as ProtectedRoute } from "./ProtectedRoute";
+export { default as Field } from "./Field";

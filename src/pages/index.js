@@ -4,3 +4,4 @@ export { default as User } from "./User";
 export { default as Admin } from "./Admin";
 export { default as Main } from "./Main";
 export { default as FinPlan } from "./FinPlan";
+export { default as ProdInfo } from "./ProdInfo";

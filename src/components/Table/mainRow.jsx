@@ -1,16 +1,21 @@
 import React from "react";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
+import {
+  TableRow,
+  TableCell,
+  Checkbox,
+  IconButton,
+  TextField,
+} from "@mui/material";
 import { SparkLineChart } from "@mui/x-charts";
 import Collapse from "@mui/material/Collapse";
-import IconButton from "@mui/material/IconButton";
-import { Checkbox } from "@mui/material";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import SaveIcon from "@mui/icons-material/Save";
 import PropTypes from "prop-types";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
 import AnalogTabble from "./analogTable";
 
@@ -22,9 +27,12 @@ const theme = createTheme({
   },
 });
 
-const Row = ({ row, deleteRow, comboChange }) => {
+const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
   const [open, setOpen] = React.useState(false);
-  const [analogProd, setanalogProd] = React.useState([
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [editedRow, setEditedRow] = React.useState(row);
+
+  const [analogProd] = React.useState([
     {
       avatar: 1,
       name: "Нижнее белье",
@@ -65,25 +73,119 @@ const Row = ({ row, deleteRow, comboChange }) => {
       sales: 123,
     },
   ]);
+  const navigate = useNavigate();
+
+  const handleRowClick = () => {
+    navigate("/user/prodinfo", { state: { data: row } });
+  };
+
+  const handleOpenPanel = (e) => {
+    e.stopPropagation();
+    setOpen(!open);
+  };
+
+  const handleEditClick = (e) => {
+    e.stopPropagation();
+    setIsEditing(true);
+  };
+
+  const handleSaveClick = (e) => {
+    e.stopPropagation();
+    setIsEditing(false);
+    saveEdit(editedRow);
+  };
+
+  const handleChange = (e) => {
+    e.stopPropagation();
+    const { name, value } = e.target;
+    setEditedRow((prev) => ({ ...prev, [name]: value }));
+  };
 
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
-        <TableRow sx={{ "& > *": { borderBottom: "none" } }}>
+        <TableRow
+          sx={{ "& > *": { borderBottom: "none" } }}
+          onClick={handleRowClick}
+        >
           <TableCell>
             <Checkbox
               checked={row.check}
-              onClick={() => comboChange(row.name)}
+              onClick={(e) => comboChange(e, row.name)}
             ></Checkbox>
           </TableCell>
           <TableCell component="th" scope="row">
-            {row.name}
+            {isEditing ? (
+              <TextField
+                name="name"
+                value={editedRow.name}
+                onChange={handleChange}
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              row.name
+            )}
           </TableCell>
-          <TableCell align="center">{row.profit}</TableCell>
-          <TableCell align="center">{row.rating}</TableCell>
-          <TableCell align="center">{row.comments}</TableCell>
-          <TableCell align="center">{row.sells}</TableCell>
-          <TableCell align="center">{row.revenue}</TableCell>
+          <TableCell align="center">
+            {isEditing ? (
+              <TextField
+                name="profit"
+                value={editedRow.profit}
+                onChange={handleChange}
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              row.profit
+            )}
+          </TableCell>
+          <TableCell align="center">
+            {isEditing ? (
+              <TextField
+                name="rating"
+                value={editedRow.rating}
+                onChange={handleChange}
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              row.rating
+            )}
+          </TableCell>
+          <TableCell align="center">
+            {isEditing ? (
+              <TextField
+                name="rating"
+                value={editedRow.comments}
+                onChange={handleChange}
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              row.comments
+            )}
+          </TableCell>
+          <TableCell align="center">
+            {isEditing ? (
+              <TextField
+                name="rating"
+                value={editedRow.sells}
+                onChange={handleChange}
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              row.sells
+            )}
+          </TableCell>
+          <TableCell align="center">
+            {isEditing ? (
+              <TextField
+                name="rating"
+                value={editedRow.revenue}
+                onChange={handleChange}
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              row.revenue
+            )}
+          </TableCell>
 
           <TableCell align="center">
             <SparkLineChart
@@ -97,21 +199,35 @@ const Row = ({ row, deleteRow, comboChange }) => {
             <IconButton
               aria-label="expand row"
               size="small"
-              onClick={() => setOpen(!open)}
+              onClick={(e) => handleOpenPanel(e)}
             >
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
           <TableCell align="center">
-            <IconButton aria-label="edit" size="small">
-              <EditIcon />
-            </IconButton>
+            {isEditing ? (
+              <IconButton
+                aria-label="save"
+                size="small"
+                onClick={handleSaveClick}
+              >
+                <SaveIcon />
+              </IconButton>
+            ) : (
+              <IconButton
+                aria-label="edit"
+                size="small"
+                onClick={handleEditClick}
+              >
+                <EditIcon />
+              </IconButton>
+            )}
           </TableCell>
           <TableCell align="center">
             <IconButton
               aria-label="delete"
               size="small"
-              onClick={() => deleteRow(row.name)}
+              onClick={(e) => deleteRow(e, row.id)}
             >
               <DeleteForeverIcon color="red" />
             </IconButton>
@@ -138,6 +254,7 @@ const Row = ({ row, deleteRow, comboChange }) => {
 
 Row.propTypes = {
   row: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     check: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     profit: PropTypes.number.isRequired,
@@ -149,6 +266,7 @@ Row.propTypes = {
   }).isRequired,
   deleteRow: PropTypes.func.isRequired,
   comboChange: PropTypes.func.isRequired,
+  saveEdit: PropTypes.func.isRequired,
 };
 
 export default Row;

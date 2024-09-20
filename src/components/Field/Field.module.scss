@@ -1,0 +1,29 @@
+.container {
+  font-family: "Inter", system-ui;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+
+  .title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #475467;
+    margin: 0;
+    padding: 0;
+  }
+
+  .body {
+    background-color: #f2f4f7;
+    border: none;
+    border-radius: 8px;
+    margin-top: 5px;
+
+    p {
+      color: #101828;
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0;
+      padding: 10px;
+    }
+  }
+}

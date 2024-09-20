@@ -19,7 +19,7 @@ function App() {
     <ErrorBoundary fallback={<div>Something went wrong</div>}>
       <Routes>
         <Route
-          path="/user*"
+          path="/user/*"
           element={
             <ProtectedRoute>
               <User />
@@ -27,7 +27,7 @@ function App() {
           }
         />
         <Route
-          path="/admin*"
+          path="/admin/*"
           element={
             <ProtectedRoute>
               <Admin />

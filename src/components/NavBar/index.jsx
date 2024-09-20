@@ -1,14 +1,15 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import styles from "./NavBar.module.scss";
 
 const NavBar = () => {
   const [active, setActive] = useState("/table");
+  const location = useLocation();
 
   useEffect(() => {
-    setActive("/" + window.location.href.split("/").pop());
-  }, [window.location.href]);
+    setActive("/" + location.pathname.split("/").pop());
+  }, [location]);
 
   return (
     <nav className={styles.navbar}>

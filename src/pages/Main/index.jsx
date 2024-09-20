@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import { useState } from "react";
 
 import styles from "./Main.module.scss";
 import { NavBar, Combobox, Table } from "../../components";
@@ -20,6 +21,12 @@ const Sips = () => {
 };
 
 const Main = () => {
+  const [search, setSearch] = useState("");
+
+  const handleInputChange = (event) => {
+    setSearch(event.target.value);
+  };
+
   return (
     <>
       <h3>Подбор товаров</h3>
@@ -42,12 +49,14 @@ const Main = () => {
             className={styles.input}
             type="text"
             placeholder="Поиск товаров..."
+            value={search}
+            onChange={handleInputChange}
           />
         </div>
       </div>
 
       <Routes>
-        <Route path="table" element={<Table />} />
+        <Route path="table" element={<Table search={search} />} />
         <Route path="list" element={<Sips />} />
         <Route path="cards" element={<div>Карточки</div>} />
         <Route path="risk-profile" element={<div>Риск профиль</div>} />
