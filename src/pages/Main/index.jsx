@@ -1,8 +1,8 @@
-import { Routes, Route } from "react-router-dom";
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
+import { Combobox, NavBar, Table } from "../../components";
 import styles from "./Main.module.scss";
-import { NavBar, Combobox, Table } from "../../components";
 
 const categories = [
   "Электроника",
@@ -35,7 +35,7 @@ const Main = () => {
 
       <div className={styles.header}>
         <div className={styles.filters}>
-          <Combobox name="Категория" options={categories} />
+          <Combobox name="Категория" options={categories} sx={{ height: 32 }} />
           <Combobox name="Инвестиции" options={options} />
           <Combobox name="Проценты годовых" options={options} />
           <Combobox name="Риск профиль" options={options} />
