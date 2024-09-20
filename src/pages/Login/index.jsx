@@ -1,25 +1,42 @@
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 
-import styles from "./Login.module.scss";
+import { CircularProgress } from "@mui/material";
+import { useSnackbar } from "notistack";
 import { login } from "../../api/auth";
-import { SignHeader } from "../../components";
 import img from "../../assets/auth/Login.png";
+import { SignHeader } from "../../components";
+import { LoadingContext } from "../../context";
+import styles from "./Login.module.scss";
 
 const Login = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [name, setName] = useState("");
+  // const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const { loading, setLoading } = useContext(LoadingContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await login({ name, password });
       navigate("/user/main/table");
     } catch (error) {
       if (error?.response?.data?.errorCode === 10002) {
-        alert("Не верный логин или пароль");
-      } else alert(error.response?.data?.message || "Ошибка авторизации");
+        enqueueSnackbar("Неверный логин или пароль", {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
+      } else
+        enqueueSnackbar(error.response?.data?.message || "Ошибка авторизации", {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -46,7 +63,13 @@ const Login = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <button onClick={handleLogin}>Войти</button>
+            {loading ? (
+              <button>
+                <CircularProgress size="30px" color="white" />
+              </button>
+            ) : (
+              <button onClick={handleLogin}>Войти</button>
+            )}
           </form>
           <span className={styles.description}>
             Нет аккаунта?{" "}
