@@ -31,14 +31,18 @@ h3 {
     display: flex;
     flex-direction: row;
 
+    .sel {
+      background-color: red;
+    }
+
     button {
       background-color: #4d4aea;
       color: #ffffff;
       border: none;
       border-radius: 8px;
       margin: 0;
-      padding: 10px;
-      height: 40px;
+      padding: 5px 15px;
+      height: 32px;
       cursor: pointer;
 
       &:active {
