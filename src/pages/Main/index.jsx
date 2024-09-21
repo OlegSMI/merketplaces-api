@@ -28,7 +28,7 @@ const Main = () => {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <h3>Подбор товаров</h3>
 
       <NavBar />
@@ -61,7 +61,7 @@ const Main = () => {
         <Route path="cards" element={<div>Карточки</div>} />
         <Route path="risk-profile" element={<div>Риск профиль</div>} />
       </Routes>
-    </>
+    </div>
   );
 };
 

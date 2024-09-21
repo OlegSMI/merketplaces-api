@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { Alert, AlertTitle, Stack } from "@mui/material";
 
 import styles from "./Login.module.scss";
 import { login } from "../../api/auth";
@@ -7,8 +8,10 @@ import { SignHeader } from "../../components";
 import img from "../../assets/auth/Login.png";
 
 const Login = () => {
+  const [showAlert, setShowAlert] = useState(0);
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -18,8 +21,10 @@ const Login = () => {
       navigate("/user/main/table");
     } catch (error) {
       if (error?.response?.data?.errorCode === 10002) {
-        alert("Не верный логин или пароль");
-      } else alert(error.response?.data?.message || "Ошибка авторизации");
+        setShowAlert(1);
+      } else {
+        setShowAlert(2);
+      }
     }
   };
 
@@ -55,6 +60,22 @@ const Login = () => {
             </Link>
           </span>
         </div>
+        {showAlert === 1 && (
+          <Stack sx={{ width: "50%" }} spacing={2} className={styles.alert}>
+            <Alert severity="info" className={styles.title}>
+              <AlertTitle className={styles.text}>Внимание</AlertTitle>
+              Не верный логин или пароль
+            </Alert>
+          </Stack>
+        )}
+        {showAlert === 2 && (
+          <Stack sx={{ width: "50%" }} spacing={2} className={styles.alert}>
+            <Alert severity="error" className={styles.title}>
+              <AlertTitle className={styles.text}>Ошибка</AlertTitle>
+              Ошибка авторизации
+            </Alert>
+          </Stack>
+        )}
       </div>
     </>
   );

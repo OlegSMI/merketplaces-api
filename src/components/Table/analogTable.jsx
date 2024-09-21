@@ -13,8 +13,7 @@ const AnalogTabble = ({ data }) => {
     <Table sx={{ minWidth: 650 }} size="small" aria-label="collapsible table">
       <TableHead>
         <TableRow className={styles.tableHead}>
-          <TableCell align="center">Фото</TableCell>
-          <TableCell align="center">Наименование товара</TableCell>
+          <TableCell align="center">Товар</TableCell>
           <TableCell align="center">Цена</TableCell>
           <TableCell align="center">Статус</TableCell>
           <TableCell align="center">Количество</TableCell>

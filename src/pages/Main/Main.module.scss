@@ -1,3 +1,18 @@
+.container {
+  animation: slideIn 1s ease forwards;
+
+  @keyframes slideIn {
+    0% {
+      opacity: 0; /* Начальное состояние - невидимый */
+      transform: translateX(-100%); /* Сдвинут влево */
+    }
+    100% {
+      opacity: 1; /* Конечное состояние - видимый */
+      transform: translateX(0); /* На своем месте */
+    }
+  }
+}
+
 h3 {
   margin: 10px 0px 25px 0px;
   font-size: 28px;

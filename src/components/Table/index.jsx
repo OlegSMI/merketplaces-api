@@ -1,13 +1,15 @@
-import { Checkbox } from "@mui/material";
-import Paper from "@mui/material/Paper";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableCell from "@mui/material/TableCell";
-import TableRow from "@mui/material/TableRow";
+import {
+  TableBody,
+  Checkbox,
+  Stack,
+  TableRow,
+  Paper,
+  Table,
+  TableContainer,
+  TableHead,
+  TableCell,
+} from "@mui/material";
 import Pagination from "@mui/material/Pagination";
-import Stack from "@mui/material/Stack";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
@@ -148,7 +150,7 @@ const CollapsibleTable = ({ search }) => {
         >
           <TableHead>
             <TableRow className={styles.tableHead}>
-              <TableCell>
+              <TableCell align="center">
                 <Checkbox
                   checked={state}
                   onClick={() => {
@@ -158,21 +160,23 @@ const CollapsibleTable = ({ search }) => {
                   }}
                 />
               </TableCell>
-              <TableCell>Товар</TableCell>
-              <TableCell>Потенциальная прибыль за период</TableCell>
-              <TableCell>Рейтинг</TableCell>
-              <TableCell>Комментарии</TableCell>
-              <TableCell>Продажи</TableCell>
-              <TableCell>Выручка</TableCell>
-              <TableCell>Динамика продаж</TableCell>
-              <TableCell>Действие</TableCell>
-              <TableCell>Изменить</TableCell>
-              <TableCell>Удалить</TableCell>
+              <TableCell align="start">Товар</TableCell>
+              <TableCell align="center">
+                Потенциальная прибыль за период
+              </TableCell>
+              <TableCell align="center">Рейтинг</TableCell>
+              <TableCell align="center">Комментарии</TableCell>
+              <TableCell align="center">Продажи</TableCell>
+              <TableCell align="center">Выручка</TableCell>
+              <TableCell align="center">Динамика продаж</TableCell>
+              <TableCell align="center">Действие</TableCell>
+              <TableCell align="center">Изменить</TableCell>
+              <TableCell align="center">Удалить</TableCell>
             </TableRow>
           </TableHead>
           <TableBody
             sx={{
-              "& > :nth-last-child(2)": {
+              "& > :nth-last-child(n)": {
                 "& > *": { borderBottom: "none" },
               },
             }}

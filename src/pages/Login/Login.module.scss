@@ -135,4 +135,19 @@
       }
     }
   }
+
+  .alert {
+    position: fixed;
+    bottom: 20px;
+    // font-size: 20px;
+    font-family: "Inter", system-ui;
+
+    .title {
+      font-size: 20px;
+    }
+
+    .text {
+      font-size: 15px;
+    }
+  }
 }

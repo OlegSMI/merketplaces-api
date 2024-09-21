@@ -5,17 +5,20 @@ import {
   Checkbox,
   IconButton,
   TextField,
+  Avatar,
+  Collapse,
 } from "@mui/material";
-import { SparkLineChart } from "@mui/x-charts";
-import Collapse from "@mui/material/Collapse";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditIcon from "@mui/icons-material/Edit";
-import SaveIcon from "@mui/icons-material/Save";
+import {
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+  DeleteForever,
+  Edit,
+  Save,
+} from "@mui/icons-material";
 import PropTypes from "prop-types";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useNavigate } from "react-router-dom";
+import { SparkLineChart } from "@mui/x-charts";
 
 import AnalogTabble from "./analogTable";
 
@@ -108,13 +111,22 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
           sx={{ "& > *": { borderBottom: "none" } }}
           onClick={handleRowClick}
         >
-          <TableCell>
+          <TableCell align="center">
             <Checkbox
               checked={row.check}
               onClick={(e) => comboChange(e, row.name)}
             ></Checkbox>
           </TableCell>
-          <TableCell component="th" scope="row">
+          <TableCell
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "start",
+            }}
+          >
+            <Avatar alt="Avatar" src="" variant="square" sx={{ mr: 1 }} />
+
             {isEditing ? (
               <TextField
                 name="name"
@@ -201,7 +213,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
               size="small"
               onClick={(e) => handleOpenPanel(e)}
             >
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
             </IconButton>
           </TableCell>
           <TableCell align="center">
@@ -211,7 +223,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
                 size="small"
                 onClick={handleSaveClick}
               >
-                <SaveIcon />
+                <Save />
               </IconButton>
             ) : (
               <IconButton
@@ -219,7 +231,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
                 size="small"
                 onClick={handleEditClick}
               >
-                <EditIcon />
+                <Edit />
               </IconButton>
             )}
           </TableCell>
@@ -229,7 +241,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
               size="small"
               onClick={(e) => deleteRow(e, row.id)}
             >
-              <DeleteForeverIcon color="red" />
+              <DeleteForever color="red" />
             </IconButton>
           </TableCell>
         </TableRow>
