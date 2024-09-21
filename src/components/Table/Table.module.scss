@@ -2,6 +2,45 @@
   border: 1px solid #ccc;
 }
 
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 60vh;
+  animation: slideIn 1s ease forwards;
+}
+
+.table {
+  animation: slideIn 1s ease forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0; /* Начальное состояние - невидимый */
+    transform: translateX(-50px); /* Сдвинут влево */
+  }
+  100% {
+    opacity: 1; /* Конечное состояние - видимый */
+    transform: translateX(0); /* На своем месте */
+  }
+}
+
+.anima {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Начальное состояние - невидимый */
+    transform: translateY(-20px); /* Сдвиг вверх */
+  }
+  to {
+    opacity: 1; /* Конечное состояние - видимый */
+    transform: translateY(0); /* На своем месте */
+  }
+}
+
 .tableHead {
   background-color: #f9f9fd;
 }

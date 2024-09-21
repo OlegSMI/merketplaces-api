@@ -1,10 +1,20 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  Combobox,
+  NavBar,
+  Table,
+  List,
+  Card,
+  RiskProfile,
+} from "../../components";
 
-import { Combobox, NavBar, Table } from "../../components";
+import { getWbProducts } from "../../redux/wbProducts/asyncAction";
 import styles from "./Main.module.scss";
 
 const categories = [
+  "Белье",
   "Электроника",
   "Мебель",
   "Товары для детей",
@@ -16,12 +26,17 @@ const categories = [
 const options = ["Отция 1", "Отция 2"];
 const filter = ["По дате", "По цене"];
 
-const Sips = () => {
-  return <div>Список</div>;
-};
-
 const Main = () => {
   const [search, setSearch] = useState("");
+  const [categoryOption, setCategoryOption] = useState("");
+  const [investOption, setInvestOption] = useState("");
+  const [procentOption, setProcentOption] = useState("");
+  const [riskOption, setRiskOption] = useState("");
+  const dispatch = useDispatch();
+
+  const getProducts = () => {
+    dispatch(getWbProducts());
+  };
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);
@@ -35,12 +50,33 @@ const Main = () => {
 
       <div className={styles.header}>
         <div className={styles.filters}>
-          <Combobox name="Категория" options={categories} sx={{ height: 32 }} />
-          <Combobox name="Инвестиции" options={options} />
-          <Combobox name="Проценты годовых" options={options} />
-          <Combobox name="Риск профиль" options={options} />
+          <Combobox
+            name="Категория"
+            options={categories}
+            selectedOption={categoryOption}
+            setSelectedOption={setCategoryOption}
+            sx={{ height: 32 }}
+          />
+          <Combobox
+            name="Инвестиции"
+            options={options}
+            selectedOption={investOption}
+            setSelectedOption={setInvestOption}
+          />
+          <Combobox
+            name="Проценты годовых"
+            options={options}
+            selectedOption={procentOption}
+            setSelectedOption={setProcentOption}
+          />
+          <Combobox
+            name="Риск профиль"
+            options={options}
+            selectedOption={riskOption}
+            setSelectedOption={setRiskOption}
+          />
 
-          <button>Подобрать товары</button>
+          <button onClick={getProducts}>Подобрать товары</button>
         </div>
 
         <div className={styles.search}>
@@ -56,10 +92,13 @@ const Main = () => {
       </div>
 
       <Routes>
-        <Route path="table" element={<Table search={search} />} />
-        <Route path="list" element={<Sips />} />
-        <Route path="cards" element={<div>Карточки</div>} />
-        <Route path="risk-profile" element={<div>Риск профиль</div>} />
+        <Route
+          path="table"
+          element={<Table search={search} categoryOption={categoryOption} />}
+        />
+        <Route path="list" element={<List />} />
+        <Route path="cards" element={<Card />} />
+        <Route path="risk-profile" element={<RiskProfile />} />
       </Routes>
     </div>
   );

@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import { SparkLineChart } from "@mui/x-charts";
 
 import AnalogTabble from "./analogTable";
+import styles from "./Table.module.scss";
 
 const theme = createTheme({
   palette: {
@@ -108,6 +109,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <TableRow
+          className={styles.anima}
           sx={{ "& > *": { borderBottom: "none" } }}
           onClick={handleRowClick}
         >
@@ -165,7 +167,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
           <TableCell align="center">
             {isEditing ? (
               <TextField
-                name="rating"
+                name="comments"
                 value={editedRow.comments}
                 onChange={handleChange}
                 onClick={(e) => e.stopPropagation()}
@@ -177,7 +179,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
           <TableCell align="center">
             {isEditing ? (
               <TextField
-                name="rating"
+                name="sells"
                 value={editedRow.sells}
                 onChange={handleChange}
                 onClick={(e) => e.stopPropagation()}
@@ -189,7 +191,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
           <TableCell align="center">
             {isEditing ? (
               <TextField
-                name="rating"
+                name="revenue"
                 value={editedRow.revenue}
                 onChange={handleChange}
                 onClick={(e) => e.stopPropagation()}

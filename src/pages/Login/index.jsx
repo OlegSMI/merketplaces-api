@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import { CircularProgress } from "@mui/material";
 import { useSnackbar } from "notistack";
+
 import { login } from "../../api/auth";
 import img from "../../assets/auth/Login.png";
 import { SignHeader } from "../../components";
@@ -79,22 +79,6 @@ const Login = () => {
             </Link>
           </span>
         </div>
-        {showAlert === 1 && (
-          <Stack sx={{ width: "50%" }} spacing={2} className={styles.alert}>
-            <Alert severity="info" className={styles.title}>
-              <AlertTitle className={styles.text}>Внимание</AlertTitle>
-              Не верный логин или пароль
-            </Alert>
-          </Stack>
-        )}
-        {showAlert === 2 && (
-          <Stack sx={{ width: "50%" }} spacing={2} className={styles.alert}>
-            <Alert severity="error" className={styles.title}>
-              <AlertTitle className={styles.text}>Ошибка</AlertTitle>
-              Ошибка авторизации
-            </Alert>
-          </Stack>
-        )}
       </div>
     </>
   );
