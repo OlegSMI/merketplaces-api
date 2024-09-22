@@ -32,14 +32,22 @@ const Main = () => {
   const [investOption, setInvestOption] = useState("");
   const [procentOption, setProcentOption] = useState("");
   const [riskOption, setRiskOption] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+
   const dispatch = useDispatch();
 
-  const getProducts = () => {
-    dispatch(getWbProducts());
+  const getProducts = (value) => {
+    dispatch(getWbProducts({ page: value }));
   };
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);
+  };
+
+  const handlePageChange = (e, value) => {
+    console.log("value", value);
+    setCurrentPage(value);
+    getProducts(value);
   };
 
   return (
@@ -94,7 +102,14 @@ const Main = () => {
       <Routes>
         <Route
           path="table"
-          element={<Table search={search} categoryOption={categoryOption} />}
+          element={
+            <Table
+              search={search}
+              categoryOption={categoryOption}
+              currentPage={currentPage}
+              handlePageChange={handlePageChange}
+            />
+          }
         />
         <Route path="list" element={<List />} />
         <Route path="cards" element={<Card />} />

@@ -19,10 +19,16 @@ import Row from "./mainRow";
 import styles from "./Table.module.scss";
 import emptyState from "../../assets/table/emptyState.svg";
 
-const CollapsibleTable = ({ search, categoryOption }) => {
+const CollapsibleTable = ({
+  search,
+  categoryOption,
+  currentPage,
+  handlePageChange,
+}) => {
   const products = useSelector((state) => state.wbProducts.items);
+  // const currentPage = useSelector((state) => state.wbProducts.currentPage);
+  const totalPages = useSelector((state) => state.wbProducts.totalPages);
 
-  const [currentPage, setCurrentPage] = useState(1);
   const [state, setState] = useState(false);
   const dispatch = useDispatch();
 
@@ -50,11 +56,6 @@ const CollapsibleTable = ({ search, categoryOption }) => {
         )
       )
     );
-  };
-
-  const handlePageChange = (event, value) => {
-    setCurrentPage(value);
-    console.log("Текущая страница:", value);
   };
 
   const saveEdit = (newData) => {
@@ -139,7 +140,7 @@ const CollapsibleTable = ({ search, categoryOption }) => {
           </TableContainer>
           <Stack className={styles.pagination}>
             <Pagination
-              count={10}
+              count={totalPages}
               shape="rounded"
               page={currentPage}
               onChange={handlePageChange}
@@ -155,6 +156,8 @@ CollapsibleTable.propTypes = {
   search: PropTypes.string,
   deleteRow: PropTypes.func,
   categoryOption: PropTypes.string,
+  currentPage: PropTypes.number,
+  handlePageChange: PropTypes.func,
 };
 
 export default CollapsibleTable;
