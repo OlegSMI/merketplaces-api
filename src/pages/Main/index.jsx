@@ -32,6 +32,7 @@ const Main = () => {
   const [investOption, setInvestOption] = useState("");
   const [procentOption, setProcentOption] = useState("");
   const [riskOption, setRiskOption] = useState("");
+  const [dateOption, setDateOption] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
@@ -87,7 +88,11 @@ const Main = () => {
         </div>
 
         <div className={styles.search}>
-          <Combobox options={filter} />
+          <Combobox
+            options={filter}
+            selectedOption={dateOption}
+            setSelectedOption={setDateOption}
+          />
           <input
             className={styles.input}
             type="text"

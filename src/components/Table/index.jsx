@@ -47,7 +47,7 @@ const CollapsibleTable = ({
 
   const comboChange = (e, id) => {
     e.stopPropagation();
-
+    console.log("id", id);
     dispatch(
       setWbProducts(
         products.map((row) =>
@@ -97,8 +97,11 @@ const CollapsibleTable = ({
                       checked={state}
                       onClick={() => {
                         const newState = !state;
+                        console.log(newState);
                         dispatch(
-                          products.map((row) => ({ ...row, check: newState }))
+                          setWbProducts(
+                            products.map((row) => ({ ...row, check: newState }))
+                          )
                         );
                         setState(newState);
                       }}

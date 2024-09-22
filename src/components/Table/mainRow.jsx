@@ -116,7 +116,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
           <TableCell align="center">
             <Checkbox
               checked={row.check}
-              onClick={(e) => comboChange(e, row.name)}
+              onClick={(e) => comboChange(e, row.id)}
             ></Checkbox>
           </TableCell>
           <TableCell
