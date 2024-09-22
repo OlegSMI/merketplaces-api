@@ -33,7 +33,6 @@ const CollapsibleTable = ({
   const dispatch = useDispatch();
 
   const filterData = () => {
-    console.log("asdsa");
     return products.filter(
       (item) =>
         item.name.toLowerCase().includes(search.toLowerCase()) &&

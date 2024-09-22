@@ -36,7 +36,7 @@ const Main = () => {
 
   const dispatch = useDispatch();
 
-  const getProducts = (value) => {
+  const getProducts = ({ value = 1 }) => {
     dispatch(getWbProducts({ page: value }));
   };
 
@@ -45,9 +45,8 @@ const Main = () => {
   };
 
   const handlePageChange = (e, value) => {
-    console.log("value", value);
     setCurrentPage(value);
-    getProducts(value);
+    getProducts({ value: value });
   };
 
   return (
