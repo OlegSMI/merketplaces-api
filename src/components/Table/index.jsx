@@ -11,11 +11,10 @@ import {
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteWbProduct, setWbProducts } from "../../redux/wbProducts/slice";
 
-import { useGoodsAPI } from "../../api/operator";
 import emptyState from "../../assets/table/emptyState.svg";
 import Row from "./mainRow";
 import styles from "./Table.module.scss";
@@ -26,61 +25,50 @@ const CollapsibleTable = ({
   currentPage,
   handlePageChange,
 }) => {
-  const [products, setProducts] = useState([]);
+  const products = useSelector((state) => state.wbProducts.items);
   // const currentPage = useSelector((state) => state.wbProducts.currentPage);
   const totalPages = useSelector((state) => state.wbProducts.totalPages);
 
   const [state, setState] = useState(false);
   const dispatch = useDispatch();
-  const { getProducts } = useGoodsAPI();
 
-  // const filterData = () => {
-  //   return products.filter(
-  //     (item) =>
-  //       item.name.toLowerCase().includes(search.toLowerCase()) &&
-  //       (categoryOption === "" || item.category === categoryOption)
-  //   );
-  // };
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getProducts(categoryOption.path, "kuser", 3000);
-      console.log(response);
-      setProducts(response);
-    }
-
-    fetchData();
-  }, []);
+  const filterData = () => {
+    return products.filter(
+      (item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) &&
+        (categoryOption === "" || item.category === categoryOption)
+    );
+  };
 
   const deleteRow = (e, id) => {
     e.stopPropagation();
     dispatch(deleteWbProduct(id));
   };
 
-  // const comboChange = (e, id) => {
-  //   e.stopPropagation();
-  //   console.log("id", id);
-  //   dispatch(
-  //     setWbProducts(
-  //       products.map((row) =>
-  //         row.id === id ? { ...row, check: !row.check } : row
-  //       )
-  //     )
-  //   );
-  // };
+  const comboChange = (e, id) => {
+    e.stopPropagation();
+    console.log("id", id);
+    dispatch(
+      setWbProducts(
+        products.map((row) =>
+          row.id === id ? { ...row, check: !row.check } : row
+        )
+      )
+    );
+  };
 
-  // const saveEdit = (newData) => {
-  //   dispatch(
-  //     setWbProducts(
-  //       products.map((item) => {
-  //         if (item.id === newData.id) {
-  //           return { ...item, ...newData };
-  //         }
-  //         return item;
-  //       })
-  //     )
-  //   );
-  // };
+  const saveEdit = (newData) => {
+    dispatch(
+      setWbProducts(
+        products.map((item) => {
+          if (item.id === newData.id) {
+            return { ...item, ...newData };
+          }
+          return item;
+        })
+      )
+    );
+  };
 
   return (
     <div className={styles.table}>
@@ -168,7 +156,7 @@ const CollapsibleTable = ({
 CollapsibleTable.propTypes = {
   search: PropTypes.string,
   deleteRow: PropTypes.func,
-  categoryOption: PropTypes.object,
+  categoryOption: PropTypes.string,
   currentPage: PropTypes.number,
   handlePageChange: PropTypes.func,
 };
