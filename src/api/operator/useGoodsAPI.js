@@ -4,8 +4,35 @@ import api from "../api";
 const useGoodsAPI = () => {
   const token = Cookies.get("token");
 
-  const getCategories = async () => {
+  const getGlobalCategories = async () => {
     const response = await api.get("/mpstats/categories", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  };
+
+  const createCategory = async ({ name, url, path }) => {
+    const newCategory = {
+      path: path,
+      url: url,
+      name: name,
+    };
+
+    const response = await api.post("/wildberries/category", newCategory, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.result.products;
+  };
+
+  const getCategories = async () => {
+    const response = await api.get("/wildberries/categories", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -49,7 +76,7 @@ const useGoodsAPI = () => {
 
   const approvedProductById = async (productId) => {
     const response = await api.post(
-      "/wildberries/product",
+      `/wildberries/product/${productId}/approve`,
       {
         productId: productId,
       },
@@ -64,6 +91,8 @@ const useGoodsAPI = () => {
   };
 
   return {
+    getGlobalCategories,
+    createCategory,
     getCategories,
     getProducts,
     hideProductById,
