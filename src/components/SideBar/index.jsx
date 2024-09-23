@@ -35,14 +35,14 @@ const SideBar = () => {
             <span>Главная</span>
           </Link>
         </li>
-        <li className={active === "/finplan" ? styles.active : ""}>
+        <li className={active === "/categories" ? styles.active : ""}>
           <Link
-            to="/user/finplan"
+            to="/user/categories"
             className={styles.link}
-            onClick={() => menuLinkClick("/finplan")}
+            onClick={() => menuLinkClick("/categories")}
           >
             <img src={finplan} />
-            Фин план
+            Категории
           </Link>
         </li>
         <li className={active === "/profile" ? styles.active : ""}>

@@ -1,0 +1,82 @@
+@keyframes slideIn {
+  0% {
+    opacity: 0; /* Начальное состояние - невидимый */
+    transform: translateX(-50px); /* Сдвинут влево */
+  }
+  100% {
+    opacity: 1; /* Конечное состояние - видимый */
+    transform: translateX(0); /* На своем месте */
+  }
+}
+
+.container {
+  font-family: "Inter", sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 2fr 8fr 1fr;
+  gap: 10px 10px;
+  animation: slideIn 1s ease forwards;
+}
+
+.category {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  border: #eaecf0 2px solid;
+  border-radius: 20px;
+  padding: 24px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #f2f4f7;
+  }
+
+  .title {
+    display: flex;
+    align-items: center;
+
+    .text {
+      margin-left: 5px;
+    }
+  }
+}
+.add {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.2);
+    transition: all 0.3s ease;
+  }
+}
+
+.subcategory {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  border: #eaecf0 2px solid;
+  border-radius: 20px;
+  padding: 0px 15px;
+  margin-left: 50px;
+  animation: fadeIn 1s ease forwards;
+}
+
+.pagination {
+  // margin-top: 10px;
+  align-items: center;
+  grid-column: 1 / -1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Начальное состояние - невидимый */
+    transform: translateY(-20px); /* Сдвиг вверх */
+  }
+  to {
+    opacity: 1; /* Конечное состояние - видимый */
+    transform: translateY(0); /* На своем месте */
+  }
+}

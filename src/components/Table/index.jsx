@@ -10,7 +10,8 @@ import {
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import PropTypes from "prop-types";
-import { useDispatch, useSelector } from "react-redux";
+
+import { useSelector } from "react-redux";
 
 import emptyState from "../../assets/table/emptyState.svg";
 import Row from "./mainRow";
@@ -24,7 +25,6 @@ const CollapsibleTable = ({
   products,
 }) => {
   const totalPages = useSelector((state) => state.wbProducts.totalPages);
-  const dispatch = useDispatch();
 
   const filterData = () => {
     return products?.filter(
@@ -149,7 +149,7 @@ const CollapsibleTable = ({
 CollapsibleTable.propTypes = {
   search: PropTypes.string,
   deleteRow: PropTypes.func,
-  categoryOption: PropTypes.object,
+  categoryOption: PropTypes.string,
   currentPage: PropTypes.number,
   handlePageChange: PropTypes.func,
   products: PropTypes.array,

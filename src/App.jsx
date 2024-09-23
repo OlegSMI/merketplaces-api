@@ -21,9 +21,10 @@ function App() {
           <Route
             path="/user/*"
             element={
-              <ProtectedRoute>
-                <User />
-              </ProtectedRoute>
+              <User />
+              // <ProtectedRoute>
+              //   <User />
+              // </ProtectedRoute>
             }
           />
           <Route

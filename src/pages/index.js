@@ -6,3 +6,4 @@ export { default as Main } from "./Main";
 export { default as FinPlan } from "./FinPlan";
 export { default as Profile } from "./Profile";
 export { default as ProdInfo } from "./ProdInfo";
+export { default as Categories } from "./Categories";
