@@ -92,7 +92,7 @@ const CollapsibleTable = ({
             >
               <TableHead>
                 <TableRow className={styles.tableHead}>
-                  <TableCell align="center">
+                  {/* <TableCell align="center">
                     <Checkbox
                       checked={state}
                       onClick={() => {
@@ -106,14 +106,12 @@ const CollapsibleTable = ({
                         setState(newState);
                       }}
                     />
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell align="start">Товар</TableCell>
-                  <TableCell align="center">
-                    Потенциальная прибыль за период
-                  </TableCell>
+                  <TableCell align="center">Ср. доход от продаж</TableCell>
                   <TableCell align="center">Рейтинг</TableCell>
-                  <TableCell align="center">Комментарии</TableCell>
-                  <TableCell align="center">Продажи</TableCell>
+                  <TableCell align="center">Кол-во отзывов</TableCell>
+                  <TableCell align="center">Кол-во продаж</TableCell>
                   <TableCell align="center">Выручка</TableCell>
                   <TableCell align="center">Динамика продаж</TableCell>
                   <TableCell align="center">Статус</TableCell>
