@@ -1,5 +1,8 @@
+import { DeleteForever } from "@mui/icons-material";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Avatar,
+  IconButton,
   Rating,
   Stack,
   TableCell,
@@ -73,6 +76,20 @@ const AnalogRow = ({ item }) => {
         <TableCell align="center">{item.market}</TableCell>
         <TableCell align="center">{item.sales}</TableCell>
         <TableCell align="center">{item.revenue}</TableCell>
+        <TableCell>Подвтержден</TableCell>
+        <TableCell align="center">
+          <Tooltip title="Подтвердить">
+            <IconButton>
+              <CheckCircleIcon color="success" />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Не отображать">
+            <IconButton aria-label="delete" size="small">
+              <DeleteForever color="red" />
+            </IconButton>
+          </Tooltip>
+        </TableCell>
       </TableRow>
     </React.Fragment>
   );
