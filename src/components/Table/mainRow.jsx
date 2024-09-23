@@ -1,24 +1,24 @@
-import React from "react";
 import {
-  TableRow,
-  TableCell,
-  Checkbox,
-  IconButton,
-  TextField,
-  Avatar,
-  Collapse,
-} from "@mui/material";
-import {
+  DeleteForever,
   KeyboardArrowDown,
   KeyboardArrowUp,
-  DeleteForever,
-  Edit,
-  Save,
 } from "@mui/icons-material";
-import PropTypes from "prop-types";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import {
+  Avatar,
+  Checkbox,
+  Collapse,
+  IconButton,
+  TableCell,
+  TableRow,
+  TextField,
+  Tooltip,
+} from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
 import { SparkLineChart } from "@mui/x-charts";
+import PropTypes from "prop-types";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import AnalogTabble from "./analogTable";
 import styles from "./Table.module.scss";
@@ -111,7 +111,6 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
         <TableRow
           className={styles.anima}
           sx={{ "& > *": { borderBottom: "none" } }}
-          onClick={handleRowClick}
         >
           <TableCell align="center">
             <Checkbox
@@ -119,28 +118,36 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
               onClick={(e) => comboChange(e, row.id)}
             ></Checkbox>
           </TableCell>
-          <TableCell
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "start",
-            }}
-          >
-            <Avatar alt="Avatar" src="" variant="square" sx={{ mr: 1 }} />
+          <Tooltip title="Посмотреть товар" placement="left-start">
+            <TableCell
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "start",
+                cursor: "pointer",
+              }}
+              onClick={handleRowClick}
+            >
+              <Avatar alt="Avatar" src="" variant="square" sx={{ mr: 1 }} />
 
-            {isEditing ? (
-              <TextField
-                name="name"
-                value={editedRow.name}
-                onChange={handleChange}
-                onClick={(e) => e.stopPropagation()}
-              />
-            ) : (
-              row.name
-            )}
-          </TableCell>
-          <TableCell align="center">
+              {isEditing ? (
+                <TextField
+                  name="name"
+                  value={editedRow.name}
+                  onChange={handleChange}
+                  onClick={(e) => e.stopPropagation()}
+                />
+              ) : (
+                row.name
+              )}
+            </TableCell>
+          </Tooltip>
+
+          <TableCell
+            align="center"
+            // sx={{ display: "flex", justifyContent: "center" }}
+          >
             {isEditing ? (
               <TextField
                 name="profit"
@@ -149,7 +156,18 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
                 onClick={(e) => e.stopPropagation()}
               />
             ) : (
-              row.profit
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <div
+                  style={{
+                    color: "#147129",
+                    backgroundColor: "#EAFDEE",
+                    padding: "4px 10px",
+                    borderRadius: "20px",
+                  }}
+                >
+                  {row.profit} р
+                </div>
+              </div>
             )}
           </TableCell>
           <TableCell align="center">
@@ -209,7 +227,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
               width={150}
             />
           </TableCell>
-          <TableCell align="center">
+          {/* <TableCell align="center">
             <IconButton
               aria-label="expand row"
               size="small"
@@ -217,8 +235,8 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
             >
               {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
             </IconButton>
-          </TableCell>
-          <TableCell align="center">
+          </TableCell> */}
+          {/* <TableCell align="center">
             {isEditing ? (
               <IconButton
                 aria-label="save"
@@ -236,15 +254,34 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
                 <Edit />
               </IconButton>
             )}
-          </TableCell>
+          </TableCell> */}
+          <TableCell>Подвтержден</TableCell>
           <TableCell align="center">
-            <IconButton
-              aria-label="delete"
-              size="small"
-              onClick={(e) => deleteRow(e, row.id)}
-            >
-              <DeleteForever color="red" />
-            </IconButton>
+            <Tooltip title="Товары с 1688">
+              <IconButton
+                aria-label="expand row"
+                size="small"
+                onClick={(e) => handleOpenPanel(e)}
+              >
+                {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Подтвердить">
+              <IconButton>
+                <CheckCircleIcon color="success" />
+              </IconButton>
+            </Tooltip>
+
+            <Tooltip title="Не отображать">
+              <IconButton
+                aria-label="delete"
+                size="small"
+                onClick={(e) => deleteRow(e, row.id)}
+              >
+                <DeleteForever color="red" />
+              </IconButton>
+            </Tooltip>
           </TableCell>
         </TableRow>
         <TableRow sx={{ "& > *": { borderBottom: "none" } }}>

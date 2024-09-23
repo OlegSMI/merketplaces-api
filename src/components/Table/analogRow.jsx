@@ -1,6 +1,13 @@
-import React from "react";
-import { TableRow, TableCell, Rating, Stack, Avatar } from "@mui/material";
+import {
+  Avatar,
+  Rating,
+  Stack,
+  TableCell,
+  TableRow,
+  Tooltip,
+} from "@mui/material";
 import PropTypes from "prop-types";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 import styles from "./Table.module.scss";
@@ -19,26 +26,31 @@ const AnalogRow = ({ item }) => {
 
   return (
     <React.Fragment>
-      <TableRow
-        sx={{ "& > *": { borderBottom: "none" } }}
-        onClick={() => handleClickRow()}
-      >
-        <TableCell
-          sx={{
-            display: "flex",
-            // flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "start",
-          }}
-        >
-          {/* <Stack
+      <TableRow sx={{ "& > *": { borderBottom: "none" } }}>
+        <Tooltip title="Посмотреть товар 1688" placement="left-start">
+          <TableCell
+            sx={{
+              display: "flex",
+              // flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "start",
+              cursor: "pointer",
+              "&:hover": {
+                backgroundColor: "red",
+              },
+            }}
+            onClick={() => handleClickRow()}
+          >
+            {/* <Stack
             alignItems="center"
             sx={{ display: "flex", flexDirection: "row" }}
           > */}
-          <Avatar alt="Remy Sharp" src="" variant="square" sx={{ mr: 1 }} />
-          {/* </Stack> */}
-          {item.name}
-        </TableCell>
+            <Avatar alt="Remy Sharp" src="" variant="square" sx={{ mr: 1 }} />
+            {/* </Stack> */}
+            {item.name}
+          </TableCell>
+        </Tooltip>
+
         <TableCell align="center">{item.price}</TableCell>
         <TableCell align="center">
           <span

@@ -1,23 +1,23 @@
 import {
-  TableBody,
   Checkbox,
-  Stack,
-  TableRow,
   Paper,
+  Stack,
   Table,
+  TableBody,
+  TableCell,
   TableContainer,
   TableHead,
-  TableCell,
+  TableRow,
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setWbProducts, deleteWbProduct } from "../../redux/wbProducts/slice";
+import { deleteWbProduct, setWbProducts } from "../../redux/wbProducts/slice";
 
+import emptyState from "../../assets/table/emptyState.svg";
 import Row from "./mainRow";
 import styles from "./Table.module.scss";
-import emptyState from "../../assets/table/emptyState.svg";
 
 const CollapsibleTable = ({
   search,
@@ -116,9 +116,10 @@ const CollapsibleTable = ({
                   <TableCell align="center">Продажи</TableCell>
                   <TableCell align="center">Выручка</TableCell>
                   <TableCell align="center">Динамика продаж</TableCell>
+                  <TableCell align="center">Статус</TableCell>
                   <TableCell align="center">Действие</TableCell>
-                  <TableCell align="center">Изменить</TableCell>
-                  <TableCell align="center">Удалить</TableCell>
+                  {/* <TableCell align="center">Изменить</TableCell>
+                  <TableCell align="center">Удалить</TableCell> */}
                 </TableRow>
               </TableHead>
               <TableBody
