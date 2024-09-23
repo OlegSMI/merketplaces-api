@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
-import close from "../../assets/table/close.svg";
-import filterDown from "../../assets/table/filterDown.svg";
-import filterUp from "../../assets/table/filterUp.svg";
+import close from "@assets/table/close.svg";
+import filterDown from "@assets/table/filterDown.svg";
+import filterUp from "@assets/table/filterUp.svg";
+
 import styles from "./Combobox.module.scss";
 
 const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
@@ -36,10 +37,7 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
   };
 
   useEffect(() => {
-    // Добавляем обработчик события при монтировании компонента
     document.addEventListener("mousedown", handleClickOutside);
-
-    // Убираем обработчик события при размонтировании компонента
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -49,7 +47,7 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
     <div className={styles.customSelect} ref={comboboxRef}>
       <div className={styles.selected} onClick={() => setIsOpen(!isOpen)}>
         <img src={close} alt="Combobox Off" onClick={dropFilter} />
-        {selectedOption || title || options[0].name}
+        {selectedOption.name || title || options[0].name}
         <img src={isOpen ? filterUp : filterDown} alt="filterImg" />
       </div>
       {isOpen && (
@@ -61,8 +59,8 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
             value={filter}
             onChange={handleInputChange}
           />
-          {filteredOptions.map((option, index) => (
-            <li key={index} onClick={() => handleSelectChange(option.name)}>
+          {filteredOptions.map((option) => (
+            <li key={option.name} onClick={() => handleSelectChange(option)}>
               {option.name}
             </li>
           ))}
@@ -75,7 +73,7 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
 Combobox.propTypes = {
   title: PropTypes.string,
   options: PropTypes.array,
-  selectedOption: PropTypes.string,
+  selectedOption: PropTypes.object,
   setSelectedOption: PropTypes.func.isRequired,
 };
 

@@ -77,6 +77,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
       sales: 123,
     },
   ]);
+
   const navigate = useNavigate();
 
   const handleRowClick = () => {

@@ -1,9 +1,41 @@
-const useGoodsForUserAPI = async () => {
-  const getCategories = () => {};
+import Cookies from "js-cookie";
+import api from "../api";
 
-  const getProducts = () => {};
+const useGoodsAPI = () => {
+  const token = Cookies.get("token");
 
-  const getProductCardById = () => {};
+  const getCategories = async () => {
+    const response = await api.get("/mpstats/categories", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    console.log(response);
+    return response.data;
+  };
+
+  const getProducts = async (categoryName, paybackPeriod, investmentAmount) => {
+    const response = await api.post(
+      "/wildberries/products",
+      {
+        categoryName: categoryName,
+        paybackPeriod: paybackPeriod,
+        investmentAmount: investmentAmount,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    console.log(response);
+    return response.result.products;
+  };
+
+  // const getProductCardById = () => {};
 
   const hideProductById = () => {};
 
@@ -12,10 +44,10 @@ const useGoodsForUserAPI = async () => {
   return {
     getCategories,
     getProducts,
-    getProductCardById,
+    // getProductCardById,
     hideProductById,
     editProductById,
   };
 };
 
-export default useGoodsForUserAPI;
+export default useGoodsAPI;

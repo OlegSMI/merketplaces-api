@@ -1,8 +1,8 @@
-import TableHead from "@mui/material/TableHead";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
-import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 import PropTypes from "prop-types";
 
 import AnalogRow from "./analogRow";
@@ -20,6 +20,8 @@ const AnalogTabble = ({ data }) => {
           <TableCell align="center">Рейтинг</TableCell>
           <TableCell align="center">Маркетплейс</TableCell>
           <TableCell align="center">Число продаж</TableCell>
+          <TableCell align="center">Статус</TableCell>
+          <TableCell align="center">Действие</TableCell>
         </TableRow>
       </TableHead>
 
