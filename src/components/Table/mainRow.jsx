@@ -113,12 +113,12 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
           className={styles.anima}
           sx={{ "& > *": { borderBottom: "none" } }}
         >
-          <TableCell align="center">
+          {/* <TableCell align="center">
             <Checkbox
               checked={row.check}
               onClick={(e) => comboChange(e, row.id)}
             ></Checkbox>
-          </TableCell>
+          </TableCell> */}
           <Tooltip title="Посмотреть товар" placement="left-start">
             <TableCell
               sx={{
@@ -152,7 +152,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
             {isEditing ? (
               <TextField
                 name="profit"
-                value={editedRow.profit}
+                value={editedRow.revenue}
                 onChange={handleChange}
                 onClick={(e) => e.stopPropagation()}
               />
@@ -166,7 +166,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
                     borderRadius: "20px",
                   }}
                 >
-                  {row.profit} р
+                  {row.revenueAverage} р
                 </div>
               </div>
             )}
@@ -199,12 +199,12 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
             {isEditing ? (
               <TextField
                 name="sells"
-                value={editedRow.sells}
+                value={editedRow.sales}
                 onChange={handleChange}
                 onClick={(e) => e.stopPropagation()}
               />
             ) : (
-              row.sells
+              row.sales
             )}
           </TableCell>
           <TableCell align="center">
@@ -216,7 +216,8 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
                 onClick={(e) => e.stopPropagation()}
               />
             ) : (
-              row.revenue
+              // row.revenue
+              12345
             )}
           </TableCell>
 
@@ -309,11 +310,10 @@ Row.propTypes = {
     id: PropTypes.number.isRequired,
     check: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
-    profit: PropTypes.number.isRequired,
     rating: PropTypes.number.isRequired,
     comments: PropTypes.number.isRequired,
-    sells: PropTypes.number.isRequired,
-    revenue: PropTypes.number.isRequired,
+    sales: PropTypes.number.isRequired,
+    revenueAverage: PropTypes.number.isRequired,
     dynamic: PropTypes.array.isRequired,
   }).isRequired,
   deleteRow: PropTypes.func.isRequired,

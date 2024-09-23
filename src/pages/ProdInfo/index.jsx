@@ -3,7 +3,7 @@ import back from "../../assets/sidebar/back.png";
 import { useLocation } from "react-router-dom";
 
 import { Field } from "../../components";
-import avatar from "../../assets/ChinaBox.png";
+// import avatar from "../../assets/ChinaBox.png";
 
 function ProdInfo() {
   const keybords = ["Трусы", "Белье", "Нижнее", "Панталоны"];
@@ -19,34 +19,48 @@ function ProdInfo() {
         <p>Инофрмация о товаре</p>
       </div>
       <div className={styles.body}>
-        <img src={avatar} alt="Avatar" />
+        <img src={data.thumb} alt="Avatar" />
         <div className={styles.generalInfo}>
+          <Field title="Артикул" text={data.id} />
           <Field title="Наименование" text={data.name} />
-          <Field title="Категория" text="Белье" />
-          <Field
-            title="Описание"
-            text="Женское нижнее белье, фиолетовое с надписью."
-          />
-          <Field title="Бренд" text="Zara" />
-          <Field title="Наличие" text="1515" />
+          <Field title="Категория" text={data.category} />
+          <Field title="Описание" text={data.subject} />
+          <Field title="Бренд" text={data.brand} />
+          <Field title="Цвет" text={data.color} />
+          <Field title="Рейтинг" text={data.rating} />
+          <Field title="Кол-во отзывов" text={data.comments} />
         </div>
         <div className={`${styles.secondaryInfo} ${styles.generalInfo}`}>
-          <h5>Ключевые слова</h5>
+          {/* <h5>Ключевые слова</h5>
           <div className={styles.keywords}>
             {keybords.map((keybord, index) => (
               <p key={index}>#{keybord}</p>
             ))}
           </div>
 
-          <h5> Выручка</h5>
-
-          <Field title="Цена продажи товара" text="1750" />
-          <Field title="Сумма выручки в месяц" text={data.profit} />
+          <h5>Выручка</h5> */}
+          <Field title="Дата первого появления" text={data.skuFirstDate} />
+          <Field title="Общее кол-во продаж" text={data.sales} />
+          <Field title="Окончательная цена товара" text={data.finalPrice} />
           <Field
-            title="Описание"
-            text="Женское нижнее белье, фиолетовое с надписью."
+            title="Cредний доход от продаж товара"
+            text={data.revenueAverage}
           />
-          <Field title="Кол-во продаж в месяц" text={data.sells} />
+          <Field
+            title="Cреднее количество продаж в день."
+            text={data.salesPerDayAverage}
+          />
+          <Field
+            title="Cредний доход от продаж товара. "
+            text={data.revenueAverage}
+          />
+
+          <Field title="Окончательная цена товара." text={data.finalPrice} />
+          <Field
+            title="Цена, по которой товар предлагается клиенту."
+            text={data.clientPrice}
+          />
+          <Field title="Ссылка на страницу товара. " text={data.url} />
         </div>
       </div>
     </div>
