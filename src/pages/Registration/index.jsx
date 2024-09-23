@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import styles from "./Registration.module.scss";
-import { SignHeader } from "../../components";
+import { SignHeader } from "@components";
 import img from "../../assets/auth/Registration.png";
+import styles from "./Registration.module.scss";
 
 const Registration = () => {
   return (

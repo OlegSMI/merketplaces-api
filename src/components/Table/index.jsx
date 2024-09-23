@@ -44,7 +44,7 @@ const CollapsibleTable = ({
 
   useEffect(() => {
     async function fetchData() {
-      const response = await getProducts(categoryOption, "kuser", 3000);
+      const response = await getProducts(categoryOption.path, "kuser", 3000);
       console.log(response);
       setProducts(response);
     }
@@ -168,7 +168,7 @@ const CollapsibleTable = ({
 CollapsibleTable.propTypes = {
   search: PropTypes.string,
   deleteRow: PropTypes.func,
-  categoryOption: PropTypes.string,
+  categoryOption: PropTypes.object,
   currentPage: PropTypes.number,
   handlePageChange: PropTypes.func,
 };

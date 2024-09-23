@@ -5,7 +5,7 @@ import { useSnackbar } from "notistack";
 
 import { login } from "../../api/auth";
 import img from "../../assets/auth/Login.png";
-import { SignHeader } from "../../components";
+import { SignHeader } from "@components";
 import { LoadingContext } from "../../context";
 import styles from "./Login.module.scss";
 

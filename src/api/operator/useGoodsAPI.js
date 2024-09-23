@@ -15,16 +15,17 @@ const useGoodsAPI = () => {
     return response.data;
   };
 
-  const getProducts = async (categoryName, payBackPeriod, investmentAmount) => {
+  const getProducts = async (categoryName, paybackPeriod, investmentAmount) => {
     const response = await api.post(
       "/wildberries/products",
       {
-        categoryName,
-        payBackPeriod,
-        investmentAmount,
+        categoryName: categoryName,
+        paybackPeriod: paybackPeriod,
+        investmentAmount: investmentAmount,
       },
       {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -34,7 +35,7 @@ const useGoodsAPI = () => {
     return response.result.products;
   };
 
-  const getProductCardById = () => {};
+  // const getProductCardById = () => {};
 
   const hideProductById = () => {};
 
@@ -43,7 +44,7 @@ const useGoodsAPI = () => {
   return {
     getCategories,
     getProducts,
-    getProductCardById,
+    // getProductCardById,
     hideProductById,
     editProductById,
   };
