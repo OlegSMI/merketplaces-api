@@ -11,7 +11,6 @@ const useGoodsAPI = () => {
       },
     });
 
-    console.log(response);
     return response.data;
   };
 
@@ -31,22 +30,44 @@ const useGoodsAPI = () => {
       }
     );
 
-    console.log(response);
     return response.result.products;
   };
 
-  // const getProductCardById = () => {};
+  const hideProductById = async (productId) => {
+    const response = await api.delete(
+      `/wildberries/product/${productId}`,
 
-  const hideProductById = () => {};
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  };
 
-  const editProductById = () => {};
+  const approvedProductById = async (productId) => {
+    const response = await api.post(
+      "/wildberries/product",
+      {
+        productId: productId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  };
 
   return {
     getCategories,
     getProducts,
-    // getProductCardById,
     hideProductById,
-    editProductById,
+    approvedProductById,
   };
 };
 

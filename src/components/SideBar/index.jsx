@@ -1,12 +1,12 @@
-import { Link } from "react-router-dom";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./SideBar.module.scss";
 
 import userPhoto from "../../assets/UserPhoto.png";
+import finplan from "../../assets/sidebar/finplan.svg";
 import logo from "../../assets/sidebar/logo.png";
 import main from "../../assets/sidebar/main.svg";
-import finplan from "../../assets/sidebar/finplan.svg";
 import profile from "../../assets/sidebar/profile.svg";
 
 const SideBar = () => {
@@ -63,8 +63,8 @@ const SideBar = () => {
       >
         <img src={userPhoto} alt="User" className={styles.userPhoto} />
         <div>
-          <p className={styles.title}>Алекс Вилкинс</p>
-          <p className={styles.text}>@vilkins</p>
+          <p className={styles.title}>Пользователь</p>
+          <p className={styles.text}>@user</p>
         </div>
       </Link>
     </div>

@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { useGoodsAPI } from "@api/operator";
 import { Card, Combobox, List, NavBar, RiskProfile, Table } from "@components";
 
+import { useSnackbar } from "notistack";
 import styles from "./Main.module.scss";
 import { categories } from "./categories";
 
@@ -11,12 +12,15 @@ const options = [{ name: "Отция 1" }, { name: "Отция 2" }];
 const filter = [{ name: "По дате" }, { name: "По цене" }];
 
 const Main = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [search, setSearch] = useState("");
   const [categoryOption, setCategoryOption] = useState({ name: "" });
   const [investOption, setInvestOption] = useState({ name: "" });
   const [procentOption, setProcentOption] = useState({ name: "" });
   const [riskOption, setRiskOption] = useState({ name: "" });
   const [dateOption, setDateOption] = useState({ name: "" });
+  const [products, setProducts] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const { getProducts } = useGoodsAPI();
@@ -30,14 +34,26 @@ const Main = () => {
   };
 
   const getProductsAPI = async () => {
-    const response = await getProducts(categoryOption.path, "", 0);
-    console.log(response);
+    try {
+      setProducts(await getProducts(categoryOption.path, "", 0));
+    } catch (error) {
+      if (error.status === 422) {
+        enqueueSnackbar("Ошибка отправки данных", {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
+      } else {
+        enqueueSnackbar(error.toString(), {
+          variant: "error",
+          anchorOrigin: { vertical: "top", horizontal: "right" },
+        });
+      }
+    }
   };
 
   return (
     <div className={styles.container}>
       <h3>Подбор товаров</h3>
-
       <NavBar />
 
       <div className={styles.header}>
@@ -69,7 +85,6 @@ const Main = () => {
 
           <button onClick={getProductsAPI}>Подобрать товары</button>
         </div>
-
         <div className={styles.search}>
           <Combobox
             options={filter}
@@ -95,6 +110,7 @@ const Main = () => {
               categoryOption={categoryOption}
               currentPage={currentPage}
               handlePageChange={handlePageChange}
+              products={products}
             />
           }
         />

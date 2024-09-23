@@ -5,6 +5,7 @@ import close from "@assets/table/close.svg";
 import filterDown from "@assets/table/filterDown.svg";
 import filterUp from "@assets/table/filterUp.svg";
 
+import { Tooltip } from "antd";
 import styles from "./Combobox.module.scss";
 
 const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
@@ -46,7 +47,11 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
   return (
     <div className={styles.customSelect} ref={comboboxRef}>
       <div className={styles.selected} onClick={() => setIsOpen(!isOpen)}>
-        <img src={close} alt="Combobox Off" onClick={dropFilter} />
+        {Object.keys(selectedOption).length > 1 && (
+          <Tooltip title="Очистить поле" placement="top">
+            <img src={close} alt="Combobox Off" onClick={dropFilter} />
+          </Tooltip>
+        )}
         {selectedOption.name || title || options[0].name}
         <img src={isOpen ? filterUp : filterDown} alt="filterImg" />
       </div>

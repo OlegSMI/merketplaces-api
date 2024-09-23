@@ -30,6 +30,14 @@
   animation: fadeIn 1s ease forwards;
 }
 
+.deleted {
+  background-color: red;
+}
+
+.approved {
+  background-color: green;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0; /* Начальное состояние - невидимый */

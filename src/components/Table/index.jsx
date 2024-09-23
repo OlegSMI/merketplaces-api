@@ -1,5 +1,4 @@
 import {
-  Checkbox,
   Paper,
   Stack,
   Table,
@@ -11,11 +10,8 @@ import {
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteWbProduct, setWbProducts } from "../../redux/wbProducts/slice";
 
-import { useGoodsAPI } from "../../api/operator";
 import emptyState from "../../assets/table/emptyState.svg";
 import Row from "./mainRow";
 import styles from "./Table.module.scss";
@@ -25,37 +21,23 @@ const CollapsibleTable = ({
   categoryOption,
   currentPage,
   handlePageChange,
+  products,
 }) => {
-  const [products, setProducts] = useState([]);
-  // const currentPage = useSelector((state) => state.wbProducts.currentPage);
   const totalPages = useSelector((state) => state.wbProducts.totalPages);
-
-  const [state, setState] = useState(false);
   const dispatch = useDispatch();
-  const { getProducts } = useGoodsAPI();
 
-  // const filterData = () => {
-  //   return products.filter(
-  //     (item) =>
-  //       item.name.toLowerCase().includes(search.toLowerCase()) &&
-  //       (categoryOption === "" || item.category === categoryOption)
-  //   );
-  // };
-
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getProducts(categoryOption.path, "kuser", 3000);
-      console.log(response);
-      setProducts(response);
-    }
-
-    fetchData();
-  }, []);
-
-  const deleteRow = (e, id) => {
-    e.stopPropagation();
-    dispatch(deleteWbProduct(id));
+  const filterData = () => {
+    return products?.filter(
+      (item) =>
+        item.name.toLowerCase().includes(search.toLowerCase()) &&
+        (categoryOption === "" || item.category === categoryOption)
+    );
   };
+
+  // const deleteRow = (e, id) => {
+  //   e.stopPropagation();
+  //   dispatch(deleteWbProduct(id));
+  // };
 
   // const comboChange = (e, id) => {
   //   e.stopPropagation();
@@ -84,7 +66,7 @@ const CollapsibleTable = ({
 
   return (
     <div className={styles.table}>
-      {products.length === 0 ? (
+      {products?.length === 0 ? (
         <div className={styles.emptyState}>
           <img src={emptyState} alt="Empty State" />
           <p>Вы не применили фильтры для поиска товара</p>
@@ -119,7 +101,7 @@ const CollapsibleTable = ({
                       }}
                     />
                   </TableCell> */}
-                  <TableCell align="start">Товар</TableCell>
+                  <TableCell align="center">Товар</TableCell>
                   <TableCell align="center">Ср. доход от продаж</TableCell>
                   <TableCell align="center">Рейтинг</TableCell>
                   <TableCell align="center">Кол-во отзывов</TableCell>
@@ -128,10 +110,9 @@ const CollapsibleTable = ({
                   <TableCell align="center">Динамика продаж</TableCell>
                   <TableCell align="center">Статус</TableCell>
                   <TableCell align="center">Действие</TableCell>
-                  {/* <TableCell align="center">Изменить</TableCell>
-                  <TableCell align="center">Удалить</TableCell> */}
                 </TableRow>
               </TableHead>
+
               <TableBody
                 sx={{
                   "& > :nth-last-child(n)": {
@@ -139,13 +120,13 @@ const CollapsibleTable = ({
                   },
                 }}
               >
-                {filterData().map((row) => (
+                {filterData()?.map((row) => (
                   <Row
                     key={row.id}
                     row={row}
-                    deleteRow={(e) => deleteRow(e, row.id)}
-                    comboChange={comboChange}
-                    saveEdit={saveEdit}
+                    // deleteRow={(e) => deleteRow(e, row.id)}
+                    // comboChange={comboChange}
+                    // saveEdit={saveEdit}
                   />
                 ))}
               </TableBody>
@@ -171,6 +152,7 @@ CollapsibleTable.propTypes = {
   categoryOption: PropTypes.object,
   currentPage: PropTypes.number,
   handlePageChange: PropTypes.func,
+  products: PropTypes.array,
 };
 
 export default CollapsibleTable;

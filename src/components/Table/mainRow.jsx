@@ -6,7 +6,6 @@ import {
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Avatar,
-  Checkbox,
   Collapse,
   IconButton,
   TableCell,
@@ -20,6 +19,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
+import useGoodsAPI from "@api/operator/useGoodsAPI";
 import AnalogTabble from "./analogTable";
 import styles from "./Table.module.scss";
 
@@ -31,7 +31,10 @@ const theme = createTheme({
   },
 });
 
-const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
+const Row = ({ row }) => {
+  const navigate = useNavigate();
+  const { hideProductById, approvedProductById } = useGoodsAPI();
+
   const [open, setOpen] = React.useState(false);
   const [isEditing, setIsEditing] = React.useState(false);
   const [editedRow, setEditedRow] = React.useState(row);
@@ -78,8 +81,6 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
     },
   ]);
 
-  const navigate = useNavigate();
-
   const handleRowClick = () => {
     navigate("/user/prodinfo", { state: { data: row } });
   };
@@ -89,16 +90,16 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
     setOpen(!open);
   };
 
-  const handleEditClick = (e) => {
-    e.stopPropagation();
-    setIsEditing(true);
-  };
+  // const handleEditClick = (e) => {
+  //   e.stopPropagation();
+  //   setIsEditing(true);
+  // };
 
-  const handleSaveClick = (e) => {
-    e.stopPropagation();
-    setIsEditing(false);
-    saveEdit(editedRow);
-  };
+  // const handleSaveClick = (e) => {
+  //   e.stopPropagation();
+  //   setIsEditing(false);
+  //   saveEdit(editedRow);
+  // };
 
   const handleChange = (e) => {
     e.stopPropagation();
@@ -106,11 +107,21 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
     setEditedRow((prev) => ({ ...prev, [name]: value }));
   };
 
+  const approveHandler = (itemId) => {
+    row.status = "APPROVED";
+    approvedProductById(itemId);
+  };
+
+  const hideHandler = (itemId) => {
+    row.status = "DELETED";
+    hideProductById(itemId);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <TableRow
-          className={styles.anima}
+          className={`${styles.anima} ${row.status.toLowerCase()}`}
           sx={{ "& > *": { borderBottom: "none" } }}
         >
           {/* <TableCell align="center">
@@ -271,7 +282,10 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
 
             <Tooltip title="Подтвердить">
               <IconButton>
-                <CheckCircleIcon color="success" />
+                <CheckCircleIcon
+                  onClick={() => approveHandler(row.id)}
+                  color="success"
+                />
               </IconButton>
             </Tooltip>
 
@@ -279,7 +293,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
               <IconButton
                 aria-label="delete"
                 size="small"
-                onClick={(e) => deleteRow(e, row.id)}
+                onClick={() => hideHandler(row.id)}
               >
                 <DeleteForever color="red" />
               </IconButton>
@@ -315,6 +329,7 @@ Row.propTypes = {
     sales: PropTypes.number.isRequired,
     revenueAverage: PropTypes.number.isRequired,
     dynamic: PropTypes.array.isRequired,
+    status: PropTypes.string.isRequired,
   }).isRequired,
   deleteRow: PropTypes.func.isRequired,
   comboChange: PropTypes.func.isRequired,
