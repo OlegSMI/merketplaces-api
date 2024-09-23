@@ -6,7 +6,7 @@ import filterDown from "../../assets/table/filterDown.svg";
 import filterUp from "../../assets/table/filterUp.svg";
 import styles from "./Combobox.module.scss";
 
-const Combobox = ({ name, options, selectedOption, setSelectedOption }) => {
+const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState("");
   const comboboxRef = useRef(null);
@@ -21,7 +21,7 @@ const Combobox = ({ name, options, selectedOption, setSelectedOption }) => {
   };
 
   const filteredOptions = options.filter((option) =>
-    option.toLowerCase().includes(filter.toLowerCase())
+    option.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   const handleClickOutside = (event) => {
@@ -49,7 +49,7 @@ const Combobox = ({ name, options, selectedOption, setSelectedOption }) => {
     <div className={styles.customSelect} ref={comboboxRef}>
       <div className={styles.selected} onClick={() => setIsOpen(!isOpen)}>
         <img src={close} alt="Combobox Off" onClick={dropFilter} />
-        {selectedOption || name || options[0]}
+        {selectedOption || title || options[0].name}
         <img src={isOpen ? filterUp : filterDown} alt="filterImg" />
       </div>
       {isOpen && (
@@ -62,8 +62,8 @@ const Combobox = ({ name, options, selectedOption, setSelectedOption }) => {
             onChange={handleInputChange}
           />
           {filteredOptions.map((option, index) => (
-            <li key={index} onClick={() => handleSelectChange(option)}>
-              {option}
+            <li key={index} onClick={() => handleSelectChange(option.name)}>
+              {option.name}
             </li>
           ))}
         </ul>
@@ -73,8 +73,8 @@ const Combobox = ({ name, options, selectedOption, setSelectedOption }) => {
 };
 
 Combobox.propTypes = {
-  name: PropTypes.string,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  title: PropTypes.string,
+  options: PropTypes.array,
   selectedOption: PropTypes.string,
   setSelectedOption: PropTypes.func.isRequired,
 };
