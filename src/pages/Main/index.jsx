@@ -1,18 +1,19 @@
 import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Route, Routes } from "react-router-dom";
 import {
-  Combobox,
-  NavBar,
-  Table,
-  List,
   Card,
+  Combobox,
+  List,
+  NavBar,
   RiskProfile,
+  Table,
 } from "../../components";
 
 import { getWbProducts } from "../../redux/wbProducts/asyncAction";
 import styles from "./Main.module.scss";
 
+// либо из базы, либо вручную
 const categories = [
   "Белье",
   "Электроника",
@@ -63,7 +64,6 @@ const Main = () => {
             options={categories}
             selectedOption={categoryOption}
             setSelectedOption={setCategoryOption}
-            sx={{ height: 32 }}
           />
           <Combobox
             name="Инвестиции"
