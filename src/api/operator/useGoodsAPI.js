@@ -4,15 +4,45 @@ import api from "../api";
 const useGoodsAPI = () => {
   const token = Cookies.get("token");
 
+  const getGlobalCategories = async (limit, offset) => {
+    console.log(offset, limit);
+    const response = await api.get(
+      `/mpstats/categories?limit=${limit}&offset=${offset}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data.result.categories;
+  };
+
+  const createCategory = async ({ name, url, path }) => {
+    const newCategory = {
+      path: path,
+      url: url,
+      name: name,
+    };
+
+    const response = await api.post("/wildberries/category", newCategory, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.result.products;
+  };
+
   const getCategories = async () => {
-    const response = await api.get("/mpstats/categories", {
+    const response = await api.get("/wildberries/categories", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    console.log(response);
-    return response.data;
+    return response.data.result.categories;
   };
 
   const getProducts = async (categoryName, paybackPeriod, investmentAmount) => {
@@ -31,22 +61,46 @@ const useGoodsAPI = () => {
       }
     );
 
-    console.log(response);
-    return response.result.products;
+    return response.data.result.products;
   };
 
-  // const getProductCardById = () => {};
+  const hideProductById = async (productId) => {
+    const response = await api.delete(
+      `/wildberries/product/${productId}`,
 
-  const hideProductById = () => {};
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  };
 
-  const editProductById = () => {};
+  const approvedProductById = async (productId) => {
+    const response = await api.post(
+      `/wildberries/product/${productId}/approve`,
+      {
+        productId: productId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
+  };
 
   return {
+    getGlobalCategories,
+    createCategory,
     getCategories,
     getProducts,
-    // getProductCardById,
     hideProductById,
-    editProductById,
+    approvedProductById,
   };
 };
 

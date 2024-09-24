@@ -6,7 +6,6 @@ import {
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Avatar,
-  Checkbox,
   Collapse,
   IconButton,
   TableCell,
@@ -15,11 +14,12 @@ import {
   Tooltip,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { SparkLineChart } from "@mui/x-charts";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import useGoodsAPI from "@api/operator/useGoodsAPI";
+import { SparkLineChart } from "@mui/x-charts";
 import AnalogTabble from "./analogTable";
 import styles from "./Table.module.scss";
 
@@ -31,54 +31,14 @@ const theme = createTheme({
   },
 });
 
-const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
-  const [open, setOpen] = React.useState(false);
-  const [isEditing, setIsEditing] = React.useState(false);
-  const [editedRow, setEditedRow] = React.useState(row);
-
-  const [analogProd] = React.useState([
-    {
-      avatar: 1,
-      name: "Нижнее белье",
-      price: 15000,
-      status: {
-        code: 0,
-        text: "На хранении",
-      },
-      count: 10,
-      rating: 3.0,
-      market: "Alibaba",
-      sales: 123,
-    },
-    {
-      avatar: 1,
-      name: "Нижнее белье",
-      price: 15000,
-      status: {
-        code: 1,
-        text: "Списан",
-      },
-      count: 10,
-      rating: 4.5,
-      market: "Alibaba",
-      sales: 123,
-    },
-    {
-      avatar: 1,
-      name: "Нижнее белье",
-      price: 15000,
-      status: {
-        code: 2,
-        text: "Выдан",
-      },
-      count: 10,
-      rating: 1.5,
-      market: "Alibaba",
-      sales: 123,
-    },
-  ]);
-
+const Row = ({ row }) => {
   const navigate = useNavigate();
+  const { hideProductById, approvedProductById } = useGoodsAPI();
+  const [rowStatus, setRowStatus] = useState(row.status);
+
+  const [open, setOpen] = React.useState(false);
+  const [isEditing] = React.useState(false);
+  const [editedRow, setEditedRow] = React.useState(row);
 
   const handleRowClick = () => {
     navigate("/user/prodinfo", { state: { data: row } });
@@ -89,16 +49,16 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
     setOpen(!open);
   };
 
-  const handleEditClick = (e) => {
-    e.stopPropagation();
-    setIsEditing(true);
-  };
+  // const handleEditClick = (e) => {
+  //   e.stopPropagation();
+  //   setIsEditing(true);
+  // };
 
-  const handleSaveClick = (e) => {
-    e.stopPropagation();
-    setIsEditing(false);
-    saveEdit(editedRow);
-  };
+  // const handleSaveClick = (e) => {
+  //   e.stopPropagation();
+  //   setIsEditing(false);
+  //   saveEdit(editedRow);
+  // };
 
   const handleChange = (e) => {
     e.stopPropagation();
@@ -106,12 +66,26 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
     setEditedRow((prev) => ({ ...prev, [name]: value }));
   };
 
+  const approveHandler = (itemId) => {
+    setRowStatus("APPROVED");
+    approvedProductById(itemId);
+  };
+
+  const hideHandler = (itemId) => {
+    setRowStatus("DELETED");
+    hideProductById(itemId);
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <TableRow
-          className={styles.anima}
-          sx={{ "& > *": { borderBottom: "none" } }}
+          className={`${styles.anima} ${styles[rowStatus.toLowerCase()]}`}
+          sx={{
+            "& > *": {
+              borderBottom: "none",
+            },
+          }}
         >
           {/* <TableCell align="center">
             <Checkbox
@@ -130,7 +104,12 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
               }}
               onClick={handleRowClick}
             >
-              <Avatar alt="Avatar" src="" variant="square" sx={{ mr: 1 }} />
+              <Avatar
+                alt="Avatar"
+                src={row.thumb}
+                variant="square"
+                sx={{ mr: 1 }}
+              />
 
               {isEditing ? (
                 <TextField
@@ -166,7 +145,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
                     borderRadius: "20px",
                   }}
                 >
-                  {row.revenueAverage} р
+                  {row.revenue}
                 </div>
               </div>
             )}
@@ -216,17 +195,20 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
                 onClick={(e) => e.stopPropagation()}
               />
             ) : (
-              // row.revenue
-              12345
+              row.revenue
             )}
           </TableCell>
 
           <TableCell align="center">
             <SparkLineChart
-              data={row.dynamic}
+              data={[
+                30, 50, 60, 70, 90, 120.15, 180, 160, 190, 150, 120, 100, 70,
+                40,
+              ]}
               plotType="bar"
               height={40}
               width={150}
+              colors={["#4d4aea"]}
             />
           </TableCell>
           {/* <TableCell align="center">
@@ -257,8 +239,25 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
               </IconButton>
             )}
           </TableCell> */}
-          <TableCell>Подвтержден</TableCell>
-          <TableCell align="center">
+          <TableCell>
+            <div
+              style={{
+                color:
+                  rowStatus === "DELETED"
+                    ? "red"
+                    : rowStatus === "APPROVED"
+                    ? "green"
+                    : "black",
+                backgroundColor: "#c4c4c4",
+                borderRadius: "8px",
+                padding: "5px 10px",
+                textAlign: "center",
+              }}
+            >
+              {rowStatus}
+            </div>
+          </TableCell>
+          <TableCell align="center" sx={{ display: "flex" }}>
             <Tooltip title="Товары с 1688">
               <IconButton
                 aria-label="expand row"
@@ -270,7 +269,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
             </Tooltip>
 
             <Tooltip title="Подтвердить">
-              <IconButton>
+              <IconButton onClick={() => approveHandler(row.id)}>
                 <CheckCircleIcon color="success" />
               </IconButton>
             </Tooltip>
@@ -279,7 +278,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
               <IconButton
                 aria-label="delete"
                 size="small"
-                onClick={(e) => deleteRow(e, row.id)}
+                onClick={() => hideHandler(row.id)}
               >
                 <DeleteForever color="red" />
               </IconButton>
@@ -296,7 +295,7 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
             colSpan={12}
           >
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <AnalogTabble data={analogProd} />
+              <AnalogTabble product={row.id} />
             </Collapse>
           </TableCell>
         </TableRow>
@@ -308,17 +307,19 @@ const Row = ({ row, deleteRow, comboChange, saveEdit }) => {
 Row.propTypes = {
   row: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    check: PropTypes.bool.isRequired,
+    // check: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
+    thumb: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     comments: PropTypes.number.isRequired,
     sales: PropTypes.number.isRequired,
-    revenueAverage: PropTypes.number.isRequired,
-    dynamic: PropTypes.array.isRequired,
+    revenue: PropTypes.number.isRequired,
+    // dynamic: PropTypes.array.isRequired,
+    status: PropTypes.string.isRequired,
   }).isRequired,
-  deleteRow: PropTypes.func.isRequired,
-  comboChange: PropTypes.func.isRequired,
-  saveEdit: PropTypes.func.isRequired,
+  // deleteRow: PropTypes.func.isRequired,
+  // comboChange: PropTypes.func.isRequired,
+  // saveEdit: PropTypes.func.isRequired,
 };
 
 export default Row;
