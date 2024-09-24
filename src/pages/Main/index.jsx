@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { useGoodsAPI } from "@api/operator";
@@ -6,16 +6,18 @@ import { Card, Combobox, List, NavBar, RiskProfile, Table } from "@components";
 
 import { useSnackbar } from "notistack";
 import styles from "./Main.module.scss";
-import { categories } from "./categories";
 
 const options = [{ name: "Отция 1" }, { name: "Отция 2" }];
 const filter = [{ name: "По дате" }, { name: "По цене" }];
 
 const Main = () => {
   const { enqueueSnackbar } = useSnackbar();
+  const { getCategories } = useGoodsAPI();
 
   const [search, setSearch] = useState("");
   const [categoryOption, setCategoryOption] = useState({ name: "" });
+  const [categories, setCategories] = useState([]);
+
   const [investOption, setInvestOption] = useState({ name: "" });
   const [procentOption, setProcentOption] = useState({ name: "" });
   const [riskOption, setRiskOption] = useState({ name: "" });
@@ -28,6 +30,13 @@ const Main = () => {
   const handleInputChange = (event) => {
     setSearch(event.target.value);
   };
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      setCategories(await getCategories());
+    };
+    fetchCategories();
+  }, []);
 
   const handlePageChange = (e, value) => {
     setCurrentPage(value);

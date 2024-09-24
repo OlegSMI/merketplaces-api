@@ -14,12 +14,12 @@ import {
   Tooltip,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { SparkLineChart } from "@mui/x-charts";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import useGoodsAPI from "@api/operator/useGoodsAPI";
+import { SparkLineChart } from "@mui/x-charts";
 import AnalogTabble from "./analogTable";
 import styles from "./Table.module.scss";
 
@@ -34,52 +34,11 @@ const theme = createTheme({
 const Row = ({ row }) => {
   const navigate = useNavigate();
   const { hideProductById, approvedProductById } = useGoodsAPI();
+  const [rowStatus, setRowStatus] = useState(row.status);
 
   const [open, setOpen] = React.useState(false);
-  const [isEditing, setIsEditing] = React.useState(false);
+  const [isEditing] = React.useState(false);
   const [editedRow, setEditedRow] = React.useState(row);
-
-  const [analogProd] = React.useState([
-    {
-      avatar: 1,
-      name: "Нижнее белье",
-      price: 15000,
-      status: {
-        code: 0,
-        text: "На хранении",
-      },
-      count: 10,
-      rating: 3.0,
-      market: "Alibaba",
-      sales: 123,
-    },
-    {
-      avatar: 1,
-      name: "Нижнее белье",
-      price: 15000,
-      status: {
-        code: 1,
-        text: "Списан",
-      },
-      count: 10,
-      rating: 4.5,
-      market: "Alibaba",
-      sales: 123,
-    },
-    {
-      avatar: 1,
-      name: "Нижнее белье",
-      price: 15000,
-      status: {
-        code: 2,
-        text: "Выдан",
-      },
-      count: 10,
-      rating: 1.5,
-      market: "Alibaba",
-      sales: 123,
-    },
-  ]);
 
   const handleRowClick = () => {
     navigate("/user/prodinfo", { state: { data: row } });
@@ -108,12 +67,12 @@ const Row = ({ row }) => {
   };
 
   const approveHandler = (itemId) => {
-    row.status = "APPROVED";
+    setRowStatus("APPROVED");
     approvedProductById(itemId);
   };
 
   const hideHandler = (itemId) => {
-    row.status = "DELETED";
+    setRowStatus("DELETED");
     hideProductById(itemId);
   };
 
@@ -121,8 +80,12 @@ const Row = ({ row }) => {
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <TableRow
-          className={`${styles.anima} ${row.status.toLowerCase()}`}
-          sx={{ "& > *": { borderBottom: "none" } }}
+          className={`${styles.anima} ${styles[rowStatus.toLowerCase()]}`}
+          sx={{
+            "& > *": {
+              borderBottom: "none",
+            },
+          }}
         >
           {/* <TableCell align="center">
             <Checkbox
@@ -141,7 +104,12 @@ const Row = ({ row }) => {
               }}
               onClick={handleRowClick}
             >
-              <Avatar alt="Avatar" src="" variant="square" sx={{ mr: 1 }} />
+              <Avatar
+                alt="Avatar"
+                src={row.thumb}
+                variant="square"
+                sx={{ mr: 1 }}
+              />
 
               {isEditing ? (
                 <TextField
@@ -177,7 +145,7 @@ const Row = ({ row }) => {
                     borderRadius: "20px",
                   }}
                 >
-                  {row.revenueAverage} р
+                  {row.revenue}
                 </div>
               </div>
             )}
@@ -227,17 +195,20 @@ const Row = ({ row }) => {
                 onClick={(e) => e.stopPropagation()}
               />
             ) : (
-              // row.revenue
-              12345
+              row.revenue
             )}
           </TableCell>
 
           <TableCell align="center">
             <SparkLineChart
-              data={row.dynamic}
+              data={[
+                30, 50, 60, 70, 90, 120.15, 180, 160, 190, 150, 120, 100, 70,
+                40,
+              ]}
               plotType="bar"
               height={40}
               width={150}
+              colors={["#4d4aea"]}
             />
           </TableCell>
           {/* <TableCell align="center">
@@ -268,8 +239,25 @@ const Row = ({ row }) => {
               </IconButton>
             )}
           </TableCell> */}
-          <TableCell>Подвтержден</TableCell>
-          <TableCell align="center">
+          <TableCell>
+            <div
+              style={{
+                color:
+                  rowStatus === "DELETED"
+                    ? "red"
+                    : rowStatus === "APPROVED"
+                    ? "green"
+                    : "black",
+                backgroundColor: "#c4c4c4",
+                borderRadius: "8px",
+                padding: "5px 10px",
+                textAlign: "center",
+              }}
+            >
+              {rowStatus}
+            </div>
+          </TableCell>
+          <TableCell align="center" sx={{ display: "flex" }}>
             <Tooltip title="Товары с 1688">
               <IconButton
                 aria-label="expand row"
@@ -281,11 +269,8 @@ const Row = ({ row }) => {
             </Tooltip>
 
             <Tooltip title="Подтвердить">
-              <IconButton>
-                <CheckCircleIcon
-                  onClick={() => approveHandler(row.id)}
-                  color="success"
-                />
+              <IconButton onClick={() => approveHandler(row.id)}>
+                <CheckCircleIcon color="success" />
               </IconButton>
             </Tooltip>
 
@@ -310,7 +295,7 @@ const Row = ({ row }) => {
             colSpan={12}
           >
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <AnalogTabble data={analogProd} />
+              <AnalogTabble product={row.id} />
             </Collapse>
           </TableCell>
         </TableRow>
@@ -322,18 +307,19 @@ const Row = ({ row }) => {
 Row.propTypes = {
   row: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    check: PropTypes.bool.isRequired,
+    // check: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
+    thumb: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     comments: PropTypes.number.isRequired,
     sales: PropTypes.number.isRequired,
-    revenueAverage: PropTypes.number.isRequired,
-    dynamic: PropTypes.array.isRequired,
+    revenue: PropTypes.number.isRequired,
+    // dynamic: PropTypes.array.isRequired,
     status: PropTypes.string.isRequired,
   }).isRequired,
-  deleteRow: PropTypes.func.isRequired,
-  comboChange: PropTypes.func.isRequired,
-  saveEdit: PropTypes.func.isRequired,
+  // deleteRow: PropTypes.func.isRequired,
+  // comboChange: PropTypes.func.isRequired,
+  // saveEdit: PropTypes.func.isRequired,
 };
 
 export default Row;

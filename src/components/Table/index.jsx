@@ -27,10 +27,8 @@ const CollapsibleTable = ({
   const totalPages = useSelector((state) => state.wbProducts.totalPages);
 
   const filterData = () => {
-    return products?.filter(
-      (item) =>
-        item.name.toLowerCase().includes(search.toLowerCase()) &&
-        (categoryOption === "" || item.category === categoryOption)
+    return products?.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
     );
   };
 
@@ -102,7 +100,7 @@ const CollapsibleTable = ({
                     />
                   </TableCell> */}
                   <TableCell align="center">Товар</TableCell>
-                  <TableCell align="center">Ср. доход от продаж</TableCell>
+                  <TableCell align="center">Доход от продаж</TableCell>
                   <TableCell align="center">Рейтинг</TableCell>
                   <TableCell align="center">Кол-во отзывов</TableCell>
                   <TableCell align="center">Кол-во продаж</TableCell>
@@ -149,7 +147,7 @@ const CollapsibleTable = ({
 CollapsibleTable.propTypes = {
   search: PropTypes.string,
   deleteRow: PropTypes.func,
-  categoryOption: PropTypes.string,
+  categoryOption: PropTypes.object,
   currentPage: PropTypes.number,
   handlePageChange: PropTypes.func,
   products: PropTypes.array,

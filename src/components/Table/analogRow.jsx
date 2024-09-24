@@ -3,24 +3,31 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import {
   Avatar,
   IconButton,
-  Rating,
-  Stack,
   TableCell,
   TableRow,
   Tooltip,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { useChinaAPI } from "../../api/operator";
 import styles from "./Table.module.scss";
 
 const AnalogRow = ({ item }) => {
+  const [rowStatus, setRowStatus] = useState(item.status);
+  const { hideProductById, approveProductById } = useChinaAPI();
+
   const navigate = useNavigate();
-  const statusClasses = {
-    0: styles.status0,
-    1: styles.status1,
-    2: styles.status2,
+
+  const approveHandler = (itemId) => {
+    setRowStatus("APPROVED");
+    approveProductById(itemId);
+  };
+
+  const hideHandler = (itemId) => {
+    setRowStatus("DELETED");
+    hideProductById(itemId);
   };
 
   const handleClickRow = () => {
@@ -29,7 +36,10 @@ const AnalogRow = ({ item }) => {
 
   return (
     <React.Fragment>
-      <TableRow sx={{ "& > *": { borderBottom: "none" } }}>
+      <TableRow
+        sx={{ "& > *": { borderBottom: "none" } }}
+        className={`${styles[rowStatus.toLowerCase()]}`}
+      >
         <Tooltip title="Посмотреть товар 1688" placement="left-start">
           <TableCell
             sx={{
@@ -44,48 +54,30 @@ const AnalogRow = ({ item }) => {
             }}
             onClick={() => handleClickRow()}
           >
-            {/* <Stack
-            alignItems="center"
-            sx={{ display: "flex", flexDirection: "row" }}
-          > */}
             <Avatar alt="Remy Sharp" src="" variant="square" sx={{ mr: 1 }} />
-            {/* </Stack> */}
-            {item.name}
+            {item.title}
           </TableCell>
         </Tooltip>
+        <TableCell align="center">{item.priceInfo.origin_price}</TableCell>
+        <TableCell align="center">{item.shopInfo.company_name}</TableCell>
+        <TableCell align="center">{item.productUrl}</TableCell>
 
-        <TableCell align="center">{item.price}</TableCell>
         <TableCell align="center">
-          <span
-            className={`${styles.status} ${statusClasses[item.status.code]}`}
-          >
-            {item.status.text}
-          </span>
+          <span className={`${styles.status} `}>{rowStatus}</span>
         </TableCell>
-        <TableCell align="center">{item.count}</TableCell>
-        <TableCell align="center">
-          <Stack alignItems="center">
-            <Rating
-              name="half-rating-read"
-              defaultValue={item.rating}
-              precision={0.5}
-              readOnly
-            />
-          </Stack>
-        </TableCell>
-        <TableCell align="center">{item.market}</TableCell>
-        <TableCell align="center">{item.sales}</TableCell>
-        <TableCell align="center">{item.revenue}</TableCell>
-        <TableCell>Подвтержден</TableCell>
-        <TableCell align="center">
+        <TableCell align="center" sx={{ display: "flex" }}>
           <Tooltip title="Подтвердить">
-            <IconButton>
+            <IconButton onClick={() => approveHandler(item.id)}>
               <CheckCircleIcon color="success" />
             </IconButton>
           </Tooltip>
 
           <Tooltip title="Не отображать">
-            <IconButton aria-label="delete" size="small">
+            <IconButton
+              aria-label="delete"
+              size="small"
+              onClick={() => hideHandler(item.id)}
+            >
               <DeleteForever color="red" />
             </IconButton>
           </Tooltip>
@@ -97,15 +89,17 @@ const AnalogRow = ({ item }) => {
 
 AnalogRow.propTypes = {
   item: PropTypes.shape({
-    avatar: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    // avatar: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    priceInfo: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    rating: PropTypes.number.isRequired,
-    market: PropTypes.string.isRequired,
-    sales: PropTypes.number.isRequired,
-    revenue: PropTypes.number.isRequired,
+    productUrl: PropTypes.number.isRequired,
+    shopInfo: PropTypes.string.isRequired,
+    // rating: PropTypes.number.isRequired,
+    // market: PropTypes.string.isRequired,
+    // sales: PropTypes.number.isRequired,
+    // revenue: PropTypes.number.isRequired,
   }).isRequired,
 };
 

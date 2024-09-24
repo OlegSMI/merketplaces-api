@@ -4,14 +4,18 @@ import api from "../api";
 const useGoodsAPI = () => {
   const token = Cookies.get("token");
 
-  const getGlobalCategories = async () => {
-    const response = await api.get("/mpstats/categories", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const getGlobalCategories = async (limit, offset) => {
+    console.log(offset, limit);
+    const response = await api.get(
+      `/mpstats/categories?limit=${limit}&offset=${offset}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
 
-    return response.data;
+    return response.data.result.categories;
   };
 
   const createCategory = async ({ name, url, path }) => {
@@ -38,7 +42,7 @@ const useGoodsAPI = () => {
       },
     });
 
-    return response.data;
+    return response.data.result.categories;
   };
 
   const getProducts = async (categoryName, paybackPeriod, investmentAmount) => {
@@ -57,7 +61,7 @@ const useGoodsAPI = () => {
       }
     );
 
-    return response.result.products;
+    return response.data.result.products;
   };
 
   const hideProductById = async (productId) => {

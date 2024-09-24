@@ -22,9 +22,10 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
     setFilter(event.target.value);
   };
 
-  const filteredOptions = options.filter((option) =>
-    option.name.toLowerCase().includes(filter.toLowerCase())
-  );
+  const filteredOptions = options.filter((option) => {
+    return true;
+    // return option?.name?.toLowerCase().includes(filter.toLowerCase());
+  });
 
   const handleClickOutside = (event) => {
     if (comboboxRef.current && !comboboxRef.current.contains(event.target)) {
@@ -65,7 +66,7 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
             onChange={handleInputChange}
           />
           {filteredOptions.map((option) => (
-            <li key={option.name} onClick={() => handleSelectChange(option)}>
+            <li key={option.url} onClick={() => handleSelectChange(option)}>
               {option.name}
             </li>
           ))}

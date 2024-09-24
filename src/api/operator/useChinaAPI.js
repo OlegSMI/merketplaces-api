@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import api from "../api";
 
-const useSearch = () => {
+const useChinaAPI = () => {
   const token = Cookies.get("token");
 
   const getProductsByImage = async (productId) => {
@@ -14,7 +14,7 @@ const useSearch = () => {
       }
     );
 
-    return response.result;
+    return response.data.result.products;
   };
 
   const getInfoProductById = async (productId) => {
@@ -37,7 +37,7 @@ const useSearch = () => {
     return response.result;
   };
 
-  const editProductById = async (productId) => {
+  const approveProductById = async (productId) => {
     const response = await api.post(
       `/collection/product/${productId}/approve`,
       {
@@ -54,8 +54,8 @@ const useSearch = () => {
     getProductsByImage,
     getInfoProductById,
     hideProductById,
-    editProductById,
+    approveProductById,
   };
 };
 
-export default useSearch;
+export default useChinaAPI;
