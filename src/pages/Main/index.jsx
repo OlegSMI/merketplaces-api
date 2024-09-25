@@ -31,7 +31,7 @@ const Main = () => {
   const [riskOption, setRiskOption] = useState({ name: "" });
   const [dateOption, setDateOption] = useState({ name: "" });
   const { items, status } = useSelector((state) => state.wbProducts);
-
+  const [categoryState, setCategoryState] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
   const dispatch = useDispatch();
@@ -68,6 +68,8 @@ const Main = () => {
         investmentAmount: 0,
       })
     );
+    if (categoryOption) setCategoryState(1);
+    else setCategoryState(0);
   };
 
   return (
@@ -130,6 +132,7 @@ const Main = () => {
                 currentPage={currentPage}
                 handlePageChange={handlePageChange}
                 products={items}
+                categoryState={categoryState}
               />
             </ProtectedRoute>
           }

@@ -13,8 +13,6 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
   const [filter, setFilter] = useState("");
   const comboboxRef = useRef(null);
 
-  console.log("selectedOption", selectedOption);
-
   const handleSelectChange = (option) => {
     setSelectedOption(option);
     setIsOpen(false);

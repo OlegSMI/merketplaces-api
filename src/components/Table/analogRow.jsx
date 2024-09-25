@@ -8,31 +8,35 @@ import {
   Tooltip,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { hideProductById, approveProductById } from "@api/operator/useChinaAPI";
 import styles from "./Table.module.scss";
 
-const AnalogRow = ({ item }) => {
+const AnalogRow = React.memo(function AnalogRow({ item }) {
   const [rowStatus, setRowStatus] = useState(item.status);
-
   const navigate = useNavigate();
 
-  const approveHandler = (itemId) => {
+  const status = {
+    CREATED: "Создан",
+    APPROVED: "Подтвержден",
+    DELETED: "Удален",
+  };
+
+  const approveHandler = useCallback((itemId) => {
     setRowStatus("APPROVED");
     approveProductById(itemId);
-  };
+  }, []);
 
-  const hideHandler = (itemId) => {
+  const hideHandler = useCallback((itemId) => {
     setRowStatus("DELETED");
     hideProductById(itemId);
-  };
+  }, []);
 
-  const handleClickRow = () => {
-    // navigate("/admin/prodinfo", { state: { id: item.id } });
+  const handleClickRow = useCallback(() => {
     navigate("/admin/prodinfo", { state: { data: item, sourse: "china" } });
-  };
+  }, [navigate, item]);
 
   return (
     <React.Fragment>
@@ -44,7 +48,6 @@ const AnalogRow = ({ item }) => {
           <TableCell
             sx={{
               display: "flex",
-              // flexDirection: "row",
               alignItems: "center",
               justifyContent: "start",
               cursor: "pointer",
@@ -63,7 +66,7 @@ const AnalogRow = ({ item }) => {
         <TableCell align="center">{item.productUrl}</TableCell>
 
         <TableCell align="center">
-          <span className={`${styles.status} `}>{rowStatus}</span>
+          <span className={`${styles.status} `}>{status[rowStatus]}</span>
         </TableCell>
         <TableCell align="center" sx={{ display: "flex" }}>
           <Tooltip title="Подтвердить">
@@ -85,21 +88,18 @@ const AnalogRow = ({ item }) => {
       </TableRow>
     </React.Fragment>
   );
-};
+});
 
 AnalogRow.propTypes = {
   item: PropTypes.shape({
-    // avatar: PropTypes.number.isRequired,
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    priceInfo: PropTypes.number.isRequired,
+    priceInfo: PropTypes.shape({
+      origin_price: PropTypes.number.isRequired,
+    }).isRequired,
     status: PropTypes.string.isRequired,
     productUrl: PropTypes.number.isRequired,
     shopInfo: PropTypes.string.isRequired,
-    // rating: PropTypes.number.isRequired,
-    // market: PropTypes.string.isRequired,
-    // sales: PropTypes.number.isRequired,
-    // revenue: PropTypes.number.isRequired,
   }).isRequired,
 };
 

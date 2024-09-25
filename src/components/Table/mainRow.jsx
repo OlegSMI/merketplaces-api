@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -23,7 +23,7 @@ import {
   approvedProductById,
 } from "@api/operator/useGoodsAPI";
 import { SparkLineChart } from "@mui/x-charts";
-import AnalogTabble from "./analogTable";
+import AnalogTable from "./analogTable";
 import styles from "./Table.module.scss";
 
 const theme = createTheme({
@@ -34,30 +34,38 @@ const theme = createTheme({
   },
 });
 
-const Row = ({ row }) => {
+const Row = React.memo(function Row({ row }) {
   const navigate = useNavigate();
   const [rowStatus, setRowStatus] = useState(row.status);
 
   const [open, setOpen] = React.useState(false);
+  const status = {
+    CREATED: "Создан",
+    APPROVED: "Подтвержден",
+    DELETED: "Удален",
+  };
 
-  const handleRowClick = () => {
+  const handleRowClick = useCallback(() => {
     navigate("/admin/prodinfo", { state: { data: row, sourse: "wb" } });
-  };
+  }, [navigate, row]);
 
-  const handleOpenPanel = (e) => {
-    e.stopPropagation();
-    setOpen(!open);
-  };
+  const handleOpenPanel = useCallback(
+    (e) => {
+      e.stopPropagation();
+      setOpen(!open);
+    },
+    [open]
+  );
 
-  const approveHandler = (itemId) => {
+  const approveHandler = useCallback((itemId) => {
     setRowStatus("APPROVED");
     approvedProductById(itemId);
-  };
+  }, []);
 
-  const hideHandler = (itemId) => {
+  const hideHandler = useCallback((itemId) => {
     setRowStatus("DELETED");
     hideProductById(itemId);
-  };
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -107,9 +115,10 @@ const Row = ({ row }) => {
           </TableCell>
           <TableCell align="center">
             <Rating
-              name="half-rating"
+              name="half-rating-read"
               defaultValue={row.rating}
               precision={0.5}
+              readOnly
             />
           </TableCell>
           <TableCell align="center">{row.comments}</TableCell>
@@ -143,7 +152,7 @@ const Row = ({ row }) => {
                 textAlign: "center",
               }}
             >
-              {rowStatus}
+              {status[rowStatus]}
             </div>
           </TableCell>
           <TableCell align="center" sx={{ display: "flex" }}>
@@ -184,14 +193,14 @@ const Row = ({ row }) => {
             colSpan={12}
           >
             <Collapse in={open} timeout="auto" unmountOnExit>
-              <AnalogTabble product={row.id} />
+              <AnalogTable product={row.id} />
             </Collapse>
           </TableCell>
         </TableRow>
       </React.Fragment>
     </ThemeProvider>
   );
-};
+});
 
 Row.propTypes = {
   row: PropTypes.shape({

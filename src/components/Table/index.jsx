@@ -10,35 +10,76 @@ import {
 } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import PropTypes from "prop-types";
-
+import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
-import emptyState from "../../assets/table/emptyState.svg";
+import emptyState from "@assets/table/emptyState.svg";
+import sortImg from "@assets/table/sort.png";
 import Row from "./mainRow";
 import styles from "./Table.module.scss";
 
-const CollapsibleTable = ({
+const CollapsibleTable = React.memo(function CollapsibleTable({
   search,
   currentPage,
   handlePageChange,
   products,
-}) => {
+  categoryState,
+}) {
   const totalPages = useSelector((state) => state.wbProducts.totalPages);
+  const [sortConfig, setSortConfig] = useState({
+    key: "",
+    direction: "asc",
+  });
 
-  const filterData = () => {
+  const filterData = useMemo(() => {
     return products?.filter((item) =>
       item.name.toLowerCase().includes(search.toLowerCase())
     );
+  }, [products, search]);
+
+  const sortedData = React.useMemo(() => {
+    let sortableItems = [...filterData];
+    console.log(sortableItems);
+    if (sortConfig.key) {
+      sortableItems.sort((a, b) => {
+        if (a[sortConfig.key] < b[sortConfig.key]) {
+          return sortConfig.direction === "asc" ? -1 : 1;
+        }
+        if (a[sortConfig.key] > b[sortConfig.key]) {
+          return sortConfig.direction === "asc" ? 1 : -1;
+        }
+        return 0;
+      });
+    }
+    return sortableItems;
+  }, [filterData, sortConfig]);
+
+  const requestSort = (key) => {
+    let direction = "asc";
+    if (sortConfig.key === key && sortConfig.direction === "asc") {
+      direction = "desc";
+    }
+    setSortConfig({ key, direction });
   };
 
   return (
     <div className={styles.table}>
-      {products?.length === 0 ? (
-        <div className={styles.emptyState}>
-          <img src={emptyState} alt="Empty State" />
-          <p>Вы не применили фильтры для поиска товара</p>
-          <p>Заполните поля фильтров, чтобы начать работу c таблицей</p>
-        </div>
+      {products.length === 0 ? (
+        categoryState === 1 ? (
+          <div className={styles.emptyState}>
+            <img src={emptyState} alt="Empty State" />
+            <p className={styles.title}>Товары не найдены</p>
+            <p className={styles.text}>Попробуйте изменить параметры поиска</p>
+          </div>
+        ) : (
+          <div className={styles.emptyState}>
+            <img src={emptyState} alt="Empty State" />
+            <p className={styles.title}>Вы не применили фильтры для поиска</p>
+            <p className={styles.text}>
+              Заполните поля фильтров, чтобы начать работу c таблицей
+            </p>
+          </div>
+        )
       ) : (
         <>
           <TableContainer
@@ -53,14 +94,56 @@ const CollapsibleTable = ({
             >
               <TableHead>
                 <TableRow className={styles.tableHead}>
-                  <TableCell align="center">Товар</TableCell>
-                  <TableCell align="center">Доход от продаж</TableCell>
-                  <TableCell align="center">Рейтинг</TableCell>
-                  <TableCell align="center">Кол-во отзывов</TableCell>
-                  <TableCell align="center">Кол-во продаж</TableCell>
-                  <TableCell align="center">Выручка</TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => requestSort("name")}
+                  >
+                    Товар <img src={sortImg} alt="sort" />
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => requestSort("revenue")}
+                  >
+                    Доход <img src={sortImg} alt="sort" />
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => requestSort("rating")}
+                  >
+                    Рейтинг <img src={sortImg} alt="sort" />
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => requestSort("comments")}
+                  >
+                    Отзывы <img src={sortImg} alt="sort" />
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => requestSort("sales")}
+                  >
+                    Продажи <img src={sortImg} alt="sort" />
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => requestSort("revenue")}
+                  >
+                    Выручка <img src={sortImg} alt="sort" />
+                  </TableCell>
                   <TableCell align="center">Динамика продаж</TableCell>
-                  <TableCell align="center">Статус</TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => requestSort("status")}
+                  >
+                    Статус <img src={sortImg} alt="sort" />
+                  </TableCell>
                   <TableCell align="center">Действие</TableCell>
                 </TableRow>
               </TableHead>
@@ -72,7 +155,7 @@ const CollapsibleTable = ({
                   },
                 }}
               >
-                {filterData()?.map((row) => (
+                {sortedData.map((row) => (
                   <Row key={row.id} row={row} />
                 ))}
               </TableBody>
@@ -90,7 +173,7 @@ const CollapsibleTable = ({
       )}
     </div>
   );
-};
+});
 
 CollapsibleTable.propTypes = {
   search: PropTypes.string,
@@ -98,6 +181,7 @@ CollapsibleTable.propTypes = {
   currentPage: PropTypes.number,
   handlePageChange: PropTypes.func,
   products: PropTypes.array,
+  categoryState: PropTypes.number,
 };
 
 export default CollapsibleTable;
