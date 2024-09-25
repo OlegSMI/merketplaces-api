@@ -15,16 +15,16 @@ const NavBar = () => {
     <nav className={styles.navbar}>
       <ul>
         <li className={active === "/table" ? styles.active : ""}>
-          <Link to="/user/main/table">Таблица</Link>
+          <Link to="/admin/main/table">Таблица</Link>
         </li>
         <li className={active === "/list" ? styles.active : ""}>
-          <Link to="/user/main/list">Список</Link>
+          <Link to="/admin/main/list">Список</Link>
         </li>
         <li className={active === "/cards" ? styles.active : ""}>
-          <Link to="/user/main/cards">Карточки</Link>
+          <Link to="/admin/main/cards">Карточки</Link>
         </li>
         <li className={active === "/risk-profile" ? styles.active : ""}>
-          <Link to="/user/main/risk-profile">Риск профиль</Link>
+          <Link to="/admin/main/risk-profile">Риск профиль</Link>
         </li>
       </ul>
     </nav>

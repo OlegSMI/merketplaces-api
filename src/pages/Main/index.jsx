@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
-
-import { getCategories, getProducts } from "@api/operator/useGoodsAPI";
-import { Card, Combobox, List, NavBar, RiskProfile, Table } from "@components";
+import { getWbProducts } from "@redux/wbProducts/asyncAction";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories } from "@api/operator/useGoodsAPI";
+import {
+  Card,
+  Combobox,
+  List,
+  NavBar,
+  RiskProfile,
+  Table,
+  ProtectedRoute,
+} from "@components";
 
 import { useSnackbar } from "notistack";
 import styles from "./Main.module.scss";
@@ -21,9 +30,20 @@ const Main = () => {
   const [procentOption, setProcentOption] = useState({ name: "" });
   const [riskOption, setRiskOption] = useState({ name: "" });
   const [dateOption, setDateOption] = useState({ name: "" });
-  const [products, setProducts] = useState([]);
+  const { items, status } = useSelector((state) => state.wbProducts);
 
   const [currentPage, setCurrentPage] = useState(1);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (status === "error") {
+      enqueueSnackbar("Произошла ошибка", {
+        variant: "error",
+        anchorOrigin: { vertical: "top", horizontal: "right" },
+      });
+    }
+  }, [status]);
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);
@@ -41,21 +61,13 @@ const Main = () => {
   };
 
   const getProductsAPI = async () => {
-    try {
-      setProducts(await getProducts(categoryOption.path, "", 0));
-    } catch (error) {
-      if (error.status === 422) {
-        enqueueSnackbar("Ошибка отправки данных", {
-          variant: "error",
-          anchorOrigin: { vertical: "top", horizontal: "right" },
-        });
-      } else {
-        enqueueSnackbar(error.toString(), {
-          variant: "error",
-          anchorOrigin: { vertical: "top", horizontal: "right" },
-        });
-      }
-    }
+    dispatch(
+      getWbProducts({
+        categoryName: categoryOption.path,
+        paybackPeriod: "",
+        investmentAmount: 0,
+      })
+    );
   };
 
   return (
@@ -110,20 +122,42 @@ const Main = () => {
 
       <Routes>
         <Route
-          path="table"
+          path="/table"
           element={
-            <Table
-              search={search}
-              categoryOption={categoryOption}
-              currentPage={currentPage}
-              handlePageChange={handlePageChange}
-              products={products}
-            />
+            <ProtectedRoute>
+              <Table
+                search={search}
+                currentPage={currentPage}
+                handlePageChange={handlePageChange}
+                products={items}
+              />
+            </ProtectedRoute>
           }
         />
-        <Route path="list" element={<List />} />
-        <Route path="cards" element={<Card />} />
-        <Route path="risk-profile" element={<RiskProfile />} />
+        <Route
+          path="/list"
+          element={
+            <ProtectedRoute>
+              <List />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/cards"
+          element={
+            <ProtectedRoute>
+              <Card />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/risk-profile"
+          element={
+            <ProtectedRoute>
+              <RiskProfile />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </div>
   );

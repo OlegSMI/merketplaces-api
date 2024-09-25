@@ -1,15 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import data from "../../json/myTest.json";
+import api from "@api/api";
+import Cookies from "js-cookie";
 
 export const getWbProducts = createAsyncThunk(
   "products/fetchProducts",
-  async ({ page = 1, limit = 5 }) => {
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
-    const products = data.products.slice(startIndex, endIndex);
-    return {
-      products,
-      totalPages: Math.ceil(data.products.length / limit),
-    };
+  async ({ categoryName, paybackPeriod, investmentAmount }) => {
+    const response = await api.post(
+      "/wildberries/products",
+      {
+        categoryName,
+        paybackPeriod,
+        investmentAmount,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${Cookies.get("token")}`,
+        },
+      }
+    );
+    console.log("response", response);
+    return response.data.result;
   }
 );

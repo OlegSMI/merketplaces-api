@@ -44,28 +44,28 @@ export const getCategories = async () => {
   return response.data.result.categories;
 };
 
-export const getProducts = async (
-  categoryName,
-  paybackPeriod,
-  investmentAmount
-) => {
-  const response = await api.post(
-    "/wildberries/products",
-    {
-      categoryName: categoryName,
-      paybackPeriod: paybackPeriod,
-      investmentAmount: investmentAmount,
-    },
-    {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+// export const getProducts = async (
+//   categoryName,
+//   paybackPeriod,
+//   investmentAmount
+// ) => {
+//   const response = await api.post(
+//     "/wildberries/products",
+//     {
+//       categoryName: categoryName,
+//       paybackPeriod: paybackPeriod,
+//       investmentAmount: investmentAmount,
+//     },
+//     {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//     }
+//   );
 
-  return response.data.result.products;
-};
+//   return response.data.result.products;
+// };
 
 export const hideProductById = async (productId) => {
   const response = await api.delete(

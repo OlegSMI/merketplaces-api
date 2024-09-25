@@ -13,6 +13,8 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
   const [filter, setFilter] = useState("");
   const comboboxRef = useRef(null);
 
+  console.log("selectedOption", selectedOption);
+
   const handleSelectChange = (option) => {
     setSelectedOption(option);
     setIsOpen(false);
@@ -23,8 +25,8 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
   };
 
   const filteredOptions = options.filter((option) => {
-    return true;
-    // return option?.name?.toLowerCase().includes(filter.toLowerCase());
+    // return true;
+    return option?.name?.toLowerCase().includes(filter.toLowerCase());
   });
 
   const handleClickOutside = (event) => {

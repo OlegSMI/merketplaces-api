@@ -24,7 +24,7 @@ const Login = () => {
     setLoading(true);
     try {
       await login({ name, password });
-      navigate("/user/main/table");
+      navigate("/admin/main/table");
     } catch (error) {
       if (error?.response?.data?.errorCode === 10002) {
         enqueueSnackbar("Неверный логин или пароль", {

@@ -30,6 +30,7 @@ h3 {
   .filters {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 
     .sel {
       background-color: red;

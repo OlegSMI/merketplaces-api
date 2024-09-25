@@ -19,7 +19,6 @@ import styles from "./Table.module.scss";
 
 const CollapsibleTable = ({
   search,
-  categoryOption,
   currentPage,
   handlePageChange,
   products,
@@ -31,36 +30,6 @@ const CollapsibleTable = ({
       item.name.toLowerCase().includes(search.toLowerCase())
     );
   };
-
-  // const deleteRow = (e, id) => {
-  //   e.stopPropagation();
-  //   dispatch(deleteWbProduct(id));
-  // };
-
-  // const comboChange = (e, id) => {
-  //   e.stopPropagation();
-  //   console.log("id", id);
-  //   dispatch(
-  //     setWbProducts(
-  //       products.map((row) =>
-  //         row.id === id ? { ...row, check: !row.check } : row
-  //       )
-  //     )
-  //   );
-  // };
-
-  // const saveEdit = (newData) => {
-  //   dispatch(
-  //     setWbProducts(
-  //       products.map((item) => {
-  //         if (item.id === newData.id) {
-  //           return { ...item, ...newData };
-  //         }
-  //         return item;
-  //       })
-  //     )
-  //   );
-  // };
 
   return (
     <div className={styles.table}>
@@ -84,21 +53,6 @@ const CollapsibleTable = ({
             >
               <TableHead>
                 <TableRow className={styles.tableHead}>
-                  {/* <TableCell align="center">
-                    <Checkbox
-                      checked={state}
-                      onClick={() => {
-                        const newState = !state;
-                        console.log(newState);
-                        dispatch(
-                          setWbProducts(
-                            products.map((row) => ({ ...row, check: newState }))
-                          )
-                        );
-                        setState(newState);
-                      }}
-                    />
-                  </TableCell> */}
                   <TableCell align="center">Товар</TableCell>
                   <TableCell align="center">Доход от продаж</TableCell>
                   <TableCell align="center">Рейтинг</TableCell>
@@ -119,13 +73,7 @@ const CollapsibleTable = ({
                 }}
               >
                 {filterData()?.map((row) => (
-                  <Row
-                    key={row.id}
-                    row={row}
-                    // deleteRow={(e) => deleteRow(e, row.id)}
-                    // comboChange={comboChange}
-                    // saveEdit={saveEdit}
-                  />
+                  <Row key={row.id} row={row} />
                 ))}
               </TableBody>
             </Table>
@@ -147,7 +95,6 @@ const CollapsibleTable = ({
 CollapsibleTable.propTypes = {
   search: PropTypes.string,
   deleteRow: PropTypes.func,
-  categoryOption: PropTypes.object,
   currentPage: PropTypes.number,
   handlePageChange: PropTypes.func,
   products: PropTypes.array,

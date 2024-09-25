@@ -11,7 +11,7 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    navigate("/user/main/table");
+    navigate("/admin/main/table");
   }, []);
 
   return (
@@ -21,10 +21,10 @@ function App() {
           <Route
             path="/user/*"
             element={
-              <User />
-              // <ProtectedRoute>
-              //   <User />
-              // </ProtectedRoute>
+              // <User />
+              <ProtectedRoute>
+                <User />
+              </ProtectedRoute>
             }
           />
           <Route

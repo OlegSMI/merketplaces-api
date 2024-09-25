@@ -10,8 +10,8 @@ import {
   IconButton,
   TableCell,
   TableRow,
-  TextField,
   Tooltip,
+  Rating,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PropTypes from "prop-types";
@@ -39,33 +39,14 @@ const Row = ({ row }) => {
   const [rowStatus, setRowStatus] = useState(row.status);
 
   const [open, setOpen] = React.useState(false);
-  const [isEditing] = React.useState(false);
-  const [editedRow, setEditedRow] = React.useState(row);
 
   const handleRowClick = () => {
-    navigate("/user/prodinfo", { state: { data: row } });
+    navigate("/admin/prodinfo", { state: { data: row, sourse: "wb" } });
   };
 
   const handleOpenPanel = (e) => {
     e.stopPropagation();
     setOpen(!open);
-  };
-
-  // const handleEditClick = (e) => {
-  //   e.stopPropagation();
-  //   setIsEditing(true);
-  // };
-
-  // const handleSaveClick = (e) => {
-  //   e.stopPropagation();
-  //   setIsEditing(false);
-  //   saveEdit(editedRow);
-  // };
-
-  const handleChange = (e) => {
-    e.stopPropagation();
-    const { name, value } = e.target;
-    setEditedRow((prev) => ({ ...prev, [name]: value }));
   };
 
   const approveHandler = (itemId) => {
@@ -89,12 +70,6 @@ const Row = ({ row }) => {
             },
           }}
         >
-          {/* <TableCell align="center">
-            <Checkbox
-              checked={row.check}
-              onClick={(e) => comboChange(e, row.id)}
-            ></Checkbox>
-          </TableCell> */}
           <Tooltip title="Посмотреть товар" placement="left-start">
             <TableCell
               sx={{
@@ -112,96 +87,36 @@ const Row = ({ row }) => {
                 variant="square"
                 sx={{ mr: 1 }}
               />
-
-              {isEditing ? (
-                <TextField
-                  name="name"
-                  value={editedRow.name}
-                  onChange={handleChange}
-                  onClick={(e) => e.stopPropagation()}
-                />
-              ) : (
-                row.name
-              )}
+              {row.name}
             </TableCell>
           </Tooltip>
 
-          <TableCell
-            align="center"
-            // sx={{ display: "flex", justifyContent: "center" }}
-          >
-            {isEditing ? (
-              <TextField
-                name="profit"
-                value={editedRow.revenue}
-                onChange={handleChange}
-                onClick={(e) => e.stopPropagation()}
-              />
-            ) : (
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <div
-                  style={{
-                    color: "#147129",
-                    backgroundColor: "#EAFDEE",
-                    padding: "4px 10px",
-                    borderRadius: "20px",
-                  }}
-                >
-                  {row.revenue}
-                </div>
+          <TableCell align="center">
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{
+                  color: "#147129",
+                  backgroundColor: "#EAFDEE",
+                  padding: "4px 10px",
+                  borderRadius: "20px",
+                }}
+              >
+                {row.revenue}
               </div>
-            )}
+            </div>
           </TableCell>
           <TableCell align="center">
-            {isEditing ? (
-              <TextField
-                name="rating"
-                value={editedRow.rating}
-                onChange={handleChange}
-                onClick={(e) => e.stopPropagation()}
-              />
-            ) : (
-              row.rating
-            )}
+            <Rating
+              name="half-rating"
+              defaultValue={row.rating}
+              precision={0.5}
+            />
           </TableCell>
-          <TableCell align="center">
-            {isEditing ? (
-              <TextField
-                name="comments"
-                value={editedRow.comments}
-                onChange={handleChange}
-                onClick={(e) => e.stopPropagation()}
-              />
-            ) : (
-              row.comments
-            )}
-          </TableCell>
-          <TableCell align="center">
-            {isEditing ? (
-              <TextField
-                name="sells"
-                value={editedRow.sales}
-                onChange={handleChange}
-                onClick={(e) => e.stopPropagation()}
-              />
-            ) : (
-              row.sales
-            )}
-          </TableCell>
-          <TableCell align="center">
-            {isEditing ? (
-              <TextField
-                name="revenue"
-                value={editedRow.revenue}
-                onChange={handleChange}
-                onClick={(e) => e.stopPropagation()}
-              />
-            ) : (
-              row.revenue
-            )}
-          </TableCell>
+          <TableCell align="center">{row.comments}</TableCell>
+          <TableCell align="center">{row.sales}</TableCell>
+          <TableCell align="center">{row.revenue}</TableCell>
 
-          <TableCell align="center">
+          <TableCell>
             <SparkLineChart
               data={[
                 30, 50, 60, 70, 90, 120.15, 180, 160, 190, 150, 120, 100, 70,
@@ -213,34 +128,6 @@ const Row = ({ row }) => {
               colors={["#4d4aea"]}
             />
           </TableCell>
-          {/* <TableCell align="center">
-            <IconButton
-              aria-label="expand row"
-              size="small"
-              onClick={(e) => handleOpenPanel(e)}
-            >
-              {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-            </IconButton>
-          </TableCell> */}
-          {/* <TableCell align="center">
-            {isEditing ? (
-              <IconButton
-                aria-label="save"
-                size="small"
-                onClick={handleSaveClick}
-              >
-                <Save />
-              </IconButton>
-            ) : (
-              <IconButton
-                aria-label="edit"
-                size="small"
-                onClick={handleEditClick}
-              >
-                <Edit />
-              </IconButton>
-            )}
-          </TableCell> */}
           <TableCell>
             <div
               style={{
@@ -309,19 +196,14 @@ const Row = ({ row }) => {
 Row.propTypes = {
   row: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    // check: PropTypes.bool.isRequired,
     name: PropTypes.string.isRequired,
     thumb: PropTypes.string.isRequired,
     rating: PropTypes.number.isRequired,
     comments: PropTypes.number.isRequired,
     sales: PropTypes.number.isRequired,
     revenue: PropTypes.number.isRequired,
-    // dynamic: PropTypes.array.isRequired,
     status: PropTypes.string.isRequired,
   }).isRequired,
-  // deleteRow: PropTypes.func.isRequired,
-  // comboChange: PropTypes.func.isRequired,
-  // saveEdit: PropTypes.func.isRequired,
 };
 
 export default Row;

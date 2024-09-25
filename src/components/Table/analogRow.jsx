@@ -30,7 +30,8 @@ const AnalogRow = ({ item }) => {
   };
 
   const handleClickRow = () => {
-    navigate("/user/prodinfo", { state: { id: item.id } });
+    // navigate("/admin/prodinfo", { state: { id: item.id } });
+    navigate("/admin/prodinfo", { state: { data: item, sourse: "china" } });
   };
 
   return (

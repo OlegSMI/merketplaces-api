@@ -7,7 +7,7 @@ const wbSlice = createSlice({
   initialState: {
     items: [],
     status: "loading",
-    totalPages: 1,
+    // totalPages: 1,
   },
   reducers: {
     setWbProducts(state, action) {
@@ -27,7 +27,7 @@ const wbSlice = createSlice({
       .addCase(getWbProducts.fulfilled, (state, action) => {
         state.status = "success";
         state.items = action.payload.products;
-        state.totalPages = action.payload.totalPages;
+        // state.totalPages = action.payload.totalPages;
       })
       .addCase(getWbProducts.rejected, (state) => {
         state.status = "error";

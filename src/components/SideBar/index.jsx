@@ -1,33 +1,43 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Tooltip } from "antd";
+import { logout } from "@api/auth";
 
 import styles from "./SideBar.module.scss";
 
-import userPhoto from "../../assets/UserPhoto.png";
-import finplan from "../../assets/sidebar/finplan.svg";
-import logo from "../../assets/sidebar/logo.png";
-import main from "../../assets/sidebar/main.svg";
-import profile from "../../assets/sidebar/profile.svg";
+import userPhoto from "@assets/UserPhoto.png";
+import categories from "@assets/sidebar/categories.png";
+import logo from "@assets/sidebar/logo.png";
+import main from "@assets/sidebar/main.svg";
+import logoutImg from "@assets/auth/logout.png";
 
 const SideBar = () => {
   const [active, setActive] = useState("/main");
 
+  const navigate = useNavigate();
+
   const menuLinkClick = (path) => {
     setActive(path);
+  };
+
+  const logoutHandler = async () => {
+    await logout();
+    navigate("/login");
   };
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.logo}>
         <img src={logo} alt="logo" />
-        <Link to={"/user/main/table"} onClick={() => menuLinkClick("/main")}>
+        <Link to={"/admin/main/table"} onClick={() => menuLinkClick("/main")}>
           <span>UStats</span>
         </Link>
       </div>
       <ul>
         <li className={active === "/main" ? styles.active : ""}>
           <Link
-            to="/user/main/table"
+            to="/admin/main/table"
             className={styles.link}
             onClick={() => menuLinkClick("/main")}
           >
@@ -37,15 +47,15 @@ const SideBar = () => {
         </li>
         <li className={active === "/categories" ? styles.active : ""}>
           <Link
-            to="/user/categories"
+            to="/admin/categories"
             className={styles.link}
             onClick={() => menuLinkClick("/categories")}
           >
-            <img src={finplan} />
+            <img src={categories} />
             Категории
           </Link>
         </li>
-        <li className={active === "/profile" ? styles.active : ""}>
+        {/* <li className={active === "/profile" ? styles.active : ""}>
           <Link
             to="/user/profile"
             className={styles.link}
@@ -54,19 +64,20 @@ const SideBar = () => {
             <img src={profile} />
             Профиль
           </Link>
-        </li>
+        </li> */}
       </ul>
-      <Link
-        to={"/user/profile"}
-        className={styles.userInfo}
-        onClick={() => menuLinkClick("/profile")}
-      >
+      <div className={styles.userInfo}>
         <img src={userPhoto} alt="User" className={styles.userPhoto} />
         <div>
           <p className={styles.title}>Пользователь</p>
-          <p className={styles.text}>@user</p>
+          <p className={styles.text}>@admin</p>
         </div>
-      </Link>
+        <button className={styles.logout} onClick={logoutHandler}>
+          <Tooltip title="Выйти" placement="top">
+            <img src={logoutImg} alt="logout" />
+          </Tooltip>
+        </button>
+      </div>
     </div>
   );
 };
