@@ -3,12 +3,14 @@ import back from "../../assets/sidebar/back.png";
 import { useLocation } from "react-router-dom";
 
 import { Field } from "../../components";
+import { getInfoProductById } from "@api/operator/useChinaAPI";
 // import avatar from "../../assets/ChinaBox.png";
 
 function ProdInfo() {
-  const keybords = ["Трусы", "Белье", "Нижнее", "Панталоны"];
   const location = useLocation();
-  const { data } = location.state;
+  const { id } = location.state;
+
+  const data = getInfoProductById(id);
 
   return (
     <div className={styles.container}>

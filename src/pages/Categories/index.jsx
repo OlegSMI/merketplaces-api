@@ -2,18 +2,20 @@ import { useEffect, useState } from "react";
 
 import { CircularProgress } from "@mui/material";
 import { useSnackbar } from "notistack";
-import useGoodsAPI from "../../api/operator/useGoodsAPI";
+import {
+  getGlobalCategories,
+  getCategories,
+  createCategory,
+} from "@api/operator/useGoodsAPI";
 import styles from "./Categories.module.scss";
 
 function Categories() {
-  const { getGlobalCategories, getCategories } = useGoodsAPI();
   const [offset, setOffset] = useState(0);
   const [categories, setCategories] = useState([]);
   const [currentCategories, setCurrentCategories] = useState([]);
   const [loadData, setLoadData] = useState(false);
   const [search, setSearch] = useState("");
 
-  const { createCategory } = useGoodsAPI();
   const { enqueueSnackbar } = useSnackbar();
 
   const handleInputChange = (event) => {

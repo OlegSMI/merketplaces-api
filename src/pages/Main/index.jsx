@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import { useGoodsAPI } from "@api/operator";
+import { getCategories, getProducts } from "@api/operator/useGoodsAPI";
 import { Card, Combobox, List, NavBar, RiskProfile, Table } from "@components";
 
 import { useSnackbar } from "notistack";
@@ -12,7 +12,6 @@ const filter = [{ name: "По дате" }, { name: "По цене" }];
 
 const Main = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const { getCategories } = useGoodsAPI();
 
   const [search, setSearch] = useState("");
   const [categoryOption, setCategoryOption] = useState({ name: "" });
@@ -25,7 +24,6 @@ const Main = () => {
   const [products, setProducts] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const { getProducts } = useGoodsAPI();
 
   const handleInputChange = (event) => {
     setSearch(event.target.value);

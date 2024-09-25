@@ -10,8 +10,6 @@ export const login = async (userData) => {
     login: userData.name,
     password: userData.password,
   });
-
-  axios.defaults.headers.common["Authorization"] = `Bearer ${response.access}`;
   Cookies.set("token", response.data.result.access);
   Cookies.set("refreshToken", response.data.result.refresh);
   return response.data;

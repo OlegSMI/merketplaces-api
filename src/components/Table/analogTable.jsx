@@ -7,12 +7,11 @@ import PropTypes from "prop-types";
 
 import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useChinaAPI } from "../../api/operator";
+import { getProductsByImage } from "@api/operator/useChinaAPI";
 import AnalogRow from "./analogRow";
 import styles from "./Table.module.scss";
 
 const AnalogTabble = ({ product }) => {
-  const { getProductsByImage } = useChinaAPI();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {

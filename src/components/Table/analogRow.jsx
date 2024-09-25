@@ -11,12 +11,11 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import { useChinaAPI } from "../../api/operator";
+import { hideProductById, approveProductById } from "@api/operator/useChinaAPI";
 import styles from "./Table.module.scss";
 
 const AnalogRow = ({ item }) => {
   const [rowStatus, setRowStatus] = useState(item.status);
-  const { hideProductById, approveProductById } = useChinaAPI();
 
   const navigate = useNavigate();
 
@@ -31,7 +30,7 @@ const AnalogRow = ({ item }) => {
   };
 
   const handleClickRow = () => {
-    navigate("/user/prodinfo", { state: { data: item } });
+    navigate("/user/prodinfo", { state: { id: item.id } });
   };
 
   return (

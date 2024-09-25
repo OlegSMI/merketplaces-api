@@ -18,7 +18,10 @@ import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import useGoodsAPI from "@api/operator/useGoodsAPI";
+import {
+  hideProductById,
+  approvedProductById,
+} from "@api/operator/useGoodsAPI";
 import { SparkLineChart } from "@mui/x-charts";
 import AnalogTabble from "./analogTable";
 import styles from "./Table.module.scss";
@@ -33,7 +36,6 @@ const theme = createTheme({
 
 const Row = ({ row }) => {
   const navigate = useNavigate();
-  const { hideProductById, approvedProductById } = useGoodsAPI();
   const [rowStatus, setRowStatus] = useState(row.status);
 
   const [open, setOpen] = React.useState(false);

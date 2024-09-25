@@ -8,13 +8,12 @@ import { Stack } from "@mui/material";
 import Pagination from "@mui/material/Pagination";
 import { useEffect, useState } from "react";
 
-import useGoodsAPI from "../../api/operator/useGoodsAPI";
+import { getGlobalCategories } from "@api/operator/useGoodsAPI";
 import styles from "./Categories.module.scss";
 
 const ITEMS_PER_PAGE = 6; // Количество элементов на странице
 
 function Categories() {
-  const { getGlobalCategories } = useGoodsAPI();
   const [offset, setOffset] = useState(0);
   const [categories, setCategories] = useState([]);
 

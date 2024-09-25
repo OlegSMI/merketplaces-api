@@ -65,8 +65,8 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
             value={filter}
             onChange={handleInputChange}
           />
-          {filteredOptions.map((option) => (
-            <li key={option.url} onClick={() => handleSelectChange(option)}>
+          {filteredOptions.map((option, index) => (
+            <li key={index} onClick={() => handleSelectChange(option)}>
               {option.name}
             </li>
           ))}
@@ -80,7 +80,7 @@ Combobox.propTypes = {
   title: PropTypes.string,
   options: PropTypes.array,
   selectedOption: PropTypes.object,
-  setSelectedOption: PropTypes.func.isRequired,
+  setSelectedOption: PropTypes.func,
 };
 
 export default Combobox;
