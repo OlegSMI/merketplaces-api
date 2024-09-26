@@ -4,20 +4,17 @@ import api from "../api";
 const token = Cookies.get("token");
 
 export const getProductsByImage = async (productId) => {
-  const response = await api.get(
-    `collection/products?WBProductId=${productId}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
+  const response = await api.get(`alibaba/products?WBProductId=${productId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
 
   return response.data.result.products;
 };
 
 export const getInfoProductById = async (productId) => {
-  const response = await api.get(`collection/product/${productId}`, {
+  const response = await api.get(`alibaba/product/${productId}`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -27,7 +24,7 @@ export const getInfoProductById = async (productId) => {
 };
 
 export const hideProductById = async (productId) => {
-  const response = await api.post(`/collection/product/${productId}/reject`, {
+  const response = await api.post(`/alibaba/product/${productId}/reject`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -37,7 +34,7 @@ export const hideProductById = async (productId) => {
 };
 
 export const approveProductById = async (productId) => {
-  const response = await api.post(`/collection/product/${productId}/approve`, {
+  const response = await api.post(`/alibaba/product/${productId}/approve`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -5,10 +5,12 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-import { useSnackbar } from "notistack";
+// import { useSnackbar } from "notistack";
+import { deleteCategoty } from "@api/operator/useGoodsAPI";
 
 import { getWbCategories } from "@redux/wbCategories/asyncAction";
 import { getGlobalCategories } from "@redux/globalCategories/asyncAction";
+import { setDeleteWbCategoty } from "../../redux/wbCategories/slice";
 import styles from "./Categories.module.scss";
 import { addWbCategory } from "../../redux/wbCategories/asyncAction";
 
@@ -21,7 +23,8 @@ function Categories() {
   const { addedCategories } = useSelector((state) => state.wbCategories);
   const { globalCategories } = useSelector((state) => state.globalCategories);
 
-  const { enqueueSnackbar } = useSnackbar();
+  console.log("asdasdas", addedCategories);
+  // const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -65,10 +68,13 @@ function Categories() {
     if (!categoryIsNew(category)) {
       dispatch(addWbCategory(category));
     } else {
-      enqueueSnackbar("Категория уже есть в базе", {
-        variant: "error",
-        anchorOrigin: { vertical: "top", horizontal: "right" },
-      });
+      // dispatch(deleteWbCategoty(category.id));
+      deleteCategoty(category.id);
+      dispatch(setDeleteWbCategoty(category.id));
+      // enqueueSnackbar("Категория уже есть в базе", {
+      //   variant: "error",
+      //   anchorOrigin: { vertical: "top", horizontal: "right" },
+      // });
     }
   };
 

@@ -34,10 +34,14 @@ const Main = () => {
   const [categoryState, setCategoryState] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [date, setDate] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
 
-  const handleChange = (event) => {
-    setDate(event.target.value);
+  const handleStartChange = (event) => {
+    setStartDate(event.target.value);
+  };
+  const handleEndChange = (event) => {
+    setEndDate(event.target.value);
   };
 
   const dispatch = useDispatch();
@@ -98,15 +102,15 @@ const Main = () => {
           <input
             type="date"
             id="date"
-            value={date}
-            onChange={handleChange}
+            value={startDate}
+            onChange={handleStartChange}
             className={styles.date}
           />
           <input
             type="date"
             id="date"
-            value={date}
-            onChange={handleChange}
+            value={endDate}
+            onChange={handleEndChange}
             className={styles.date}
           />
           {/* <Combobox

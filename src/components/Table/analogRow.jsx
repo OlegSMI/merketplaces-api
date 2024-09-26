@@ -57,8 +57,13 @@ const AnalogRow = React.memo(function AnalogRow({ item }) {
             }}
             onClick={() => handleClickRow()}
           >
-            <Avatar alt="Remy Sharp" src="" variant="square" sx={{ mr: 1 }} />
-            {item.title}
+            <Avatar
+              alt="Remy Sharp"
+              src={item.img}
+              variant="square"
+              sx={{ mr: 1 }}
+            />
+            {/* {item} */}
           </TableCell>
         </Tooltip>
         <TableCell align="center">{item.priceInfo.origin_price}</TableCell>
@@ -93,6 +98,7 @@ const AnalogRow = React.memo(function AnalogRow({ item }) {
 AnalogRow.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    img: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     priceInfo: PropTypes.shape({
       origin_price: PropTypes.number.isRequired,

@@ -21,6 +21,8 @@ const AnalogTabble = React.memo(function AnalogTabble({ product }) {
     fetchProducts();
   }, []);
 
+  console.log(products);
+
   return (
     <>
       {(products === null && (

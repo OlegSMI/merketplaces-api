@@ -3,6 +3,16 @@ import api from "../api";
 
 const token = Cookies.get("token");
 
+export const deleteCategoty = async (categoryId) => {
+  const response = await api.delete(`/wildberries/category/${categoryId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  return response;
+};
+
 export const getGlobalCategories = async (limit, offset) => {
   const response = await api.get(
     `/mpstats/categories?limit=${limit}&offset=${offset}`,

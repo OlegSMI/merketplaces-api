@@ -12,6 +12,12 @@ const wbCategoriesSclice = createSlice({
     setWbCategories(state, action) {
       state.addedCategories = action.payload;
     },
+
+    setDeleteWbCategoty(state, action) {
+      state.addedCategories = state.addedCategories.filter(
+        (item) => item.id !== action.payload
+      );
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -37,5 +43,6 @@ const wbCategoriesSclice = createSlice({
   },
 });
 
-export const { setWbCategories } = wbCategoriesSclice.actions;
+export const { setWbCategories, setDeleteWbCategoty } =
+  wbCategoriesSclice.actions;
 export default wbCategoriesSclice.reducer;

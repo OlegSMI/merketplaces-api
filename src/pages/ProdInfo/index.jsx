@@ -23,19 +23,17 @@ function ProdInfo() {
         <p>Инофрмация о товаре</p>
       </div>
       <div className={styles.body}>
-        <img src={sourse === "wb" ? data.thumb : ""} alt="Avatar" />
+        <img src={sourse === "wb" ? data.thumb : data.img} alt="Avatar" />
         <div className={styles.generalInfo}>
-          <Field
-            title="Артикул"
-            text={sourse === "wb" ? data.id : data.itemId}
-          />
+          <Field title="Артикул" text={data.id} />
           <Field
             title="Наименование"
-            text={sourse === "wb" ? data.name : "china"}
+            text={sourse === "wb" ? data.name : data.title}
           />
           <Field
-            title="Категория"
-            text={sourse === "wb" ? data.category : "china"}
+            // title="Категория"
+            title={sourse === "wb" ? "Категория" : "Компания"}
+            text={sourse === "wb" ? data.category : data.shopInfo.company_name}
           />
           <Field
             title="Описание"
@@ -62,41 +60,93 @@ function ProdInfo() {
 
           <h5>Выручка</h5> */}
           <Field
-            title="Дата первого появления"
-            text={sourse === "wb" ? data.skuFirstDate : "china"}
+            // title="Дата первого появления"
+            title={sourse === "wb" ? "Дата первого появления" : "Оптовая цена"}
+            text={
+              sourse === "wb"
+                ? data.skuFirstDate
+                : data.priceInfo.wholesale_price
+            }
           />
           <Field
-            title="Общее кол-во продаж"
-            text={sourse === "wb" ? data.sales : "china"}
+            // title="Общее кол-во продаж"
+            title={
+              sourse === "wb"
+                ? "Общее кол-во продаж"
+                : "Объем продаж за последние 30 дней"
+            }
+            text={sourse === "wb" ? data.sales : data.saleInfo.gmv_30days}
           />
           <Field
-            title="Окончательная цена товара"
-            text={sourse === "wb" ? data.finalPrice : "china"}
+            // title="Окончательная цена товара"
+            title={
+              sourse === "wb"
+                ? "Окончательная цена товара"
+                : "Общее количество заказов"
+            }
+            text={
+              sourse === "wb" ? data.finalPrice : data.saleInfo.orders_count
+            }
           />
           <Field
-            title="Cредний доход от продаж товара"
-            text={sourse === "wb" ? data.revenueAverage : "china"}
+            // title="Cредний доход от продаж товара"
+            title={
+              sourse === "wb"
+                ? "Cредний доход от продаж товара"
+                : "Сылка на магазин"
+            }
+            text={
+              sourse === "wb" ? data.revenueAverage : data.shopInfo.shop_url
+            }
           />
           <Field
-            title="Cреднее количество продаж в день."
-            text={sourse === "wb" ? data.salesPerDayAverage : "china"}
+            // title="Cреднее количество продаж в день."
+            title={
+              sourse === "wb"
+                ? "Cреднее количество продаж в день."
+                : "Идентификатор участника."
+            }
+            text={
+              sourse === "wb"
+                ? data.salesPerDayAverage
+                : data.shopInfo.member_id
+            }
           />
           <Field
-            title="Cредний доход от продаж товара. "
-            text={sourse === "wb" ? data.revenueAverage : "china"}
+            // title="Cредний доход от продаж товара. "
+            title={
+              sourse === "wb"
+                ? "Cредний доход от продаж товара. "
+                : "Год участия в TP. "
+            }
+            text={sourse === "wb" ? data.revenueAverage : data.shopInfo.tp_year}
           />
 
           <Field
-            title="Окончательная цена товара."
-            text={sourse === "wb" ? data.finalPrice : "china"}
+            // title="Окончательная цена товара."
+            title={
+              sourse === "wb" ? "Окончательная цена товара." : "Исходная цена. "
+            }
+            text={
+              sourse === "wb" ? data.finalPrice : data.priceInfo.origin_price
+            }
           />
           <Field
-            title="Цена, по которой товар предлагается клиенту."
-            text={sourse === "wb" ? data.clientPrice : "china"}
+            // title="Цена, по которой товар предлагается клиенту."
+            title={
+              sourse === "wb"
+                ? "Цена, по которой товар предлагается клиенту."
+                : "Цена для дропшиппинга"
+            }
+            text={
+              sourse === "wb"
+                ? data.clientPrice
+                : data.priceInfo.drop_ship_price
+            }
           />
           <Field
             title="Ссылка на страницу товара. "
-            text={sourse === "wb" ? data.url : "china"}
+            text={sourse === "wb" ? data.url : data.productUrl}
           />
         </div>
       </div>
