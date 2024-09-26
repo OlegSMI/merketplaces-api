@@ -4,7 +4,6 @@ import api from "../api";
 const token = Cookies.get("token");
 
 export const getGlobalCategories = async (limit, offset) => {
-  console.log(offset, limit);
   const response = await api.get(
     `/mpstats/categories?limit=${limit}&offset=${offset}`,
     {

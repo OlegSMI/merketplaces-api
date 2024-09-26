@@ -1,101 +1,69 @@
 import { useEffect, useState } from "react";
-
-import { CircularProgress } from "@mui/material";
-import { useSnackbar } from "notistack";
+import { useDispatch, useSelector } from "react-redux";
 import {
-  getGlobalCategories,
-  getCategories,
-  createCategory,
-} from "@api/operator/useGoodsAPI";
+  CircularProgress,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
+import { useSnackbar } from "notistack";
+
+import { getWbCategories } from "@redux/wbCategories/asyncAction";
+import { getGlobalCategories } from "@redux/globalCategories/asyncAction";
 import styles from "./Categories.module.scss";
+import { addWbCategory } from "../../redux/wbCategories/asyncAction";
 
 function Categories() {
   const [offset, setOffset] = useState(0);
-  const [categories, setCategories] = useState([]);
-  const [currentCategories, setCurrentCategories] = useState([]);
   const [loadData, setLoadData] = useState(false);
   const [search, setSearch] = useState("");
+  const [alignment, setAlignment] = useState("all");
+  const dispatch = useDispatch();
+  const { addedCategories } = useSelector((state) => state.wbCategories);
+  const { globalCategories } = useSelector((state) => state.globalCategories);
 
   const { enqueueSnackbar } = useSnackbar();
 
-  const handleInputChange = (event) => {
-    console.log("tut");
-    setSearch(event.target.value);
-  };
-
-  const filterCategories = () => {
-    return categories?.filter((item) =>
-      item.name.toLowerCase().includes(search.toLowerCase())
-    );
-  };
-
-  // async function checkPosition() {
-  //   const height = document.body.offsetHeight;
-  //   const screenHeight = window.innerHeight;
-  //   const scrolled = window.scrollY;
-
-  //   const threshold = height - screenHeight / 4;
-
-  //   const position = scrolled + screenHeight;
-
-  //   if (position >= threshold) {
-  //     console.log(offset);
-  //     setLoadData(true);
-  //     const newOffset = offset + 50;
-  //     // const newCategories = [...(await getGlobalCategories(50, newOffset))];
-  //     // setCategories((prevCategories) => [...prevCategories, ...newCategories]);
-  //     setOffset((of) => of + newOffset);
-  //     setLoadData(false);
-  //   }
-  // }
-
-  const addCategories = async () => {
-    console.log(offset);
-    setLoadData(true);
-    const newOffset = offset + 50;
-    const newCategories = [...(await getGlobalCategories(50, newOffset))];
-    setCategories((prevCategories) => [...prevCategories, ...newCategories]);
-    setOffset(newOffset);
-    setLoadData(false);
-  };
-
-  // function throttle(callee, timeout) {
-  //   let timer = null;
-
-  //   return function perform(...args) {
-  //     if (timer) return;
-
-  //     timer = setTimeout(() => {
-  //       callee(...args);
-
-  //       clearTimeout(timer);
-  //       timer = null;
-  //     }, timeout);
-  //   };
-  // }
-
   useEffect(() => {
-    // window.addEventListener("scroll", throttle(checkPosition, 250));
-    // window.addEventListener("resize", throttle(checkPosition, 250));
     const fetchCategories = async () => {
-      setCurrentCategories(await getCategories());
+      dispatch(await getWbCategories());
     };
-    console.log("ue");
     const fetchCurrentCategories = async () => {
-      setCategories(await getGlobalCategories(50, offset));
+      dispatch(await getGlobalCategories({ limit: 50, offset: offset }));
     };
     fetchCategories();
     fetchCurrentCategories();
   }, []);
 
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
+
+  const handleInputChange = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const filterCategories = (items) => {
+    return items.filter((item) =>
+      item.name.toLowerCase().includes(search.toLowerCase())
+    );
+  };
+
+  const addCategories = async () => {
+    console.log(offset);
+    setLoadData(true);
+    const newOffset = offset + 50;
+    dispatch(await getGlobalCategories({ limit: 50, offset: newOffset }));
+    setOffset(newOffset);
+    setLoadData(false);
+  };
+
   const categoryIsNew = (category) => {
-    return currentCategories.find((c) => c.path === category.path);
+    return addedCategories.find((c) => c.path === category.path);
   };
 
   const addToCategories = (category) => {
     if (!categoryIsNew(category)) {
-      createCategory(category);
-      setCurrentCategories([...currentCategories, category]);
+      dispatch(addWbCategory(category));
     } else {
       enqueueSnackbar("Категория уже есть в базе", {
         variant: "error",
@@ -106,7 +74,7 @@ function Categories() {
 
   return (
     <>
-      {categories?.length == 0 ? (
+      {globalCategories?.length == 0 ? (
         <CircularProgress
           size="80px"
           color="white"
@@ -119,25 +87,50 @@ function Categories() {
         />
       ) : (
         <>
-          <input
-            className={styles.input}
-            type="text"
-            placeholder="Поиск категорий..."
-            value={search}
-            onChange={handleInputChange}
-          />
+          <div className={styles.header}>
+            <input
+              className={styles.input}
+              type="text"
+              placeholder="Поиск категорий..."
+              value={search}
+              onChange={handleInputChange}
+            />
+            <ToggleButtonGroup
+              color="primary"
+              value={alignment}
+              exclusive
+              onChange={handleChange}
+              aria-label="Platform"
+            >
+              <ToggleButton value="all">Все</ToggleButton>
+              <ToggleButton value="added">Добавленные</ToggleButton>
+            </ToggleButtonGroup>
+          </div>
+
           <div className={styles.container}>
-            {filterCategories().map((category, index) => (
-              <div
-                key={index}
-                className={`${styles.category} ${
-                  categoryIsNew(category) ? styles.adding : ""
-                }`}
-                onClick={() => addToCategories(category)}
-              >
-                {category.name}
-              </div>
-            ))}
+            {alignment === "all"
+              ? filterCategories(globalCategories).map((category, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.category} ${
+                      categoryIsNew(category) ? styles.adding : ""
+                    }`}
+                    onClick={() => addToCategories(category)}
+                  >
+                    {category.name}
+                  </div>
+                ))
+              : filterCategories(addedCategories).map((category, index) => (
+                  <div
+                    key={index}
+                    className={`${styles.category} ${
+                      categoryIsNew(category) ? styles.adding : ""
+                    }`}
+                    onClick={() => addToCategories(category)}
+                  >
+                    {category.name}
+                  </div>
+                ))}
           </div>
           {loadData ? (
             <CircularProgress

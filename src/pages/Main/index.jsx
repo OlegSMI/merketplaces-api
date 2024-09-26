@@ -16,8 +16,8 @@ import {
 import { useSnackbar } from "notistack";
 import styles from "./Main.module.scss";
 
-const options = [{ name: "Отция 1" }, { name: "Отция 2" }];
-const filter = [{ name: "По дате" }, { name: "По цене" }];
+// const options = [{ name: "Отция 1" }, { name: "Отция 2" }];
+// const filter = [{ name: "По дате" }, { name: "По цене" }];
 
 const Main = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -26,13 +26,19 @@ const Main = () => {
   const [categoryOption, setCategoryOption] = useState({ name: "" });
   const [categories, setCategories] = useState([]);
 
-  const [investOption, setInvestOption] = useState({ name: "" });
-  const [procentOption, setProcentOption] = useState({ name: "" });
-  const [riskOption, setRiskOption] = useState({ name: "" });
-  const [dateOption, setDateOption] = useState({ name: "" });
+  // const [investOption, setInvestOption] = useState({ name: "" });
+  // const [procentOption, setProcentOption] = useState({ name: "" });
+  // const [riskOption, setRiskOption] = useState({ name: "" });
+  // const [dateOption, setDateOption] = useState({ name: "" });
   const { items, status } = useSelector((state) => state.wbProducts);
   const [categoryState, setCategoryState] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [date, setDate] = useState("");
+
+  const handleChange = (event) => {
+    setDate(event.target.value);
+  };
 
   const dispatch = useDispatch();
 
@@ -45,16 +51,16 @@ const Main = () => {
     }
   }, [status]);
 
-  const handleInputChange = (event) => {
-    setSearch(event.target.value);
-  };
-
   useEffect(() => {
     const fetchCategories = async () => {
       setCategories(await getCategories());
     };
     fetchCategories();
   }, []);
+
+  const handleInputChange = (event) => {
+    setSearch(event.target.value);
+  };
 
   const handlePageChange = (e, value) => {
     setCurrentPage(value);
@@ -85,7 +91,25 @@ const Main = () => {
             selectedOption={categoryOption}
             setSelectedOption={setCategoryOption}
           />
-          <Combobox
+
+          {/* <label className={styles.label} htmlFor="date">
+            Выберите дату:
+          </label> */}
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={handleChange}
+            className={styles.date}
+          />
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={handleChange}
+            className={styles.date}
+          />
+          {/* <Combobox
             title="Инвестиции"
             options={options}
             selectedOption={investOption}
@@ -102,16 +126,16 @@ const Main = () => {
             options={options}
             selectedOption={riskOption}
             setSelectedOption={setRiskOption}
-          />
+          /> */}
 
           <button onClick={getProductsAPI}>Подобрать товары</button>
         </div>
         <div className={styles.search}>
-          <Combobox
+          {/* <Combobox
             options={filter}
             selectedOption={dateOption}
             setSelectedOption={setDateOption}
-          />
+          /> */}
           <input
             className={styles.input}
             type="text"

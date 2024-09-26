@@ -32,6 +32,27 @@ h3 {
     flex-direction: row;
     flex-wrap: wrap;
 
+    // .label {
+    //   margin: 0;
+    //   padding: 0;
+    //   margin-right: 10px;
+    // }
+
+    .date {
+      margin: 0;
+      padding: 0;
+      margin-right: 10px;
+
+      background-color: #f2f4f7;
+      color: #344054;
+      border: none; /* Убираем рамку */
+      border-radius: 8px;
+      padding-left: 10px;
+      margin-right: 10px;
+      height: 35px;
+      width: 200px;
+    }
+
     .sel {
       background-color: red;
     }
