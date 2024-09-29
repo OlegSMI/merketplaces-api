@@ -1,6 +1,6 @@
+import { SnackbarProvider } from "notistack";
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { SnackbarProvider } from "notistack";
 
 import { ProtectedRoute } from "./components";
 import { LoadingContext } from "./context";

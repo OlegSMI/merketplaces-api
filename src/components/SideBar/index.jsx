@@ -1,17 +1,16 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { Tooltip } from "antd";
 import { logout } from "@api/auth";
+import { Tooltip } from "antd";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./SideBar.module.scss";
 
 import userPhoto from "@assets/UserPhoto.png";
+import logoutImg from "@assets/auth/logout.png";
 import categories from "@assets/sidebar/categories.png";
 import collecting from "@assets/sidebar/collecting.png";
 import logo from "@assets/sidebar/logo.png";
 import main from "@assets/sidebar/main.svg";
-import logoutImg from "@assets/auth/logout.png";
 
 const SideBar = () => {
   const [active, setActive] = useState("/main");
@@ -56,6 +55,7 @@ const SideBar = () => {
             Категории
           </Link>
         </li>
+
         <li className={active === "/collecting" ? styles.active : ""}>
           <Link
             to="/admin/collecting"
