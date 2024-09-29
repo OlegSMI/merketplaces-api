@@ -1,6 +1,5 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "@api/api";
-import Cookies from "js-cookie";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const getWbProducts = createAsyncThunk(
   "products/fetchProducts",
@@ -15,7 +14,6 @@ export const getWbProducts = createAsyncThunk(
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${Cookies.get("token")}`,
         },
       }
     );
