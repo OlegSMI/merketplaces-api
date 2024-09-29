@@ -19,14 +19,6 @@ export default function TagsInput({ ...props }) {
 
   return (
     <React.Fragment>
-      {/* <Downshift
-        id="downshift-multiple"
-        inputValue={inputValue}
-        selectedItem={selectedItem}
-      > */}
-      {/* {({ getInputProps }) => {
-        const { onBlur, onChange, onFocus, ...inputProps } = getInputProps(); */}
-      {/* return ( */}
       <div className={styles.textFieldWrapper}>
         <TextField
           InputProps={{
@@ -44,29 +36,14 @@ export default function TagsInput({ ...props }) {
                 ))}
               </div>
             ),
-
-            // onBlur,
-            // onChange: (event) => {
-            //   handleInputChange(event);
-            //   onChange(event);
-            // },
-            // onFocus,
           }}
           className={styles.textField}
           {...other}
-          //   {...inputProps}
         />
       </div>
-      {/* ); */}
-      {/* }} */}
-      {/* </Downshift> */}
     </React.Fragment>
   );
 }
-
-TagsInput.defaultProps = {
-  tags: [],
-};
 
 TagsInput.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
