@@ -2,8 +2,9 @@ import { Route, Routes } from "react-router-dom";
 
 import { Categories, Main, ProdInfo } from "@pages";
 import { ProtectedRoute, SideBar } from "../../components";
-import { CollectGoods } from "../CollectGoods";
 import styles from "./Admin.module.scss";
+
+import { Collecting } from "@pages";
 
 const User = () => {
   return (
@@ -39,10 +40,10 @@ const User = () => {
             }
           />
           <Route
-            path="/collect-goods"
+            path="/collecting"
             element={
               <ProtectedRoute>
-                <CollectGoods />
+                <Collecting />
               </ProtectedRoute>
             }
           />

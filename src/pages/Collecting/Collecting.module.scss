@@ -1,0 +1,135 @@
+@keyframes slideIn {
+  0% {
+    opacity: 0; /* Начальное состояние - невидимый */
+    transform: translateX(-50px); /* Сдвинут влево */
+  }
+  100% {
+    opacity: 1; /* Конечное состояние - видимый */
+    transform: translateX(0); /* На своем месте */
+  }
+}
+
+.container {
+  position: relative;
+  animation: slideIn 1s ease forwards;
+  font-family: "Inter", system-ui;
+  color: #2a2a2a;
+}
+
+.panel {
+  display: flex;
+  align-items: center;
+  width: 95%;
+
+  textarea {
+    width: 90%;
+    resize: none;
+    height: 50px;
+    max-height: 200px;
+    overflow-y: auto;
+    resize: none;
+    border: #ececee 2px solid;
+    border-radius: 10px;
+    outline: none;
+    background-color: #f2f4f7;
+    color: #344054;
+    font-family: "Inter", sans-serif;
+    font-size: 16px;
+    padding: 5px;
+    margin: 0 10px;
+
+    &::placeholder {
+      padding: 5px;
+      color: #a0a0a0;
+      font-size: 16px;
+    }
+  }
+
+  .send {
+    background-color: #4d4aea;
+  }
+
+  .download {
+    background-color: rgb(0, 171, 0);
+  }
+
+  button {
+    margin: 0 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    img {
+      width: 30px;
+    }
+  }
+}
+
+.history {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  height: 90vh;
+  border-left: #ececee 3px solid;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+
+  .toggleButton {
+    display: flex;
+    justify-content: start;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 30px;
+
+    img {
+      width: 30px;
+    }
+  }
+
+  .content {
+    flex-direction: column;
+
+    margin-top: 20px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #ececee transparent;
+
+    .sessia {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: #ececee 2px solid;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 10px;
+      transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для фона и цвета */
+
+      &:hover {
+        // background-color: #f2f4f7;
+        cursor: pointer;
+      }
+
+      img {
+        width: 25px;
+      }
+    }
+
+    .clicked {
+      color: #4d4aea;
+      background-color: #f4f3ff;
+      font-weight: 500;
+    }
+  }
+}
+
+.history.open {
+  right: 0;
+  width: 300px;
+}
