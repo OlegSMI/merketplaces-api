@@ -8,6 +8,7 @@ import styles from "./SideBar.module.scss";
 
 import userPhoto from "@assets/UserPhoto.png";
 import categories from "@assets/sidebar/categories.png";
+import collecting from "@assets/sidebar/collecting.png";
 import logo from "@assets/sidebar/logo.png";
 import main from "@assets/sidebar/main.svg";
 import logoutImg from "@assets/auth/logout.png";
@@ -53,6 +54,16 @@ const SideBar = () => {
           >
             <img src={categories} />
             Категории
+          </Link>
+        </li>
+        <li className={active === "/collecting" ? styles.active : ""}>
+          <Link
+            to="/admin/collecting"
+            className={styles.link}
+            onClick={() => menuLinkClick("/collecting")}
+          >
+            <img src={collecting} />
+            Сбор товаров
           </Link>
         </li>
         {/* <li className={active === "/profile" ? styles.active : ""}>

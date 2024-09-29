@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import styles from "./Admin.module.scss";
 import { SideBar, ProtectedRoute } from "../../components";
-import { Main, ProdInfo, Categories } from "@pages";
+import { Main, ProdInfo, Categories, Collecting } from "@pages";
 
 const User = () => {
   return (
@@ -34,6 +34,14 @@ const User = () => {
             element={
               <ProtectedRoute>
                 <Categories />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/collecting"
+            element={
+              <ProtectedRoute>
+                <Collecting />
               </ProtectedRoute>
             }
           />
