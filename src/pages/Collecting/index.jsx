@@ -1,26 +1,33 @@
-import { useState, useRef, useEffect } from "react";
 import { Tooltip } from "antd";
+import { useEffect, useRef, useState } from "react";
 
-import styles from "./Collecting.module.scss";
-import history from "@assets/sidebar/history.png";
-import redy from "@assets/redy.png";
 import download from "@assets/download.png";
+import redy from "@assets/redy.png";
 import send from "@assets/send.png";
+import history from "@assets/sidebar/history.png";
+import replaceInput from "../../utils/replaceInput";
+import TagsInput from "../CollectGoods/components/TagsInput";
+import styles from "./Collecting.module.scss";
+import CollapsibleTable from "./components/CollectingTable";
 
 const Collecting = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(10);
+  const [value, setValue] = useState("");
+  const [articles, setArticles] = useState([]);
+
   const clickRef = useRef(null);
 
-  const [value, setValue] = useState("");
   const textareaRef = useRef(null);
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
 
   const handleClick = (index) => {
     setClickedIndex(index);
+  };
+
+  const changeInputHandler = (e) => {
+    setValue(e.target.value);
+    const parseArticles = replaceInput(e.target.value);
+    setArticles([...parseArticles]);
   };
 
   useEffect(() => {
@@ -54,9 +61,8 @@ const Collecting = () => {
       <div className={styles.panel}>
         <textarea
           ref={textareaRef}
-          placeholder="Введите текст..."
-          value={value}
-          onChange={handleChange}
+          placeholder="Введите артикулы"
+          onChange={(e) => changeInputHandler(e)}
         />
         <Tooltip title="Отправить">
           <button className={styles.send}>
@@ -69,6 +75,18 @@ const Collecting = () => {
             <img src={download} alt="download" />
           </button>
         </Tooltip>
+      </div>
+      <div>
+        {articles.length > 0 && (
+          <TagsInput
+            tags={articles}
+            variant="outlined"
+            id="tags"
+            name="tags"
+            label="Найденные артикулы"
+            disabled
+          />
+        )}
       </div>
       <div
         className={`${styles.history} ${isOpen ? styles.open : ""}`}
@@ -97,6 +115,7 @@ const Collecting = () => {
           </ul>
         )}
       </div>
+      <CollapsibleTable />
     </div>
   );
 };
