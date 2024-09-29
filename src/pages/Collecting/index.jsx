@@ -6,9 +6,9 @@ import redy from "@assets/redy.png";
 import send from "@assets/send.png";
 import history from "@assets/sidebar/history.png";
 import replaceInput from "../../utils/replaceInput";
-import TagsInput from "../CollectGoods/components/TagsInput";
+import TagsInput from "./components/TagsInput/TagsInput";
 import styles from "./Collecting.module.scss";
-import CollapsibleTable from "./components/CollectingTable";
+import CollectingTable from "./components/CollectingTable/CollectingTable";
 
 const Collecting = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -115,7 +115,7 @@ const Collecting = () => {
           </ul>
         )}
       </div>
-      <CollapsibleTable />
+      <CollectingTable />
     </div>
   );
 };

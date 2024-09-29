@@ -1,0 +1,166 @@
+.container {
+  border: 1px solid #ccc;
+  margin-top: 20px;
+}
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 60vh;
+  animation: slideIn 1s ease forwards;
+
+  img {
+    width: 300px;
+  }
+
+  p {
+    margin: 5px;
+    font-family: "Inter", sans-serif;
+    color: #344054;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .text {
+    font-weight: 400;
+    font-size: 16px;
+  }
+}
+
+.emptyAnalogs {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  font-family: "Inter", sans-serif;
+  font-size: 18px;
+  color: #475467;
+}
+
+.table {
+  animation: slideIn 1s ease forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0; /* Начальное состояние - невидимый */
+    transform: translateX(-50px); /* Сдвинут влево */
+  }
+  100% {
+    opacity: 1; /* Конечное состояние - видимый */
+    transform: translateX(0); /* На своем месте */
+  }
+}
+
+.deleted {
+  background-color: rgba(203, 46, 46, 0.21);
+}
+
+.approved {
+  background-color: rgba(35, 220, 35, 0.21);
+}
+
+.anima {
+  animation: fadeIn 1s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; /* Начальное состояние - невидимый */
+    transform: translateY(-20px); /* Сдвиг вверх */
+  }
+  to {
+    opacity: 1; /* Конечное состояние - видимый */
+    transform: translateY(0); /* На своем месте */
+  }
+}
+
+.tableHead {
+  background-color: #f9f9fd;
+
+  img {
+    width: 15px;
+  }
+}
+
+.pagination {
+  margin-top: 20px;
+  align-items: center;
+}
+
+.status {
+  margin-bottom: 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border-radius: 100px;
+  width: max-content;
+
+  &0 {
+    background-color: #eff8ff;
+    color: #175cd3;
+  }
+
+  &1 {
+    background-color: #fef3f2;
+    color: #b42318;
+  }
+
+  &2 {
+    background-color: #ecfdf3;
+    color: #067647;
+  }
+}
+
+.fade-enter {
+  opacity: 0;
+}
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 3000ms;
+}
+.fade-exit {
+  opacity: 1;
+}
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 3000ms;
+}
+
+.show-order {
+  background-color: red !important;
+
+  &:hover {
+    background-color: green !important;
+    color: red;
+  }
+}
+
+.statusCell {
+}
+
+.statusWrapper {
+  border-radius: 8px;
+  padding: 10px 10px;
+  text-align: "center";
+  display: flex;
+  justify-content: center;
+}
+
+.approved {
+  background-color: #ebf9eb;
+  color: #6ed26e;
+}
+
+.deleted {
+  background-color: #fdebeb;
+  color: #f46e6f;
+}
+
+.created {
+  background-color: #fef8e8;
+  color: #f6cd59;
+}

@@ -1,5 +1,6 @@
 import sortImg from "@assets/table/sort.png";
 import { TableCell, TableHead, TableRow } from "@mui/material";
+import PropTypes from "prop-types";
 import { useState } from "react";
 import styles from "./Table.module.scss";
 
@@ -48,40 +49,57 @@ const headerContent = [
   },
 ];
 
-const TableHeader = () => {
+const TableHeader = ({ changeDirection }) => {
   const [headers, setHeaders] = useState(headerContent);
 
-  const requestSort = (headItem) => {
-    if (!headItem.sortable) {
-      return;
-    }
-
+  const getNewDirection = (headItem) => {
     let direction = "asc";
 
     if (headItem.direction === "asc") {
       direction = "desc";
     } else direction = "asc";
 
-    setHeaders([...headers, { ...headItem, direction: direction }]);
-    console.log(headers);
+    return direction;
+  };
+
+  const requestSort = (headItem) => {
+    if (!headItem.sortable) {
+      return;
+    }
+
+    let direction = getNewDirection(headItem);
+
+    const updatedHeaders = headers.map((item) =>
+      item.key === headItem.key ? { ...item, direction } : item
+    );
+
+    setHeaders(updatedHeaders);
+    changeDirection(headItem.key);
   };
 
   return (
     <TableHead>
       <TableRow className={styles.tableHead}>
         {headers.map((headItem) => {
-          <TableCell
-            key={headItem.key}
-            align="center"
-            sx={{ ...(headItem.sortable && { cursor: "pointer" }) }}
-            onClick={() => requestSort(headItem)}
-          >
-            {headItem.name} <img src={sortImg} alt="sort" />
-          </TableCell>;
+          return (
+            <TableCell
+              key={headItem.key}
+              align="center"
+              sx={{ ...(headItem.sortable && { cursor: "pointer" }) }}
+              onClick={() => requestSort(headItem)}
+            >
+              {headItem.name}
+              {headItem.sortable && <img src={sortImg} alt="sort" />}
+            </TableCell>
+          );
         })}
       </TableRow>
     </TableHead>
   );
+};
+
+TableHeader.propTypes = {
+  changeDirection: PropTypes.func,
 };
 
 export default TableHeader;
