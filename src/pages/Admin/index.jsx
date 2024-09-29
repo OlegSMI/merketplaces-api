@@ -1,8 +1,9 @@
-import { Routes, Route } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
+import { Categories, Main, ProdInfo } from "@pages";
+import { ProtectedRoute, SideBar } from "../../components";
+import { CollectGoods } from "../CollectGoods";
 import styles from "./Admin.module.scss";
-import { SideBar, ProtectedRoute } from "../../components";
-import { Main, ProdInfo, Categories } from "@pages";
 
 const User = () => {
   return (
@@ -34,6 +35,14 @@ const User = () => {
             element={
               <ProtectedRoute>
                 <Categories />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/collect-goods"
+            element={
+              <ProtectedRoute>
+                <CollectGoods />
               </ProtectedRoute>
             }
           />

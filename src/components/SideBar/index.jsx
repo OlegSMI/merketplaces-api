@@ -1,16 +1,15 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { Tooltip } from "antd";
 import { logout } from "@api/auth";
+import { Tooltip } from "antd";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./SideBar.module.scss";
 
 import userPhoto from "@assets/UserPhoto.png";
+import logoutImg from "@assets/auth/logout.png";
 import categories from "@assets/sidebar/categories.png";
 import logo from "@assets/sidebar/logo.png";
 import main from "@assets/sidebar/main.svg";
-import logoutImg from "@assets/auth/logout.png";
 
 const SideBar = () => {
   const [active, setActive] = useState("/main");
@@ -53,6 +52,16 @@ const SideBar = () => {
           >
             <img src={categories} />
             Категории
+          </Link>
+        </li>
+        <li className={active === "/collect-goods" ? styles.active : ""}>
+          <Link
+            to="/admin/collect-goods"
+            className={styles.link}
+            onClick={() => menuLinkClick("/collect-goods")}
+          >
+            <img src={main} />
+            <span>Сбор товаров</span>
           </Link>
         </li>
         {/* <li className={active === "/profile" ? styles.active : ""}>

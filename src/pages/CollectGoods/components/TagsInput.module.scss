@@ -1,0 +1,23 @@
+.textField {
+  width: 100%;
+
+  input {
+    display: none;
+  }
+}
+
+.textFieldWrapper {
+  margin-top: 10px;
+}
+
+.chip {
+  margin: 0 2px;
+  color: red;
+}
+
+.chipsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 10px 0;
+}
