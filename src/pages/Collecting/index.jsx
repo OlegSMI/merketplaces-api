@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 
-import { useSnackbar } from "notistack";
-import customSetInterval from "../../utils/customSetInterval";
-import styles from "./Collecting.module.scss";
 import CollectingHeader from "./components/CollectingHeader/CollectingHeader";
 import CollectingTable from "./components/CollectingTable/CollectingTable";
 import SessionsList from "./components/SessionsList/SessionsList";
-import TagsComponent from "./components/TagsInput";
+import TagsComponent from "./components/TagsComponent";
+
+import { useSnackbar } from "notistack";
+import customSetInterval from "../../utils/customSetInterval";
+
+import styles from "./Collecting.module.scss";
 
 const Collecting = () => {
   const { enqueueSnackbar } = useSnackbar();
 
+  const [currentSession, setCurrentSession] = useState(0);
   const [articles, setArticles] = useState([]);
   const [products, setProducts] = useState([]);
   const [progressSession, setProgressSession] = useState(false);
@@ -27,50 +30,58 @@ const Collecting = () => {
         anchorOrigin: { vertical: "top", horizontal: "right" },
       });
     } else {
+      // запуск сбора данных возвращается статус сессии и ее id
       localStorage.setItem("sessionId", 234223);
+      setCurrentSession(234223);
       setProgressSession(true);
-      // запуск сбора данных возвращается статус сессии
     }
   };
 
   useEffect(() => {
-    let longPool;
     if (localStorage.getItem("sessionId")) {
-      longPool = customSetInterval(longPoolTimer, 500);
+      setProgressSession(true);
+      setCurrentSession(localStorage.getItem("sessionId"));
     }
-    return () => clearTimeout(longPool);
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("sessionId")) {
+      window.longPool = customSetInterval(longPoolTimer, 500);
+    }
+    return () => clearTimeout(window.longPool);
   }, [progressSession]);
 
   const longPoolTimer = () => {
     // запрос на получение статуса сессии
-    console.log("yes");
     // if (status == pending) {
-
+    //   пропускаем
     // } else {
+    //
+    //   clearInterval(window.longPool)
+    //   если находимся в текущей сессии currentSession == localStorage.getItem("sessionId")
+    //   получить данные setProducts()
     //   setProgressSession(false);
     //   localStorage.removeItem("sessionId");
-    //   clearInterval
-    //   // получить данные
+    // getSessionProducts
     // }
   };
 
-  useEffect(() => {
-    if (localStorage.getItem("sessionId")) {
-      setProgressSession(true);
-    }
-  }, []);
+  const getSessionProducts = (sessionId) => {
+    // setProducts()
+  };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/src/json/collectingTest.json");
-      const data = await response.json();
-      setProducts(data.products);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch("/src/json/collectingTest.json");
+  //     const data = await response.json();
+  //     setProducts(data.products);
+  //   };
+  //   fetchData();
+  // }, []);
 
-  const enterAnotherSession = () => {
-    // получить данные о продуктах из другой сессии
+  const enterAnotherSession = (sessionId) => {
+    setCurrentSession(sessionId);
+    getSessionProducts(sessionId);
   };
 
   return (
@@ -80,8 +91,16 @@ const Collecting = () => {
         startCollectGoods={startCollectGoods}
       />
       <TagsComponent articles={articles} />
-      <SessionsList enterAnotherSession={enterAnotherSession} />
+      <SessionsList
+        enterAnotherSession={(sessionId) => enterAnotherSession(sessionId)}
+      />
+      {/* Отображать таблицу в 2 случаях: 
+      1. Если были получены данные запущенной сессии progressSession == false и products.length > 0
+      2. Если данные запущенной сессии не получены но выбрана другая сессия 
+      progressSession == true, currentSession != localStorage.getItem() и products.length > 0 */}
       <CollectingTable products={products} />
+      {/* Если progressSession == false и products.length == 0, то отображаем заглушку */}
+      {/* Иначе отображать окошко подгрузки в процентах */}
     </div>
   );
 };
