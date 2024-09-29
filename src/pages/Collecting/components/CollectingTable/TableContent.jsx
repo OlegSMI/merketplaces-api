@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import TableRowItem from "./TableRowItem";
 
 const TableContent = ({ products }) => {
-  console.log(products);
   return (
     <TableBody
       sx={{
