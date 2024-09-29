@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import CollectingHeader from "./components/CollectingHeader/CollectingHeader";
-import CollectingTable from "./components/CollectingTable/CollectingTable";
 import SessionsList from "./components/SessionsList/SessionsList";
 import TagsComponent from "./components/TagsComponent";
 
@@ -13,10 +12,12 @@ import styles from "./Collecting.module.scss";
 const Collecting = () => {
   const { enqueueSnackbar } = useSnackbar();
 
-  const [currentSession, setCurrentSession] = useState(0);
   const [articles, setArticles] = useState([]);
-  const [products, setProducts] = useState([]);
+
+  const [currentSession, setCurrentSession] = useState(0);
   const [progressSession, setProgressSession] = useState(false);
+
+  const [products, setProducts] = useState([]);
 
   const startCollectGoods = () => {
     if (articles.length == 0) {
@@ -52,6 +53,7 @@ const Collecting = () => {
   }, [progressSession]);
 
   const longPoolTimer = () => {
+    console.log("пулим");
     // запрос на получение статуса сессии
     // if (status == pending) {
     //   пропускаем
@@ -98,9 +100,27 @@ const Collecting = () => {
       1. Если были получены данные запущенной сессии progressSession == false и products.length > 0
       2. Если данные запущенной сессии не получены но выбрана другая сессия 
       progressSession == true, currentSession != localStorage.getItem() и products.length > 0 */}
-      <CollectingTable products={products} />
-      {/* Если progressSession == false и products.length == 0, то отображаем заглушку */}
-      {/* Иначе отображать окошко подгрузки в процентах */}
+      {((progressSession == false && products.length > 0) ||
+        (progressSession == true &&
+          currentSession != localStorage.getItem("sessionId") &&
+          products.length > 0)) && (
+        <>
+          <div>Табличка тут</div>
+          {/* <CollectingTable products={products} /> */}
+        </>
+      )}
+
+      {progressSession == false && products.length == 0 && (
+        <div>Поиска нема</div>
+      )}
+      {progressSession == true &&
+        products.length == 0 &&
+        currentSession == localStorage.getItem("sessionId") && (
+          <div>Грузим</div>
+        )}
+      {progressSession == true &&
+        currentSession != localStorage.getItem("sessionId") &&
+        products.length == 0 && <div>Идет загрузка данных из БД</div>}
     </div>
   );
 };
