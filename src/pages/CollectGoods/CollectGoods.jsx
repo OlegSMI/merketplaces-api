@@ -32,14 +32,16 @@ const CollectGoods = () => {
         <button>Сбор товаров</button>
       </div>
 
-      <TagsInput
-        tags={articles}
-        variant="outlined"
-        id="tags"
-        name="tags"
-        label="Найденные артикулы"
-        disabled
-      />
+      {articles.length > 0 && (
+        <TagsInput
+          tags={articles}
+          variant="outlined"
+          id="tags"
+          name="tags"
+          label="Найденные артикулы"
+          disabled
+        />
+      )}
     </div>
   );
 };
