@@ -5,7 +5,6 @@ import styles from "./TagsInput.module.scss";
 
 export default function TagsInput({ ...props }) {
   const { tags, ...other } = props;
-  const [inputValue, setInputValue] = React.useState("");
   const [selectedItem, setSelectedItem] = React.useState([]);
 
   useEffect(() => {
@@ -18,9 +17,6 @@ export default function TagsInput({ ...props }) {
     setSelectedItem(newSelectedItem);
   };
 
-  function handleInputChange(event) {
-    setInputValue(event.target.value);
-  }
   return (
     <React.Fragment>
       {/* <Downshift
