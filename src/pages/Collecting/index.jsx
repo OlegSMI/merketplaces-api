@@ -115,7 +115,7 @@ const Collecting = () => {
           </ul>
         )}
       </div>
-      <CollapsibleTable />
+      {/* <CollapsibleTable /> */}
     </div>
   );
 };

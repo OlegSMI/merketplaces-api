@@ -1,9 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 
-import { Categories, Main, ProdInfo } from "@pages";
 import { ProtectedRoute, SideBar } from "../../components";
 import styles from "./Admin.module.scss";
-import { SideBar, ProtectedRoute } from "../../components";
 import { Main, ProdInfo, Categories, Collecting } from "@pages";
 
 const User = () => {
