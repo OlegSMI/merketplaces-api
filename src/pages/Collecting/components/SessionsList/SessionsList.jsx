@@ -3,8 +3,8 @@ import { Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
+import history from "@assets/collecting/history.svg";
 import styles from "../../Collecting.module.scss";
-import history from "@assets/sidebar/history.png";
 
 const SessionsList = ({ enterAnotherSession }) => {
   const [isOpen, setIsOpen] = useState(false);

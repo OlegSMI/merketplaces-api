@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import replaceInput from "../../../../utils/replaceInput";
 import styles from "../../Collecting.module.scss";
 
-import download from "@assets/download.png";
+import download from "@assets/collecting/xlsx.svg";
 import send from "@assets/send.png";
 
 const CollectingHeader = ({ setArticles, startCollectGoods }) => {
