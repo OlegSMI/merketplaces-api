@@ -1,22 +1,17 @@
 import { Paper, Table, TableContainer } from "@mui/material";
 
+import sortedData from "@utils/sortedData";
 import PropTypes from "prop-types";
+import { useState } from "react";
 import styles from "./Table.module.scss";
 import TableContent from "./TableContent";
 import TableHeader from "./TableHeader";
 
 const CollectingTable = ({ products }) => {
-  // const [products, setProducts] = useState([]);
-  // const [search, setSearch] = useState("");
+  const [sortedProducts, setSortedProducts] = useState([...products]);
 
-  // const filterProducts = useMemo(() => {
-  //   return products?.filter((item) =>
-  //     item.name.toLowerCase().includes(search.toLowerCase())
-  //   );
-  // }, [products, search]);
-
-  const changeDirectionHandle = (key) => {
-    console.log(key);
+  const changeDirectionHandle = (key, direction) => {
+    setSortedProducts(sortedData(products, key, direction));
   };
 
   return (
@@ -31,8 +26,12 @@ const CollectingTable = ({ products }) => {
           size="small"
           aria-label="collapsible table"
         >
-          <TableHeader changeDirection={(key) => changeDirectionHandle(key)} />
-          <TableContent products={products} />
+          <TableHeader
+            changeDirection={(key, direction) =>
+              changeDirectionHandle(key, direction)
+            }
+          />
+          <TableContent products={sortedProducts} />
         </Table>
       </TableContainer>
     </div>

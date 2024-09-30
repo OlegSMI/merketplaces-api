@@ -1,9 +1,7 @@
-import {
-  DeleteForever,
-  KeyboardArrowDown,
-  KeyboardArrowUp,
-} from "@mui/icons-material";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import check from "@assets/table/check.svg";
+import deleteIcon from "@assets/table/delete.svg";
+
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import {
   Avatar,
   IconButton,
@@ -61,31 +59,25 @@ const TableRowItem = ({ item }) => {
   return (
     <ThemeProvider theme={theme}>
       <React.Fragment>
-        <TableRow
-          className={`${styles.anima}`}
-          sx={{
-            "& > *": {
-              borderBottom: "none",
-            },
-          }}
-        >
+        <TableRow className={`${styles.anima}`}>
           <TableCell align="center">{item.article}</TableCell>
-          <TableCell
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "start",
-              cursor: "pointer",
-            }}
-          >
-            <Avatar
-              alt="Avatar"
-              src={item.image}
-              variant="square"
-              sx={{ mr: 1 }}
-            />
-            {item.name}
+          <TableCell>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "start",
+                cursor: "pointer",
+              }}
+            >
+              <Avatar
+                alt="Avatar"
+                src={item.image}
+                variant="square"
+                sx={{ mr: 1 }}
+              />
+              {item.name}
+            </div>
           </TableCell>
           <TableCell align="center">{item.category}</TableCell>
           <TableCell align="center">{item.price} ₽</TableCell>
@@ -100,32 +92,38 @@ const TableRowItem = ({ item }) => {
             </div>
           </TableCell>
 
-          <TableCell align="center" sx={{ display: "flex" }}>
-            <Tooltip title="Товары с 1688">
-              <IconButton
-                aria-label="expand row"
-                size="small"
+          <TableCell align="center" sx={{ width: "max-content" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <button
+                className={styles.expandButton}
                 onClick={(e) => handleOpenPanel(e)}
               >
+                Товары с 1688
                 {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
-              </IconButton>
-            </Tooltip>
+              </button>
 
-            <Tooltip title="Подтвердить">
-              <IconButton onClick={() => approveHandler(item.id)}>
-                <CheckCircleIcon color="success" />
-              </IconButton>
-            </Tooltip>
+              <Tooltip title="Подтвердить">
+                <IconButton onClick={() => approveHandler(item.id)}>
+                  <img src={check} width={20} />
+                </IconButton>
+              </Tooltip>
 
-            <Tooltip title="Не отображать">
-              <IconButton
-                aria-label="delete"
-                size="small"
-                onClick={() => hideHandler(item.id)}
-              >
-                <DeleteForever color="red" />
-              </IconButton>
-            </Tooltip>
+              <Tooltip title="Не отображать">
+                <IconButton
+                  aria-label="delete"
+                  size="small"
+                  onClick={() => hideHandler(item.id)}
+                >
+                  <img src={deleteIcon} width={20} />
+                </IconButton>
+              </Tooltip>
+            </div>
           </TableCell>
         </TableRow>
         <TableRow sx={{ "& > *": { borderBottom: "none" } }}>

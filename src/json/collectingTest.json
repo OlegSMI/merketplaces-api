@@ -2,7 +2,7 @@
   "products": [
     {
       "id": 0,
-      "article": 23423412,
+      "article": 23421612,
       "name": "Трусы",
       "image": "https://ir-3.ozone.ru/s3/multimedia-1-4/c400/7009850020.jpg",
       "category": "Белье",
@@ -13,21 +13,21 @@
     {
       "id": 1,
       "article": 23423412,
-      "name": "Трусы",
+      "name": "Трусики",
       "image": "https://ir-3.ozone.ru/s3/multimedia-1-4/c400/7009850020.jpg",
       "category": "Белье",
-      "price": 346,
-      "weight": 123,
+      "price": 546,
+      "weight": 103,
       "status": "DELETED"
     },
     {
       "id": 2,
-      "article": 23423412,
-      "name": "Трусы",
+      "article": 23421212,
+      "name": "Боксеры",
       "image": "https://ir-3.ozone.ru/s3/multimedia-1-4/c400/7009850020.jpg",
       "category": "Белье",
-      "price": 346,
-      "weight": 123,
+      "price": 146,
+      "weight": 153,
       "status": "CREATED"
     }
   ]

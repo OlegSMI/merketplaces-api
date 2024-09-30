@@ -1,16 +1,16 @@
-const sortedData = (products, key) => {
+const sortedData = (products, key, direction) => {
   let sortableItems = [...products];
-  //   if (key) {
-  //     sortableItems.sort((a, b) => {
-  //       if (a[key] < b[key]) {
-  //         return sortConfig.direction === "asc" ? -1 : 1;
-  //       }
-  //       if (a[sortConfig.key] > b[sortConfig.key]) {
-  //         return sortConfig.direction === "asc" ? 1 : -1;
-  //       }
-  //       return 0;
-  //     });
-  //   }
+  if (key) {
+    sortableItems.sort((a, b) => {
+      if (a[key] < b[key]) {
+        return direction === "asc" ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return direction === "asc" ? 1 : -1;
+      }
+      return 0;
+    });
+  }
   return sortableItems;
 };
 
