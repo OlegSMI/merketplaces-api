@@ -25,7 +25,18 @@ const CollectingHeader = ({ setArticles, startCollectGoods }) => {
     textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`;
   }, [value]);
 
-  const downloadExcel = () => {};
+  const downloadExcel = () => {
+    // запрос на получение файла
+    // const blob = await response.blob();
+    // const downloadUrl = URL.createObjectURL(blob);
+    // const link = document.createElement('a');
+    // link.href = downloadUrl;
+    // link.download = 'downloaded_file.xlsx';
+    // document.body.appendChild(link);
+    // link.click();
+    // document.body.removeChild(link);
+    // URL.revokeObjectURL(downloadUrl);
+  };
 
   return (
     <div className={styles.panel}>
