@@ -1,121 +1,126 @@
-import { Tooltip } from "antd";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-import download from "@assets/download.png";
-import redy from "@assets/redy.png";
-import send from "@assets/send.png";
-import history from "@assets/sidebar/history.png";
-import replaceInput from "../../utils/replaceInput";
-import TagsInput from "../CollectGoods/components/TagsInput";
+import CollectingHeader from "./components/CollectingHeader/CollectingHeader";
+import SessionsList from "./components/SessionsList/SessionsList";
+import TagsComponent from "./components/TagsComponent";
+
+import { useSnackbar } from "notistack";
+import customSetInterval from "../../utils/customSetInterval";
+
 import styles from "./Collecting.module.scss";
-import CollapsibleTable from "./components/CollectingTable";
 
 const Collecting = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [clickedIndex, setClickedIndex] = useState(10);
-  const [value, setValue] = useState("");
+  const { enqueueSnackbar } = useSnackbar();
+
   const [articles, setArticles] = useState([]);
 
-  const clickRef = useRef(null);
+  const [currentSession, setCurrentSession] = useState(0);
+  const [progressSession, setProgressSession] = useState(false);
 
-  const textareaRef = useRef(null);
+  const [products, setProducts] = useState([]);
 
-  const handleClick = (index) => {
-    setClickedIndex(index);
-  };
-
-  const changeInputHandler = (e) => {
-    setValue(e.target.value);
-    const parseArticles = replaceInput(e.target.value);
-    setArticles([...parseArticles]);
+  const startCollectGoods = () => {
+    if (articles.length == 0) {
+      enqueueSnackbar("Артикулы не найдены", {
+        variant: "error",
+        anchorOrigin: { vertical: "top", horizontal: "right" },
+      });
+    } else if (localStorage.getItem("sessionId")) {
+      enqueueSnackbar("Сессия уже запущена", {
+        variant: "error",
+        anchorOrigin: { vertical: "top", horizontal: "right" },
+      });
+    } else {
+      // запуск сбора данных возвращается статус сессии и ее id
+      localStorage.setItem("sessionId", 234223);
+      setCurrentSession(234223);
+      setProgressSession(true);
+    }
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    if (localStorage.getItem("sessionId")) {
+      setProgressSession(true);
+      setCurrentSession(localStorage.getItem("sessionId"));
+    }
   }, []);
 
   useEffect(() => {
-    const textarea = textareaRef.current;
+    if (localStorage.getItem("sessionId")) {
+      window.longPool = customSetInterval(longPoolTimer, 500);
+    }
+    return () => clearTimeout(window.longPool);
+  }, [progressSession]);
 
-    textarea.style.height = "auto";
-
-    textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`;
-  }, [value]);
-
-  const toggleSidebar = () => {
-    setIsOpen(!isOpen);
+  const longPoolTimer = () => {
+    console.log("пулим");
+    // запрос на получение статуса сессии
+    // if (status == pending) {
+    //   пропускаем
+    // } else {
+    //
+    //   clearInterval(window.longPool)
+    //   если находимся в текущей сессии currentSession == localStorage.getItem("sessionId")
+    //   получить данные setProducts()
+    //   setProgressSession(false);
+    //   localStorage.removeItem("sessionId");
+    // getSessionProducts
+    // }
   };
 
-  const handleClickOutside = (event) => {
-    if (clickRef.current && !clickRef.current.contains(event.target)) {
-      setIsOpen(false);
-    }
+  const getSessionProducts = (sessionId) => {
+    // setProducts()
+  };
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch("/src/json/collectingTest.json");
+  //     const data = await response.json();
+  //     setProducts(data.products);
+  //   };
+  //   fetchData();
+  // }, []);
+
+  const enterAnotherSession = (sessionId) => {
+    setCurrentSession(sessionId);
+    getSessionProducts(sessionId);
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.panel}>
-        <textarea
-          ref={textareaRef}
-          placeholder="Введите артикулы"
-          onChange={(e) => changeInputHandler(e)}
-        />
-        <Tooltip title="Отправить">
-          <button className={styles.send}>
-            <img src={send} alt="send" />
-          </button>
-        </Tooltip>
+      <CollectingHeader
+        setArticles={(articles) => setArticles(articles)}
+        startCollectGoods={startCollectGoods}
+      />
+      <TagsComponent articles={articles} />
+      <SessionsList
+        enterAnotherSession={(sessionId) => enterAnotherSession(sessionId)}
+      />
+      {/* Отображать таблицу в 2 случаях: 
+      1. Если были получены данные запущенной сессии progressSession == false и products.length > 0
+      2. Если данные запущенной сессии не получены но выбрана другая сессия 
+      progressSession == true, currentSession != localStorage.getItem() и products.length > 0 */}
+      {((progressSession == false && products.length > 0) ||
+        (progressSession == true &&
+          currentSession != localStorage.getItem("sessionId") &&
+          products.length > 0)) && (
+        <>
+          <div>Табличка тут</div>
+          {/* <CollectingTable products={products} /> */}
+        </>
+      )}
 
-        <Tooltip title="Скачать Exel">
-          <button className={styles.download}>
-            <img src={download} alt="download" />
-          </button>
-        </Tooltip>
-      </div>
-      <div>
-        {articles.length > 0 && (
-          <TagsInput
-            tags={articles}
-            variant="outlined"
-            id="tags"
-            name="tags"
-            label="Найденные артикулы"
-            disabled
-          />
+      {progressSession == false && products.length == 0 && (
+        <div>Поиска нема</div>
+      )}
+      {progressSession == true &&
+        products.length == 0 &&
+        currentSession == localStorage.getItem("sessionId") && (
+          <div>Грузим</div>
         )}
-      </div>
-      <div
-        className={`${styles.history} ${isOpen ? styles.open : ""}`}
-        ref={clickRef}
-      >
-        <Tooltip title="История">
-          <button onClick={toggleSidebar} className={styles.toggleButton}>
-            <img src={history} alt="history" />
-          </button>
-        </Tooltip>
-
-        {isOpen && (
-          <ul className={styles.content}>
-            {[...Array(20)].map((_, index) => (
-              <li
-                key={index}
-                className={`${styles.sessia} ${
-                  clickedIndex === index ? styles.clicked : ""
-                }`}
-                onClick={() => handleClick(index)}
-              >
-                1234
-                <img src={redy} alt="redy" />
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      {/* <CollapsibleTable /> */}
+      {progressSession == true &&
+        currentSession != localStorage.getItem("sessionId") &&
+        products.length == 0 && <div>Идет загрузка данных из БД</div>}
     </div>
   );
 };
