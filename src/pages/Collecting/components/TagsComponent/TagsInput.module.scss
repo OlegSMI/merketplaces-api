@@ -1,23 +1,40 @@
-.textField {
-  width: 100%;
+.textFieldWrapper {
+  margin-top: 30px;
 
-  input {
-    display: none;
+  .textField {
+    width: 95%;
+
+    input {
+      display: none;
+    }
   }
 }
 
-.textFieldWrapper {
-  margin-top: 10px;
+.deliteIcon {
+  width: 10px;
+  height: 10px;
 }
 
-.chip {
-  margin: 0 2px;
-  color: red;
-}
-
+// .chip {
+//   margin: 0 2px;
+//   color: red;
+// }
 .chipsContainer {
+  margin-top: 10px;
+  width: 95%;
+  max-height: 80px;
+  overflow-y: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
   padding: 10px 0;
+
+  .chip {
+    display: flex;
+    align-items: center;
+    background-color: #f4f3ff;
+    color: #4d4aea;
+    padding: 15px 5px;
+    margin: 2px;
+  }
 }

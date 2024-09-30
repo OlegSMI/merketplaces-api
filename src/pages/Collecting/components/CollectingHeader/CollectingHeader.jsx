@@ -47,12 +47,14 @@ const CollectingHeader = ({ setArticles, startCollectGoods }) => {
       />
       <Tooltip title="Отправить">
         <button className={styles.send} onClick={startCollectGoods}>
+          Загрузить
           <img src={send} alt="send" />
         </button>
       </Tooltip>
 
       <Tooltip title="Скачать Exel">
         <button className={styles.download} onClick={downloadExcel}>
+          Скачать
           <img src={download} alt="download" />
         </button>
       </Tooltip>

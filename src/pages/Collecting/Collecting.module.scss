@@ -21,27 +21,28 @@
   align-items: center;
   width: 95%;
 
+  font-family: "Inter", system-ui;
+
   textarea {
     width: 90%;
     resize: none;
-    height: 50px;
+    height: 25px;
     max-height: 200px;
     overflow-y: auto;
-    resize: none;
-    border: #ececee 2px solid;
-    border-radius: 10px;
+    border: none;
+    border-radius: 8px;
     outline: none;
     background-color: #f2f4f7;
     color: #344054;
     font-family: "Inter", sans-serif;
-    font-size: 16px;
-    padding: 5px;
+    // font-size: 16px;
+    // padding: 0 15px;
     margin: 0 10px;
 
     &::placeholder {
-      padding: 5px;
+      // padding: 7px 0;
       color: #a0a0a0;
-      font-size: 16px;
+      font-size: 14px;
     }
   }
 
@@ -54,15 +55,24 @@
   }
 
   button {
+    display: flex;
+    align-items: center;
     margin: 0 10px;
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
+    padding: 10px 15px;
+    // width: 37px;
+    color: #ffffff;
+    height: 37px;
+    border-radius: 8px;
     border: none;
     cursor: pointer;
 
+    &:active {
+      background-color: rgba(108, 99, 255, 1);
+    }
+
     img {
-      width: 30px;
+      width: 20px;
+      margin-left: 10px;
     }
   }
 }

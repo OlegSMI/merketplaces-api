@@ -3,7 +3,7 @@ import TagsInput from "./TagsInput";
 
 const TagsComponent = ({ articles }) => {
   return (
-    <div>
+    <>
       {articles.length > 0 && (
         <TagsInput
           tags={articles}
@@ -14,7 +14,7 @@ const TagsComponent = ({ articles }) => {
           disabled
         />
       )}
-    </div>
+    </>
   );
 };
 

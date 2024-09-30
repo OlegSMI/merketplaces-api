@@ -2,13 +2,23 @@ import redy from "@assets/redy.png";
 import { Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
+
 import styles from "../../Collecting.module.scss";
+import history from "@assets/sidebar/history.png";
 
 const SessionsList = ({ enterAnotherSession }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [clickedIndex, setClickedIndex] = useState(10);
 
   const clickRef = useRef(null);
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -24,14 +34,6 @@ const SessionsList = ({ enterAnotherSession }) => {
     setClickedIndex(index);
     enterAnotherSession(index);
   };
-
-  useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   return (
     <div

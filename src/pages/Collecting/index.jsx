@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import CollectingHeader from "./components/CollectingHeader/CollectingHeader";
 import SessionsList from "./components/SessionsList/SessionsList";
 import TagsComponent from "./components/TagsComponent";
+import CollectingTable from "./components/CollectingTable/CollectingTable";
 
 import { useSnackbar } from "notistack";
 import customSetInterval from "../../utils/customSetInterval";
@@ -109,7 +110,7 @@ const Collecting = () => {
           {/* <CollectingTable products={products} /> */}
         </>
       )}
-
+      <CollectingTable products={products} />
       {progressSession == false && products.length == 0 && (
         <div>Поиска нема</div>
       )}
