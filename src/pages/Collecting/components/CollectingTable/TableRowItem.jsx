@@ -98,6 +98,7 @@ const TableRowItem = ({ item }) => {
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
+                gap: "5px",
               }}
             >
               <button

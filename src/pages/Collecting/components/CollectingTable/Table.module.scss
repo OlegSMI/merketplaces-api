@@ -1,6 +1,5 @@
 .container {
   border: 1px solid #6183a240;
-  margin-top: 20px;
 }
 
 .emptyState {
@@ -42,6 +41,7 @@
 }
 
 .table {
+  margin-top: 20px;
   animation: slideIn 1s ease forwards;
 }
 
