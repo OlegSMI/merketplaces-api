@@ -1,5 +1,6 @@
 import check from "@assets/table/check.svg";
 import deleteIcon from "@assets/table/delete.svg";
+import ContentLoader from "react-content-loader";
 
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import {
@@ -138,7 +139,23 @@ const TableRowItem = ({ item }) => {
             colSpan={12}
           >
             <Collapse in={open} timeout="auto" unmountOnExit>
+              {/* TODO: После отправки запроса и до момента ответа отображаем Loader */}
               <AnalogTable />
+              {[...Array(5)].map((item) => (
+                <ContentLoader
+                  speed={2}
+                  width={1100}
+                  height={50}
+                  viewBox="0 0 850 50"
+                  backgroundColor="#f3f3f3"
+                  foregroundColor="#ecebeb"
+                  key={item}
+                >
+                  <rect x="1" y="NaN" rx="0" ry="0" width="180" height="NaN" />
+                  <rect x="12" y="NaN" rx="0" ry="0" width="131" height="NaN" />
+                  <rect x="25" y="5" rx="10" ry="10" width="800" height="30" />
+                </ContentLoader>
+              ))}
             </Collapse>
           </TableCell>
         </TableRow>

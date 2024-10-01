@@ -44,6 +44,10 @@
     scrollbar-width: thin;
     scrollbar-color: #ececee transparent;
 
+    .sceleton {
+      margin: 5px 10px;
+    }
+
     .sessia {
       position: relative;
       display: flex;

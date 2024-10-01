@@ -17,6 +17,51 @@ import styles from "./Table.module.scss";
 const AnalogTable = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  const headerContent = [
+    {
+      key: "article",
+      name: "Артикул",
+      sortable: false,
+      direction: "asc",
+    },
+    {
+      key: "name",
+      name: "Товар",
+      sortable: true,
+      direction: "asc",
+    },
+    {
+      key: "category",
+      name: "Категория",
+      sortable: true,
+      direction: "asc",
+    },
+    {
+      key: "price",
+      name: "Цена",
+      sortable: true,
+      direction: "asc",
+    },
+    {
+      key: "weight",
+      name: "Вес",
+      sortable: true,
+      direction: "asc",
+    },
+    // {
+    //   key: "status",
+    //   name: "Статус",
+    //   sortable: true,
+    //   direction: "asc",
+    // },
+    // {
+    //   key: "action",
+    //   name: "Действие",
+    //   sortable: false,
+    //   direction: "asc",
+    // },
+  ];
+
   const handlePageChange = (e, value) => {
     setCurrentPage(value);
   };
@@ -32,17 +77,21 @@ const AnalogTable = () => {
       <Table sx={{ minWidth: 650 }} size="small" aria-label="collapsible table">
         <TableHead>
           <TableRow className={styles.tableHead}>
-            <TableCell align="center">Товар</TableCell>
-            <TableCell align="center">Цена</TableCell>
-            <TableCell align="center">Вес</TableCell>
-            <TableCell align="center">Статус</TableCell>
-            <TableCell align="center">Действие</TableCell>
+            {headerContent.map((item) => (
+              <TableCell
+                key={item.key}
+                align="center"
+                className={styles.tableHeadCell}
+              >
+                <div>{item.name}</div>
+              </TableCell>
+            ))}
           </TableRow>
         </TableHead>
 
         <TableBody
           sx={{
-            "& > :nth-last-child()": {
+            "& > :nth-last-child(1)": {
               "& > *": { border: "none" },
             },
           }}
