@@ -106,11 +106,11 @@ const Collecting = () => {
           currentSession != localStorage.getItem("sessionId") &&
           products.length > 0)) && (
         <>
-          <div>Табличка тут</div>
-          {/* <CollectingTable products={products} /> */}
+          {/* <div>Табличка тут</div> */}
+          <CollectingTable products={products} />
         </>
       )}
-      <CollectingTable products={products} />
+      {/* <CollectingTable products={products} /> */}
       {progressSession == false && products.length == 0 && (
         <div>Поиска нема</div>
       )}

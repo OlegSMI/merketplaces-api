@@ -5,7 +5,6 @@
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  // margin-top: 50px;
 
   @media (max-width: 1100px) {
     flex-direction: column;
@@ -23,9 +22,7 @@
 
     .title {
       font-size: 55px;
-      font-family: "Roboto", system-ui;
       font-weight: 700;
-      font-style: normal;
       margin: 0px;
 
       @media (max-width: 700px) {
@@ -35,9 +32,7 @@
 
     .text {
       font-size: 25px;
-      font-family: "Roboto", system-ui;
       font-weight: 400;
-      font-style: normal;
       margin: 0px;
 
       @media (max-width: 700px) {
@@ -68,9 +63,7 @@
       border-radius: 5px;
       border: rgba(175, 169, 169, 0.5) 0.5px solid;
       font-size: 20px;
-      font-family: "Roboto", system-ui;
       font-weight: 400;
-      font-style: normal;
       margin-bottom: 20px;
       padding-left: 15px;
       outline: none;
@@ -88,13 +81,11 @@
     button {
       height: 50px;
       background-color: rgba(108, 99, 255, 0.79);
-      color: #ffffff;
+      color: white;
       border: none;
       border-radius: 10px;
       font-size: 25px;
-      font-family: "Roboto", system-ui;
       font-weight: 400;
-      font-style: normal;
       margin-bottom: 20px;
       cursor: pointer;
 
@@ -106,9 +97,7 @@
     .description {
       cursor: default;
       font-size: 20px;
-      font-family: "Roboto", system-ui;
       font-weight: 400;
-      font-style: normal;
       text-align: center;
 
       @media (max-width: 700px) {

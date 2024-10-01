@@ -7,9 +7,7 @@
 }
 
 .logo {
-  font-family: "Roboto", system-ui;
   font-weight: 900;
-  font-style: normal;
   font-size: 30px;
 
   @media (max-width: 700px) {
@@ -21,9 +19,7 @@
   display: flex;
   width: 50%;
   justify-content: space-between;
-  font-family: "Roboto", system-ui;
   font-weight: 300;
-  font-style: normal;
   font-size: 20px;
 
   @media (max-width: 700px) {

@@ -1,11 +1,13 @@
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+  TableHead,
+  CircularProgress,
+} from "@mui/material";
 import PropTypes from "prop-types";
 
-import { CircularProgress } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { getProductsByImage } from "@api/operator/useChinaAPI";
 import AnalogRow from "./analogRow";

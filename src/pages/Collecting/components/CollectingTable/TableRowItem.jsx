@@ -8,7 +8,9 @@ import {
   TableCell,
   TableRow,
   Tooltip,
+  Collapse,
 } from "@mui/material";
+import AnalogTable from "./AnalogTable";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import React, { useCallback, useState } from "react";
@@ -17,7 +19,6 @@ import {
   approvedProductById,
   hideProductById,
 } from "@api/operator/useGoodsAPI";
-// import AnalogTable from "./analogTable";
 import styles from "./Table.module.scss";
 
 const theme = createTheme({
@@ -136,9 +137,9 @@ const TableRowItem = ({ item }) => {
             }}
             colSpan={12}
           >
-            {/* <Collapse in={open} timeout="auto" unmountOnExit>
-              <AnalogTable product={item.id} />
-            </Collapse> */}
+            <Collapse in={open} timeout="auto" unmountOnExit>
+              <AnalogTable />
+            </Collapse>
           </TableCell>
         </TableRow>
       </React.Fragment>

@@ -1,5 +1,6 @@
 export { default as Card } from "./Card/Card";
 export { default as Combobox } from "./Combobox";
+export { default as Button } from "./Button";
 export { default as Field } from "./Field";
 export { default as List } from "./List";
 export { default as NavBar } from "./NavBar";

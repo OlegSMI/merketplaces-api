@@ -11,6 +11,7 @@ import {
   RiskProfile,
   Table,
   ProtectedRoute,
+  Button,
 } from "@components";
 
 import { useSnackbar } from "notistack";
@@ -132,7 +133,11 @@ const Main = () => {
             setSelectedOption={setRiskOption}
           /> */}
 
-          <button onClick={getProductsAPI}>Подобрать товары</button>
+          <Button
+            // title="Подобрать товары"
+            text="Подобрать товары"
+            onClick={getProductsAPI}
+          />
         </div>
         <div className={styles.search}>
           {/* <Combobox

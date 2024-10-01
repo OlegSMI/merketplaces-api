@@ -1,19 +1,20 @@
+@import "src/scss/variables.scss";
+
 .container {
-  font-family: "Inter", system-ui;
   font-weight: 400;
   font-size: 24px;
-  opacity: 0; /* Начальное состояние - невидимый */
-  transform: translateН(-100%); /* Сдвинут влево на 100% */
+  opacity: 0;
+  transform: translateН(-100%);
   animation: slideIn 1s ease forwards;
 
   @keyframes slideIn {
     0% {
-      opacity: 0; /* Начальное состояние - невидимый */
-      transform: translateX(-100%); /* Сдвинут влево */
+      opacity: 0;
+      transform: translateX(-100%);
     }
     100% {
-      opacity: 1; /* Конечное состояние - видимый */
-      transform: translateX(0); /* На своем месте */
+      opacity: 1;
+      transform: translateX(0);
     }
   }
 
@@ -34,7 +35,7 @@
       cursor: pointer;
 
       &:hover {
-        background-color: #eaecf0;
+        background-color: $componentBackgroundColor;
         border-radius: 50%;
         width: 30px;
         height: 30px;
@@ -61,11 +62,10 @@
       width: 130px;
       height: 130px;
     }
-    // }
 
     .generalInfo {
       flex-direction: column;
-      border: #eaecf0 1px solid;
+      border: $borderColor 1px solid;
       border-radius: 20px;
       padding: 24px;
     }
@@ -74,7 +74,6 @@
       h5 {
         font-size: 14px;
         font-weight: 500;
-        // margin: 0 0 10px 0;
         margin: 0 0 10px 0;
         padding: 0;
       }
@@ -90,7 +89,7 @@
           font-size: 14px;
           margin: 5px;
           padding: 10px;
-          background-color: #f2f4f7;
+          background-color: $componentBackgroundColor;
         }
       }
     }

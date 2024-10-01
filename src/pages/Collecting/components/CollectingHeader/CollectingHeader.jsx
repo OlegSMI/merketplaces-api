@@ -1,9 +1,10 @@
 import { Tooltip } from "@mui/material";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
-import replaceInput from "../../../../utils/replaceInput";
-import styles from "../../Collecting.module.scss";
+import replaceInput from "@utils/replaceInput";
+import styles from "./CollectingHeader.module.scss";
 
+import { Button } from "@components";
 import download from "@assets/collecting/xlsx.svg";
 import send from "@assets/send.png";
 
@@ -45,13 +46,12 @@ const CollectingHeader = ({ setArticles, startCollectGoods }) => {
         placeholder="Введите артикулы"
         onChange={(e) => changeInputHandler(e)}
       />
-      <Tooltip title="Отправить">
-        <button className={styles.send} onClick={startCollectGoods}>
-          Загрузить
-          <img src={send} alt="send" />
-        </button>
-      </Tooltip>
-
+      <Button
+        title="Отправить артикулы"
+        text="Отправить"
+        img={send}
+        onClick={startCollectGoods}
+      />
       <Tooltip title="Скачать Exel">
         <button className={styles.download} onClick={downloadExcel}>
           Скачать

@@ -1,5 +1,7 @@
+@import "src/scss/variables.scss";
+
 .container {
-  border: 1px solid #ccc;
+  border: 1px solid $borderColor;
   margin-top: 20px;
 }
 
@@ -17,8 +19,7 @@
 
   p {
     margin: 5px;
-    font-family: "Inter", sans-serif;
-    color: #344054;
+    color: $textColor;
   }
 
   .title {
@@ -36,9 +37,8 @@
   display: flex;
   justify-content: center;
   margin: 10px;
-  font-family: "Inter", sans-serif;
   font-size: 18px;
-  color: #475467;
+  color: $textColor;
 }
 
 .table {
@@ -47,12 +47,12 @@
 
 @keyframes slideIn {
   0% {
-    opacity: 0; /* Начальное состояние - невидимый */
-    transform: translateX(-50px); /* Сдвинут влево */
+    opacity: 0;
+    transform: translateX(-50px);
   }
   100% {
-    opacity: 1; /* Конечное состояние - видимый */
-    transform: translateX(0); /* На своем месте */
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 
@@ -70,17 +70,17 @@
 
 @keyframes fadeIn {
   from {
-    opacity: 0; /* Начальное состояние - невидимый */
-    transform: translateY(-20px); /* Сдвиг вверх */
+    opacity: 0;
+    transform: translateY(-20px);
   }
   to {
-    opacity: 1; /* Конечное состояние - видимый */
-    transform: translateY(0); /* На своем месте */
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .tableHead {
-  background-color: #f9f9fd;
+  background-color: $componentBackgroundColor;
 
   img {
     width: 15px;
@@ -100,17 +100,17 @@
   width: max-content;
 
   &0 {
-    background-color: #eff8ff;
+    background-color: $componentBackgroundColor;
     color: #175cd3;
   }
 
   &1 {
-    background-color: #fef3f2;
+    background-color: $componentBackgroundColor;
     color: #b42318;
   }
 
   &2 {
-    background-color: #ecfdf3;
+    background-color: $componentBackgroundColor;
     color: #067647;
   }
 }

@@ -4,11 +4,11 @@
 
 @keyframes slideIn {
   0% {
-    opacity: 0; /* Начальное состояние - невидимый */
-    transform: translateX(-50px); /* Сдвинут влево */
+    opacity: 0;
+    transform: translateX(-50px);
   }
   100% {
-    opacity: 1; /* Конечное состояние - видимый */
-    transform: translateX(0); /* На своем месте */
+    opacity: 1;
+    transform: translateX(0);
   }
 }

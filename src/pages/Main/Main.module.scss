@@ -1,14 +1,16 @@
+@import "src/scss/variables.scss";
+
 .container {
   animation: slideIn 1s ease forwards;
 
   @keyframes slideIn {
     0% {
-      opacity: 0; /* Начальное состояние - невидимый */
-      transform: translateY(100%); /* Сдвинут влево */
+      opacity: 0;
+      transform: translateY(100%);
     }
     100% {
-      opacity: 1; /* Конечное состояние - видимый */
-      transform: translateY(0); /* На своем месте */
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 }
@@ -16,9 +18,8 @@
 h3 {
   margin: 10px 0px 25px 0px;
   font-size: 28px;
-  font-family: "Inter", system-ui;
   font-weight: 500;
-  color: #2a2a2a;
+  color: $textColor;
 }
 
 .header {
@@ -32,20 +33,14 @@ h3 {
     flex-direction: row;
     flex-wrap: wrap;
 
-    // .label {
-    //   margin: 0;
-    //   padding: 0;
-    //   margin-right: 10px;
-    // }
-
     .date {
       margin: 0;
       padding: 0;
       margin-right: 10px;
 
-      background-color: #f2f4f7;
-      color: #344054;
-      border: none; /* Убираем рамку */
+      background-color: $componentBackgroundColor;
+      color: $textColor;
+      border: none;
       border-radius: 8px;
       padding-left: 10px;
       margin-right: 10px;
@@ -55,21 +50,6 @@ h3 {
 
     .sel {
       background-color: red;
-    }
-
-    button {
-      background-color: #4d4aea;
-      color: #ffffff;
-      border: none;
-      border-radius: 8px;
-      margin: 0;
-      padding: 10px 15px;
-      height: 37px;
-      cursor: pointer;
-
-      &:active {
-        background-color: rgba(108, 99, 255, 1);
-      }
     }
   }
 
@@ -81,8 +61,8 @@ h3 {
       font-family: "Inter", sans-serif;
       height: 35px;
       width: 200px;
-      background-color: #f2f4f7;
-      color: #344054;
+      background-color: $componentBackgroundColor;
+      color: $textColor;
       border: none;
       border-radius: 8px;
       padding-left: 10px;
@@ -102,8 +82,8 @@ h3 {
 
 .selected {
   padding: 10px;
-  background-color: #f2f4f7;
-  border: 1px solid #ccc;
+  background-color: $componentBackgroundColor;
+  border: 1px solid $borderColor;
   border-radius: 8px;
   cursor: pointer;
 }
@@ -113,8 +93,8 @@ h3 {
   top: 100%;
   left: 0;
   right: 0;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
+  background-color: white;
+  border: 1px solid $borderColor;
   border-radius: 8px;
   max-height: 150px;
   overflow-y: auto;
@@ -126,5 +106,5 @@ h3 {
 }
 
 .options li:hover {
-  background-color: #f0f0f0; /* Цвет фона при наведении */
+  background-color: $borderColor;
 }

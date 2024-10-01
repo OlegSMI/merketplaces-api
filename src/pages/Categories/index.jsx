@@ -5,14 +5,14 @@ import {
   ToggleButton,
   ToggleButtonGroup,
 } from "@mui/material";
-// import { useSnackbar } from "notistack";
 import { deleteCategoty } from "@api/operator/useGoodsAPI";
 
+import { Button } from "@components";
 import { getWbCategories } from "@redux/wbCategories/asyncAction";
 import { getGlobalCategories } from "@redux/globalCategories/asyncAction";
 import { setDeleteWbCategoty } from "../../redux/wbCategories/slice";
-import styles from "./Categories.module.scss";
 import { addWbCategory } from "../../redux/wbCategories/asyncAction";
+import styles from "./Categories.module.scss";
 
 function Categories() {
   const [offset, setOffset] = useState(0);
@@ -22,9 +22,6 @@ function Categories() {
   const dispatch = useDispatch();
   const { addedCategories } = useSelector((state) => state.wbCategories);
   const { globalCategories } = useSelector((state) => state.globalCategories);
-
-  console.log("asdasdas", addedCategories);
-  // const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -68,13 +65,8 @@ function Categories() {
     if (!categoryIsNew(category)) {
       dispatch(addWbCategory(category));
     } else {
-      // dispatch(deleteWbCategoty(category.id));
       deleteCategoty(category.id);
       dispatch(setDeleteWbCategoty(category.id));
-      // enqueueSnackbar("Категория уже есть в базе", {
-      //   variant: "error",
-      //   anchorOrigin: { vertical: "top", horizontal: "right" },
-      // });
     }
   };
 
@@ -144,9 +136,11 @@ function Categories() {
               sx={{ position: "absolute", bottom: "-50%", left: "50%" }}
             ></CircularProgress>
           ) : (
-            <button onClick={addCategories} className={styles.button}>
-              Добавить
-            </button>
+            <Button
+              title={"Добавить категории"}
+              text={"Добавить"}
+              onClick={addCategories}
+            />
           )}
         </>
       )}

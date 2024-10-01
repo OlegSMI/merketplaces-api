@@ -1,0 +1,25 @@
+@import "src/scss/variables";
+
+.button {
+  font-family: $fontFamily;
+  display: flex;
+  align-items: center;
+  margin: 0 10px;
+  padding: 10px 15px;
+  color: #ffffff;
+  height: 37px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: $buttonColor;
+
+  &:active {
+    background-color: $buttonClickColor;
+  }
+
+  img {
+    width: 20px;
+    margin-left: 10px;
+  }
+}
