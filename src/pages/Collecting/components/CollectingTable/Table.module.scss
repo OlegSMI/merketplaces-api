@@ -1,6 +1,5 @@
 .container {
-  border: 1px solid #ccc;
-  margin-top: 20px;
+  border: 1px solid #6183a240;
 }
 
 .emptyState {
@@ -42,6 +41,7 @@
 }
 
 .table {
+  margin-top: 20px;
   animation: slideIn 1s ease forwards;
 }
 
@@ -66,6 +66,14 @@
 
 .anima {
   animation: fadeIn 1s ease forwards;
+  border-bottom: 1px solid #6183a21a;
+  & > * {
+    border-bottom: none !important;
+    &:nth-child(even) {
+      border-left: 1px solid #6183a21a;
+      border-right: 1px solid #6183a21a;
+    }
+  }
 }
 
 @keyframes fadeIn {
@@ -80,7 +88,21 @@
 }
 
 .tableHead {
-  background-color: #f9f9fd;
+}
+
+.tableHeadCell {
+  background-color: #6183a20c;
+  &:nth-child(even) {
+    border-left: 1px solid #6183a21a;
+    border-right: 1px solid #6183a21a;
+  }
+
+  & > * {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
 
   img {
     width: 15px;
@@ -163,4 +185,17 @@
 .created {
   background-color: #fef8e8;
   color: #f6cd59;
+}
+
+.expandButton {
+  position: relative;
+  background-color: #6183a21a;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 15px;
+  cursor: pointer;
 }

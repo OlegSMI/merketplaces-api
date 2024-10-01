@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 import CollectingHeader from "./components/CollectingHeader/CollectingHeader";
+import CollectingTable from "./components/CollectingTable/CollectingTable";
 import SessionsList from "./components/SessionsList/SessionsList";
 import TagsComponent from "./components/TagsComponent";
-import CollectingTable from "./components/CollectingTable/CollectingTable";
 
 import { useSnackbar } from "notistack";
 import customSetInterval from "../../utils/customSetInterval";
@@ -73,14 +73,14 @@ const Collecting = () => {
     // setProducts()
   };
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch("/src/json/collectingTest.json");
-  //     const data = await response.json();
-  //     setProducts(data.products);
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/src/json/collectingTest.json");
+      const data = await response.json();
+      setProducts(data.products);
+    };
+    fetchData();
+  }, []);
 
   const enterAnotherSession = (sessionId) => {
     setCurrentSession(sessionId);

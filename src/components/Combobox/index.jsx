@@ -8,7 +8,13 @@ import filterUp from "@assets/table/filterUp.svg";
 import { Tooltip } from "antd";
 import styles from "./Combobox.module.scss";
 
-const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
+const Combobox = ({
+  title,
+  options,
+  selectedOption,
+  setSelectedOption,
+  style,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const [filter, setFilter] = useState("");
   const comboboxRef = useRef(null);
@@ -46,7 +52,7 @@ const Combobox = ({ title, options, selectedOption, setSelectedOption }) => {
   }, []);
 
   return (
-    <div className={styles.customSelect} ref={comboboxRef}>
+    <div className={styles.customSelect} ref={comboboxRef} style={style}>
       <div className={styles.selected} onClick={() => setIsOpen(!isOpen)}>
         {Object.keys(selectedOption).length > 1 && (
           <Tooltip title="Очистить поле" placement="top">
@@ -81,6 +87,7 @@ Combobox.propTypes = {
   options: PropTypes.array,
   selectedOption: PropTypes.object,
   setSelectedOption: PropTypes.func,
+  style: PropTypes.object,
 };
 
 export default Combobox;

@@ -1,4 +1,4 @@
-import sortImg from "@assets/table/sort.png";
+import sortImg from "@assets/table/sort.svg";
 import { TableCell, TableHead, TableRow } from "@mui/material";
 import PropTypes from "prop-types";
 import { useState } from "react";
@@ -74,7 +74,7 @@ const TableHeader = ({ changeDirection }) => {
     );
 
     setHeaders(updatedHeaders);
-    changeDirection(headItem.key);
+    changeDirection(headItem.key, direction);
   };
 
   return (
@@ -87,9 +87,12 @@ const TableHeader = ({ changeDirection }) => {
               align="center"
               sx={{ ...(headItem.sortable && { cursor: "pointer" }) }}
               onClick={() => requestSort(headItem)}
+              className={styles.tableHeadCell}
             >
-              {headItem.name}
-              {headItem.sortable && <img src={sortImg} alt="sort" />}
+              <div>
+                {headItem.name}
+                {headItem.sortable && <img src={sortImg} alt="sort" />}
+              </div>
             </TableCell>
           );
         })}

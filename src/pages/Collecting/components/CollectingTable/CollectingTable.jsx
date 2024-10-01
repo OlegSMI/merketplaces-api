@@ -1,26 +1,35 @@
 import { Paper, Table, TableContainer } from "@mui/material";
 
+import sortedData from "@utils/sortedData";
 import PropTypes from "prop-types";
+import { useEffect, useState } from "react";
+import FiltersTable from "./FiltersTable";
 import styles from "./Table.module.scss";
 import TableContent from "./TableContent";
 import TableHeader from "./TableHeader";
 
 const CollectingTable = ({ products }) => {
-  // const [products, setProducts] = useState([]);
-  // const [search, setSearch] = useState("");
+  const [sortedProducts, setSortedProducts] = useState([]);
 
-  // const filterProducts = useMemo(() => {
-  //   return products?.filter((item) =>
-  //     item.name.toLowerCase().includes(search.toLowerCase())
-  //   );
-  // }, [products, search]);
+  useEffect(() => {
+    setSortedProducts([...products]);
+  }, [products]);
 
-  const changeDirectionHandle = (key) => {
-    console.log(key);
+  const changeDirectionHandle = (key, direction) => {
+    setSortedProducts(sortedData(products, key, direction));
+  };
+
+  const handleInputChange = (e) => {
+    setSortedProducts(
+      [...products].filter((product) =>
+        product.name.toLowerCase().includes(e.target.value.toLowerCase())
+      )
+    );
   };
 
   return (
     <div className={styles.table}>
+      <FiltersTable handleInputChange={(e) => handleInputChange(e)} />
       <TableContainer
         component={Paper}
         elevation={0}
@@ -31,8 +40,12 @@ const CollectingTable = ({ products }) => {
           size="small"
           aria-label="collapsible table"
         >
-          <TableHeader changeDirection={(key) => changeDirectionHandle(key)} />
-          <TableContent products={products} />
+          <TableHeader
+            changeDirection={(key, direction) =>
+              changeDirectionHandle(key, direction)
+            }
+          />
+          <TableContent products={sortedProducts} />
         </Table>
       </TableContainer>
     </div>

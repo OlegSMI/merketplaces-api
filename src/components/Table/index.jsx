@@ -14,7 +14,7 @@ import React, { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 import emptyState from "@assets/table/emptyState.svg";
-import sortImg from "@assets/table/sort.png";
+import sortImg from "@assets/table/sort.svg";
 import Row from "./mainRow";
 import styles from "./Table.module.scss";
 

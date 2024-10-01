@@ -4,13 +4,7 @@ import TableRowItem from "./TableRowItem";
 
 const TableContent = ({ products }) => {
   return (
-    <TableBody
-      sx={{
-        "& > :nth-last-child(n)": {
-          "& > *": { borderBottom: "none" },
-        },
-      }}
-    >
+    <TableBody>
       {products?.map((item) => (
         <TableRowItem key={item.id} item={item} />
       ))}
