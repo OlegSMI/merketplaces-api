@@ -14,9 +14,9 @@ import { CollectPercents } from "./components/CollectPercents";
 import emptyState from "@assets/table/emptyState.svg";
 
 import {
+  createSession,
   getHistory,
   getSessionStatus,
-  createSession,
   startSession,
 } from "@api/operator/useCollectGoodsAPI";
 
@@ -30,12 +30,10 @@ const Collecting = () => {
 
   const [products, setProducts] = useState([]);
   const [redyProducts, setRedyProducts] = useState([]);
-  const [history, setHistory] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getHistory(10, 0);
-      setHistory(data);
 
       // TODO: Если есть что-то на сборе то оно всегад первым в списке со статусом pending поэтому чекаю [0]
       if (data[0].status !== "successed") {
@@ -132,7 +130,6 @@ const Collecting = () => {
       />
       <TagsComponent articles={articles} />
       <SessionsList
-        history={history}
         enterAnotherSession={(sessionId) => enterAnotherSession(sessionId)}
       />
       {/* Отображать таблицу в 2 случаях: 

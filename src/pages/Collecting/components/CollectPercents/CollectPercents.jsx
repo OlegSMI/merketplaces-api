@@ -1,4 +1,4 @@
-import currentDateFormat from "@utils/currentDateFormat";
+import { currentDateFormat } from "@utils/currentDateFormat";
 import PropTypes from "prop-types";
 import styles from "./CollectPercents.module.scss";
 
