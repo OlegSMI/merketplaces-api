@@ -3,10 +3,16 @@ import PropTypes from "prop-types";
 
 import styles from "./Button.module.scss";
 
-const Button = ({ title, text, img, onClick }) => {
+const Button = ({ title, text, img, onClick, disabled }) => {
   return (
     <Tooltip title={title}>
-      <button className={styles.button} onClick={onClick}>
+      <button
+        className={`${styles.button} ${
+          disabled ? styles.disable : styles.active
+        } `}
+        onClick={onClick}
+        disabled={disabled}
+      >
         {text}
         {img && <img src={img} alt="image" />}
       </button>
@@ -21,4 +27,5 @@ Button.propTypes = {
   text: PropTypes.string,
   img: PropTypes.string,
   onClick: PropTypes.func,
+  disabled: PropTypes.bool,
 };

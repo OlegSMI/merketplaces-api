@@ -7,7 +7,11 @@ import styles from "./CollectingHeader.module.scss";
 import download from "@assets/collecting/xlsx.svg";
 import { Button } from "@components";
 
-const CollectingHeader = ({ setArticles, startCollectGoods }) => {
+const CollectingHeader = ({
+  setArticles,
+  startCollectGoods,
+  progressSession,
+}) => {
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
 
@@ -46,6 +50,7 @@ const CollectingHeader = ({ setArticles, startCollectGoods }) => {
         onChange={(e) => changeInputHandler(e)}
       />
       <Button
+        disabled={progressSession}
         title="Отправить артикулы для сбора"
         text="Собрать"
         onClick={startCollectGoods}
@@ -63,6 +68,7 @@ const CollectingHeader = ({ setArticles, startCollectGoods }) => {
 CollectingHeader.propTypes = {
   setArticles: PropTypes.func,
   startCollectGoods: PropTypes.func,
+  progressSession: PropTypes.bool,
 };
 
 export default CollectingHeader;

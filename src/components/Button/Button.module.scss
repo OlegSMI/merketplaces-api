@@ -2,25 +2,31 @@
 
 .button {
   font-family: $fontFamily;
-  // display: flex;
-  // align-items: center;
-  // margin: 0 10px;
   padding: 10px 15px;
   color: #ffffff;
   height: 37px;
   border-radius: 8px;
   border: none;
   outline: none;
-  cursor: pointer;
-  background-color: $buttonColor;
-  text-align: center;
 
-  &:active {
-    background-color: $buttonClickColor;
-  }
+  text-align: center;
 
   img {
     width: 20px;
     margin-left: 10px;
+  }
+
+  &:active {
+    background-color: $buttonColor;
+    cursor: pointer;
+  }
+
+  &:disabled {
+    background-color: #d6d6d6;
+    cursor: default;
+
+    &:active {
+      background-color: #d6d6d6;
+    }
   }
 }
