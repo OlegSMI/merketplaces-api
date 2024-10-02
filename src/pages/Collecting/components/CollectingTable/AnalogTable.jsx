@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
 import {
+  Pagination,
+  Stack,
   Table,
   TableBody,
   TableCell,
-  TableRow,
   TableHead,
-  Stack,
-  Pagination,
-  CircularProgress,
+  TableRow,
 } from "@mui/material";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
 
 import AnalogRow from "./AnalogRow";
 import styles from "./Table.module.scss";
@@ -66,6 +65,10 @@ const AnalogTable = () => {
     setCurrentPage(value);
   };
 
+  // const changeDirectionHandle = (key, direction) => {
+  //   setSortedProducts(sortedData(products, key, direction));
+  // };
+
   return (
     <>
       {/* {(products === null && (
@@ -88,6 +91,11 @@ const AnalogTable = () => {
             ))}
           </TableRow>
         </TableHead>
+        {/* <TableHeader
+          changeDirection={(key, direction) =>
+            changeDirectionHandle(key, direction)
+          }
+        /> */}
 
         <TableBody
           sx={{

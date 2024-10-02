@@ -4,19 +4,20 @@
   display: flex;
   align-items: center;
   width: 95%;
+  gap: 5px;
 
   textarea {
     width: 90%;
-    resize: none;
+    // resize: none;
     height: 25px;
-    max-height: 100px;
+    // max-height: 100px;
     overflow-y: auto;
     border: none;
     border-radius: 8px;
     outline: none;
     background-color: $componentBackgroundColor;
     color: $textColor;
-    margin: 0 10px;
+    padding: 5px 10px;
 
     &::placeholder {
       color: $textGreyColor;
@@ -33,7 +34,7 @@
   button {
     display: flex;
     align-items: center;
-    margin: 0 10px;
+    // margin: 0 10px;
     padding: 10px 15px;
     color: white;
     height: 37px;

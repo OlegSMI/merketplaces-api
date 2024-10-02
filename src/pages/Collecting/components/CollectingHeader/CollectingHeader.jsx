@@ -1,12 +1,11 @@
 import { Tooltip } from "@mui/material";
+import replaceInput from "@utils/replaceInput";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
-import replaceInput from "@utils/replaceInput";
 import styles from "./CollectingHeader.module.scss";
 
-import { Button } from "@components";
 import download from "@assets/collecting/xlsx.svg";
-import send from "@assets/send.png";
+import { Button } from "@components";
 
 const CollectingHeader = ({ setArticles, startCollectGoods }) => {
   const [value, setValue] = useState("");
@@ -21,7 +20,7 @@ const CollectingHeader = ({ setArticles, startCollectGoods }) => {
   useEffect(() => {
     const textarea = textareaRef.current;
 
-    textarea.style.height = "auto";
+    textarea.style.height = "17px";
 
     textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`;
   }, [value]);
@@ -47,9 +46,8 @@ const CollectingHeader = ({ setArticles, startCollectGoods }) => {
         onChange={(e) => changeInputHandler(e)}
       />
       <Button
-        title="Отправить артикулы"
-        text="Отправить"
-        img={send}
+        title="Отправить артикулы для сбора"
+        text="Собрать"
         onClick={startCollectGoods}
       />
       <Tooltip title="Скачать Exel">

@@ -16,3 +16,31 @@
   animation: slideIn 1s ease forwards;
   color: $textColor;
 }
+
+.emptyState {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 60vh;
+  animation: slideIn 1s ease forwards;
+
+  img {
+    width: 300px;
+  }
+
+  p {
+    margin: 5px;
+    color: $textColor;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .text {
+    font-weight: 400;
+    font-size: 16px;
+  }
+}
