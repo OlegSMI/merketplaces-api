@@ -23,3 +23,10 @@ export const startSession = async (articles) => {
   });
   return response.data.result;
 };
+
+export const getWbProducts = async (limit, offset, sessionId) => {
+  const response = await api.get(
+    `/storage/wb/session/products?limit=${limit}&offset=${offset}&serviceSessionId=${sessionId}`
+  );
+  return response.data.result.products;
+};

@@ -18,6 +18,7 @@ import {
   getSessionStatus,
   createSession,
   startSession,
+  getWbProducts,
 } from "@api/operator/useCollectGoodsAPI";
 
 const Collecting = () => {
@@ -58,7 +59,14 @@ const Collecting = () => {
     } else {
       const sessionID = await createSession();
       startSession(articles);
-
+      setHistory([
+        ...history,
+        {
+          id: sessionID,
+          status: "started",
+          doneAt: null,
+        },
+      ]);
       // запуск сбора данных возвращается статус сессии и ее id
       localStorage.setItem("sessionId", sessionID);
       setCurrentSession(sessionID);
@@ -74,7 +82,7 @@ const Collecting = () => {
   }, [progressSession]);
 
   const longPoolTimer = async () => {
-    const data = await getSessionStatus(history[0].sessionId);
+    const data = await getSessionStatus(localStorage.getItem("sessionId"));
 
     if (data.status == "successed") {
       setProgressSession(false);
@@ -82,6 +90,12 @@ const Collecting = () => {
       // TODO: Запрос на получение статуса сессии
       // После того как получили что данные готовы нужен запрос на их получение
       // Можно прям от сюда отправлять
+      const products = await getWbProducts(
+        10,
+        0,
+        localStorage.getItem("sessionId")
+      );
+      setProducts(products);
 
       localStorage.removeItem("sessionId");
     }
@@ -126,7 +140,7 @@ const Collecting = () => {
   return (
     <div className={styles.container}>
       <CollectingHeader
-        progressSession
+        progressSession={progressSession}
         setArticles={(articles) => setArticles(articles)}
         startCollectGoods={startCollectGoods}
       />
