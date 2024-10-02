@@ -13,6 +13,8 @@ import { CollectPercents } from "./components/CollectPercents";
 
 import emptyState from "@assets/table/emptyState.svg";
 
+import { getHistory } from "../../api/operator/useCollectGoodsAPI";
+
 const Collecting = () => {
   const { enqueueSnackbar } = useSnackbar();
 
@@ -22,6 +24,20 @@ const Collecting = () => {
   const [progressSession, setProgressSession] = useState(false);
 
   const [products, setProducts] = useState([]);
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getHistory(10, 0);
+      // const
+      setHistory(data);
+    };
+    fetchData();
+    // if (localStorage.getItem("sessionId")) {
+    //   setProgressSession(true);
+    //   setCurrentSession(localStorage.getItem("sessionId"));
+    // }
+  }, []);
 
   const startCollectGoods = () => {
     if (articles.length == 0) {
@@ -41,13 +57,6 @@ const Collecting = () => {
       setProgressSession(true);
     }
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("sessionId")) {
-      setProgressSession(true);
-      setCurrentSession(localStorage.getItem("sessionId"));
-    }
-  }, []);
 
   useEffect(() => {
     if (localStorage.getItem("sessionId")) {
@@ -98,6 +107,7 @@ const Collecting = () => {
       />
       <TagsComponent articles={articles} />
       <SessionsList
+        history={history}
         enterAnotherSession={(sessionId) => enterAnotherSession(sessionId)}
       />
       {/* Отображать таблицу в 2 случаях: 

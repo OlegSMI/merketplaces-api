@@ -48,37 +48,53 @@
       margin: 5px 10px;
     }
 
-    .sessia {
-      position: relative;
+    .sessiaWrapper {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      border: #ececee 2px solid;
-      border-radius: 10px;
-      padding: 10px;
-      margin: 5px 10px;
-      color: $textColor;
-      font-size: 14px;
-      transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для фона и цвета */
-
-      &:hover {
-        // background-color: #f2f4f7;
-        cursor: pointer;
-      }
-
-      .time {
-        position: absolute;
-        right: 10%;
-        top: 0;
-        color: $textGreyColor;
-        font-size: 10px;
-        margin: 10px 0;
-        padding: 0;
-      }
 
       img {
-        right: 10px;
+        // right: 10px;
         width: 25px;
+        height: 25px;
+      }
+
+      .sessia {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border: #ececee 2px solid;
+        border-radius: 10px;
+        padding: 10px;
+        margin: 5px 10px;
+        color: $textColor;
+        font-size: 14px;
+        transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для фона и цвета */
+
+        &:hover {
+          // background-color: #f2f4f7;
+          cursor: pointer;
+        }
+
+        .time {
+          position: absolute;
+          right: 10%;
+          top: 0;
+          color: $textGreyColor;
+          font-size: 10px;
+          margin: 10p 0;
+          padding: 0;
+        }
+
+        .date {
+          position: absolute;
+          right: 10%;
+          bottom: 0;
+          color: $textGreyColor;
+          font-size: 10px;
+          margin: 10px 0;
+          padding: 0;
+        }
       }
     }
 
