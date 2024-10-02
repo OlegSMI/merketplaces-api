@@ -31,7 +31,7 @@ const theme = createTheme({
 });
 
 const TableRowItem = ({ item }) => {
-  const [rowStatus, setRowStatus] = useState(item.status);
+  const [rowStatus, setRowStatus] = useState("CREATED");
   const [open, setOpen] = React.useState(false);
 
   const status = {
@@ -62,7 +62,7 @@ const TableRowItem = ({ item }) => {
     <ThemeProvider theme={theme}>
       <React.Fragment>
         <TableRow className={`${styles.anima}`}>
-          <TableCell align="center">{item.article}</TableCell>
+          <TableCell align="center">{item.id}</TableCell>
           <TableCell>
             <div
               style={{
@@ -74,16 +74,15 @@ const TableRowItem = ({ item }) => {
             >
               <Avatar
                 alt="Avatar"
-                src={item.image}
+                src={item.photoPath}
                 variant="square"
                 sx={{ mr: 1 }}
               />
               {item.name}
             </div>
           </TableCell>
-          <TableCell align="center">{item.category}</TableCell>
-          <TableCell align="center">{item.price} ₽</TableCell>
-          <TableCell align="center">{item.weight} гр.</TableCell>
+          <TableCell align="center">{item.productUrl}</TableCell>
+
           <TableCell className={styles.statusCell}>
             <div
               className={`${styles.statusWrapper} ${
@@ -168,12 +167,9 @@ const TableRowItem = ({ item }) => {
 TableRowItem.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    article: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    image: PropTypes.string.isRequired,
-    category: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    weight: PropTypes.number.isRequired,
+    photoPath: PropTypes.string.isRequired,
+    productUrl: PropTypes.string.isRequired,
     status: PropTypes.string.isRequired,
   }).isRequired,
 };

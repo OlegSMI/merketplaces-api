@@ -98,7 +98,7 @@ const SessionsList = ({ enterAnotherSession, history }) => {
 
 SessionsList.propTypes = {
   enterAnotherSession: PropTypes.func,
-  history: PropTypes.arrayOf(string),
+  history: PropTypes.array,
 };
 
 export default SessionsList;

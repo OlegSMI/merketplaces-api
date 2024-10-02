@@ -29,7 +29,7 @@ const CollectingTable = ({ products }) => {
 
   return (
     <div className={styles.table}>
-      <FiltersTable handleInputChange={(e) => handleInputChange(e)} />
+      {/* <FiltersTable handleInputChange={(e) => handleInputChange(e)} /> */}
       <TableContainer
         component={Paper}
         elevation={0}
