@@ -9,6 +9,9 @@ import { useSnackbar } from "notistack";
 import customSetInterval from "../../utils/customSetInterval";
 
 import styles from "./Collecting.module.scss";
+import { CollectPercents } from "./components/CollectPercents";
+
+import emptyState from "@assets/table/emptyState.svg";
 
 const Collecting = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -57,7 +60,7 @@ const Collecting = () => {
     console.log("пулим");
     // запрос на получение статуса сессии
     // if (status == pending) {
-    //   пропускаем
+    //   прроцены
     // } else {
     //
     //   clearInterval(window.longPool)
@@ -73,14 +76,14 @@ const Collecting = () => {
     // setProducts()
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/src/json/collectingTest.json");
-      const data = await response.json();
-      setProducts(data.products);
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch("/src/json/collectingTest.json");
+  //     const data = await response.json();
+  //     setProducts(data.products);
+  //   };
+  //   fetchData();
+  // }, []);
 
   const enterAnotherSession = (sessionId) => {
     setCurrentSession(sessionId);
@@ -104,21 +107,26 @@ const Collecting = () => {
       {((progressSession == false && products.length > 0) ||
         (progressSession == true &&
           currentSession != localStorage.getItem("sessionId") &&
-          products.length > 0)) && (
-        <>
-          {/* <div>Табличка тут</div> */}
-          <CollectingTable products={products} />
-        </>
-      )}
+          products.length > 0)) && <CollectingTable products={products} />}
+
       {/* <CollectingTable products={products} /> */}
       {progressSession == false && products.length == 0 && (
-        <div>Поиска нема</div>
+        <div className={styles.emptyState}>
+          <img src={emptyState} alt="Empty State" />
+          <p className={styles.title}>Таблица товаров пустая</p>
+          <p className={styles.text}>
+            Начните поиск товаров по артикулам или выберете сессию
+          </p>
+        </div>
       )}
+
       {progressSession == true &&
         products.length == 0 &&
         currentSession == localStorage.getItem("sessionId") && (
-          <div>Грузим</div>
+          <CollectPercents percents={10} />
         )}
+
+      {/* Сделай скелетон */}
       {progressSession == true &&
         currentSession != localStorage.getItem("sessionId") &&
         products.length == 0 && <div>Идет загрузка данных из БД</div>}

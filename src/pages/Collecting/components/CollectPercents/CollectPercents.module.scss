@@ -1,0 +1,24 @@
+@import "src/scss/variables";
+
+.wrapper {
+}
+
+.percents {
+  width: 95%;
+  height: 10px;
+  background-color: #6183a21a;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.innerPercents {
+  background-color: #4d4aea;
+  height: 100%;
+}
+
+.details {
+  font-size: 12px;
+  color: $textGreyColor;
+  margin-top: 10px;
+}

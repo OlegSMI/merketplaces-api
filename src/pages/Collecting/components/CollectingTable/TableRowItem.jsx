@@ -5,16 +5,16 @@ import ContentLoader from "react-content-loader";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import {
   Avatar,
+  Collapse,
   IconButton,
   TableCell,
   TableRow,
   Tooltip,
-  Collapse,
 } from "@mui/material";
-import AnalogTable from "./AnalogTable";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import PropTypes from "prop-types";
 import React, { useCallback, useState } from "react";
+import AnalogTable from "./AnalogTable";
 
 import {
   approvedProductById,
@@ -134,9 +134,10 @@ const TableRowItem = ({ item }) => {
             style={{
               paddingBottom: 0,
               paddingTop: 0,
+              padding: 0,
               border: "none",
             }}
-            colSpan={12}
+            colSpan={7}
           >
             <Collapse in={open} timeout="auto" unmountOnExit>
               {/* TODO: После отправки запроса и до момента ответа отображаем Loader */}
