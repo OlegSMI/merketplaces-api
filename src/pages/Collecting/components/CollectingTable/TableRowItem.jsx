@@ -66,7 +66,12 @@ const TableRowItem = ({ item }) => {
               {item.name}
             </div>
           </TableCell>
-          <TableCell align="center">{item.productUrl}</TableCell>
+          <TableCell align="center">
+            <a href={item.productUrl} target="_blank">
+              {" "}
+              {item.productUrl}
+            </a>
+          </TableCell>
 
           {/* <TableCell className={styles.statusCell}>
             <div

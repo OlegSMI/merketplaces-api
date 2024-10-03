@@ -41,6 +41,7 @@ export const getAlibabaProducts = async (wbProductId) => {
 export const createExcel = async (sessionId) => {
   const response = await api.post(`/serviceSession/${sessionId}/export_excel`);
   console.log(response);
+
   return response.data;
 };
 

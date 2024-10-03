@@ -24,6 +24,7 @@
     "axios": "^1.7.7",
     "downshift": "^9.0.8",
     "js-cookie": "^3.0.5",
+    "jszip": "^3.10.1",
     "mui-chips-input": "^3.1.0",
     "notistack": "^3.0.1",
     "prop-types": "^15.8.1",

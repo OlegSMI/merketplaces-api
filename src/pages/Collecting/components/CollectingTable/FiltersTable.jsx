@@ -38,7 +38,9 @@ const FiltersTable = ({ sessionId, handleInputChange }) => {
     const byteArray = stringToByteArray(response);
 
     console.log(byteArray);
-    const blob = new Blob([byteArray], {
+    console.log(response);
+
+    const blob = new Blob([response], {
       type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     });
 

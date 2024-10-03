@@ -1,6 +1,6 @@
 import check from "@assets/table/check.svg";
 import deleteIcon from "@assets/table/delete.svg";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import {
   approveAlibabaProduct,
@@ -26,6 +26,10 @@ const AnalogRow = ({ item }) => {
     APPROVED: "Подтвержден",
     DELETED: "Удален",
   };
+
+  useEffect(() => {
+    setRowStatus(item.status);
+  }, []);
 
   const approveHandler = useCallback((itemId) => {
     setRowStatus("APPROVED");
@@ -61,7 +65,11 @@ const AnalogRow = ({ item }) => {
         </TableCell>
         <TableCell align="center">{item.price}</TableCell>
         <TableCell align="center">{item.weight}</TableCell>
-        <TableCell align="center">{item.productUrl}</TableCell>
+        <TableCell align="center">
+          <a href={item.productUrl} target="_blank">
+            {item.productUrl}
+          </a>
+        </TableCell>
         <TableCell className={styles.statusCell}>
           <div
             className={`${styles.statusWrapper} ${
