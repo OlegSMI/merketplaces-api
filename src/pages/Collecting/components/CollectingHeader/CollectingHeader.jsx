@@ -1,16 +1,15 @@
-import { Tooltip } from "@mui/material";
 import replaceInput from "@utils/replaceInput";
 import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import styles from "./CollectingHeader.module.scss";
 
-import download from "@assets/collecting/xlsx.svg";
 import { Button } from "@components";
 
 const CollectingHeader = ({
   setArticles,
   startCollectGoods,
   progressSession,
+  currentSession,
 }) => {
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
@@ -29,19 +28,6 @@ const CollectingHeader = ({
     textarea.style.height = `${Math.min(textarea.scrollHeight, 300)}px`;
   }, [value]);
 
-  const downloadExcel = () => {
-    // запрос на получение файла
-    // const blob = await response.blob();
-    // const downloadUrl = URL.createObjectURL(blob);
-    // const link = document.createElement('a');
-    // link.href = downloadUrl;
-    // link.download = 'downloaded_file.xlsx';
-    // document.body.appendChild(link);
-    // link.click();
-    // document.body.removeChild(link);
-    // URL.revokeObjectURL(downloadUrl);
-  };
-
   return (
     <div className={styles.panel}>
       <textarea
@@ -55,12 +41,16 @@ const CollectingHeader = ({
         text="Собрать"
         onClick={startCollectGoods}
       />
-      <Tooltip title="Скачать Exel">
-        <button className={styles.download} onClick={downloadExcel}>
+      {/* <Tooltip title="Скачать Exel">
+        <button
+          className={styles.download}
+          disabled={progressSession}
+          onClick={downloadExcel}
+        >
           Скачать
           <img src={download} alt="download" />
         </button>
-      </Tooltip>
+      </Tooltip> */}
     </div>
   );
 };
@@ -69,6 +59,7 @@ CollectingHeader.propTypes = {
   setArticles: PropTypes.func,
   startCollectGoods: PropTypes.func,
   progressSession: PropTypes.bool,
+  currentSession: PropTypes.string,
 };
 
 export default CollectingHeader;

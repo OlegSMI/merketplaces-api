@@ -9,48 +9,39 @@ import { useSnackbar } from "notistack";
 import customSetInterval from "../../utils/customSetInterval";
 
 import styles from "./Collecting.module.scss";
-import { CollectPercents } from "./components/CollectPercents";
 
 import emptyState from "@assets/table/emptyState.svg";
 
 import {
-  getHistory,
-  getSessionStatus,
   createSession,
-  startSession,
+  getSessionStatus,
   getWbProducts,
+  startSession,
 } from "@api/operator/useCollectGoodsAPI";
+import { CircularProgress } from "@mui/material";
+import PaginationCustom from "../../components/Pagination/Pagination";
 
 const Collecting = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [articles, setArticles] = useState([]);
 
-  const [currentSession, setCurrentSession] = useState(0);
+  const [currentSession, setCurrentSession] = useState("");
   const [progressSession, setProgressSession] = useState(false);
 
   const [products, setProducts] = useState([]);
-  const [redyProducts, setRedyProducts] = useState([]);
-  const [history, setHistory] = useState([]);
+  const [redyProducts, setRedyProducts] = useState(0);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getHistory(10, 0);
-      setHistory(data);
-
-      // TODO: Если есть что-то на сборе то оно всегад первым в списке со статусом pending поэтому чекаю [0]
-      if (data[0].status !== "successed") {
-        setProgressSession(true);
-      }
-    };
-    fetchData();
-    // if (localStorage.getItem("sessionId")) {
-    //   setProgressSession(true);
-    //   setCurrentSession(localStorage.getItem("sessionId"));
-    // }
+    if (localStorage.getItem("sessionId")) {
+      console.log("has token in storage");
+      setProgressSession(true);
+      setCurrentSession(localStorage.getItem("sessionId"));
+    }
   }, []);
 
   const startCollectGoods = async () => {
+    setProducts([]);
     if (articles.length == 0) {
       enqueueSnackbar("Артикулы не найдены", {
         variant: "error",
@@ -63,15 +54,6 @@ const Collecting = () => {
       setProgressSession(true);
 
       startSession(articles);
-      setHistory([
-        ...history,
-        {
-          id: sessionID,
-          status: "started",
-          doneAt: null,
-        },
-      ]);
-      // запуск сбора данных возвращается статус сессии и ее id
     }
   };
 
@@ -86,65 +68,42 @@ const Collecting = () => {
     const data = await getSessionStatus(localStorage.getItem("sessionId"));
 
     if (data.status == "successed") {
-      setProgressSession(false);
-      setHistory((prevHistory) =>
-        prevHistory.map(
-          (item) =>
-            item.id === localStorage.getItem("sessionId")
-              ? { ...item, status: "successed", doneAt: new Date() } // Заменяем элемент
-              : item // Возвращаем элемент без изменений
-        )
-      );
+      clearTimeout(window.longPool);
 
-      // TODO: Запрос на получение статуса сессии
-      // После того как получили что данные готовы нужен запрос на их получение
-      // Можно прям от сюда отправлять
-      const products = await getWbProducts(
-        10,
-        0,
-        localStorage.getItem("sessionId")
-      );
-      setProducts(products);
+      setProgressSession(false);
+      if (currentSession === localStorage.getItem("sessionId")) {
+        const products = await getWbProducts(
+          100,
+          0,
+          localStorage.getItem("sessionId")
+        );
+        setProducts(products);
+      }
 
       localStorage.removeItem("sessionId");
     }
 
-    // TODO: После получения товаров почему все равно продолжает стучать на статус хотя стоит проверка
     if (data.status == "pending") {
-      // TODO: Это для процентов загрузки, всего артикулов делить на redyProducts
+      console.log("in process");
       setRedyProducts(data.productsIds.length);
     }
-    // console.log("пулим");
-    // запрос на получение статуса сессии
-    // if (status == pending) {
-    //   прроцены
-    // } else {
-    //
-    //   clearInterval(window.longPool)
-    //   если находимся в текущей сессии currentSession == localStorage.getItem("sessionId")
-    //   получить данные setProducts()
-    //   setProgressSession(false);
-    //   localStorage.removeItem("sessionId");
-    // getSessionProducts
-    // }
   };
 
-  const getSessionProducts = (sessionId) => {
-    // setProducts()
+  const getSessionProducts = async (sessionId) => {
+    const products = await getWbProducts(100, 0, sessionId);
+    setProducts(products);
   };
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const response = await fetch("/src/json/collectingTest.json");
-  //     const data = await response.json();
-  //     setProducts(data.products);
-  //   };
-  //   fetchData();
-  // }, []);
 
   const enterAnotherSession = (sessionId) => {
     setCurrentSession(sessionId);
     getSessionProducts(sessionId);
+  };
+
+  const paginateHandler = async (page) => {
+    const response = await getWbProducts(100, page, currentSession);
+    if (response.length > 0) {
+      setProducts(response);
+    }
   };
 
   return (
@@ -153,10 +112,10 @@ const Collecting = () => {
         progressSession={progressSession}
         setArticles={(articles) => setArticles(articles)}
         startCollectGoods={startCollectGoods}
+        currentSession={currentSession}
       />
       <TagsComponent articles={articles} />
       <SessionsList
-        history={history}
         enterAnotherSession={(sessionId) => enterAnotherSession(sessionId)}
       />
       {/* Отображать таблицу в 2 случаях: 
@@ -166,7 +125,12 @@ const Collecting = () => {
       {((progressSession == false && products.length > 0) ||
         (progressSession == true &&
           currentSession != localStorage.getItem("sessionId") &&
-          products.length > 0)) && <CollectingTable products={products} />}
+          products.length > 0)) && (
+        <>
+          <CollectingTable sessionId={currentSession} products={products} />
+          <PaginationCustom paginateHandler={paginateHandler} />
+        </>
+      )}
 
       {/* <CollectingTable products={products} /> */}
       {progressSession == false && products.length == 0 && (
@@ -182,8 +146,9 @@ const Collecting = () => {
       {progressSession == true &&
         products.length == 0 &&
         currentSession == localStorage.getItem("sessionId") && (
-          <CollectPercents percents={10} />
+          <CircularProgress />
         )}
+      {/* <CollectPercents percents={redyProducts / articles.length} /> */}
 
       {/* Сделай скелетон */}
       {progressSession == true &&

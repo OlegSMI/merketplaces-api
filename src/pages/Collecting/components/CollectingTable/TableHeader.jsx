@@ -23,12 +23,12 @@ const headerContent = [
     sortable: true,
     direction: "asc",
   },
-  {
-    key: "status",
-    name: "Статус",
-    sortable: true,
-    direction: "asc",
-  },
+  // {
+  //   key: "status",
+  //   name: "Статус",
+  //   sortable: true,
+  //   direction: "asc",
+  // },
   {
     key: "action",
     name: "Действие",

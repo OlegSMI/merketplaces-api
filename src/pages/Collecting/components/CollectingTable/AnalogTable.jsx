@@ -1,6 +1,5 @@
 import {
-  Pagination,
-  Stack,
+  CircularProgress,
   Table,
   TableBody,
   TableCell,
@@ -8,13 +7,15 @@ import {
   TableRow,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
+import { getAlibabaProducts } from "../../../../api/operator/useCollectGoodsAPI";
 import AnalogRow from "./AnalogRow";
 import styles from "./Table.module.scss";
 
-const AnalogTable = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+const AnalogTable = ({ itemId }) => {
+  // const [currentPage, setCurrentPage] = useState(1);
+  const [products, setProducts] = useState([]);
 
   const headerContent = [
     {
@@ -29,12 +30,7 @@ const AnalogTable = () => {
       sortable: true,
       direction: "asc",
     },
-    {
-      key: "category",
-      name: "Категория",
-      sortable: true,
-      direction: "asc",
-    },
+
     {
       key: "price",
       name: "Цена",
@@ -47,23 +43,37 @@ const AnalogTable = () => {
       sortable: true,
       direction: "asc",
     },
-    // {
-    //   key: "status",
-    //   name: "Статус",
-    //   sortable: true,
-    //   direction: "asc",
-    // },
-    // {
-    //   key: "action",
-    //   name: "Действие",
-    //   sortable: false,
-    //   direction: "asc",
-    // },
+    {
+      key: "link",
+      name: "Ссылка",
+      sortable: true,
+      direction: "asc",
+    },
+    {
+      key: "status",
+      name: "Статус",
+      sortable: true,
+      direction: "asc",
+    },
+    {
+      key: "action",
+      name: "Действие",
+      sortable: false,
+      direction: "asc",
+    },
   ];
 
-  const handlePageChange = (e, value) => {
-    setCurrentPage(value);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await getAlibabaProducts(itemId);
+      setProducts(response);
+    };
+    fetchData();
+  }, []);
+
+  // const handlePageChange = (e, value) => {
+  //   setCurrentPage(value);
+  // };
 
   // const changeDirectionHandle = (key, direction) => {
   //   setSortedProducts(sortedData(products, key, direction));
@@ -104,22 +114,25 @@ const AnalogTable = () => {
             },
           }}
         >
-          {/* {products?.map((item) => ( */}
-          {[...Array(5)].map((item) => (
-            <AnalogRow key={item} />
-          ))}
-
-          {/* ))} */}
+          {products.length > 0 ? (
+            <>
+              {products.map((item) => (
+                <AnalogRow key={item} item={item} />
+              ))}
+            </>
+          ) : (
+            <CircularProgress />
+          )}
         </TableBody>
       </Table>
-      <Stack className={styles.pagination}>
+      {/* <Stack className={styles.pagination}>
         <Pagination
           count={3}
           shape="rounded"
           page={currentPage}
           onChange={handlePageChange}
         />
-      </Stack>
+      </Stack> */}
       {/* ))} */}
     </>
   );
@@ -128,5 +141,5 @@ const AnalogTable = () => {
 export default AnalogTable;
 
 AnalogTable.propTypes = {
-  products: PropTypes.array,
+  itemId: PropTypes.number,
 };
