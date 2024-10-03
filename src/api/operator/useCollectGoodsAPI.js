@@ -39,10 +39,15 @@ export const getAlibabaProducts = async (wbProductId) => {
 };
 
 export const createExcel = async (sessionId) => {
-  const response = await api.post(`/serviceSession/${sessionId}/export_excel`);
-  console.log(response);
+  const response = await api.post(
+    `/serviceSession/${sessionId}/export_excel`,
+    null,
+    {
+      responseType: "blob",
+    }
+  );
 
-  return response.data;
+  return response;
 };
 
 export const rejectAlibabaProduct = async (productId) => {

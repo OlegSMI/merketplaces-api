@@ -24,7 +24,7 @@ const AnalogRow = ({ item }) => {
   const status = {
     CREATED: "Создан",
     APPROVED: "Подтвержден",
-    DELETED: "Удален",
+    REJECTED: "Удален",
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const AnalogRow = ({ item }) => {
   }, []);
 
   const hideHandler = useCallback((itemId) => {
-    setRowStatus("DELETED");
+    setRowStatus("REJECTED");
     rejectAlibabaProduct(itemId);
   }, []);
 

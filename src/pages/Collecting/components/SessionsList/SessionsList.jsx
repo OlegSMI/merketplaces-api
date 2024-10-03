@@ -9,7 +9,7 @@ import PaginationCustom from "@components/Pagination/Pagination";
 import { formateDate, formateTime } from "@utils/currentDateFormat";
 import styles from "./SessionsList.module.scss";
 
-const SessionsList = ({ enterAnotherSession }) => {
+const SessionsList = ({ enterAnotherSession, progressSession }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState(null);
   const [sessions, setSessions] = useState([]);
@@ -24,15 +24,25 @@ const SessionsList = ({ enterAnotherSession }) => {
     };
   }, []);
 
+  // useEffect(() => {
+  //   const fetchHistory = async () => {
+  //     if (!progressSession) {
+  //       const response = await getHistory(10, 0);
+  //       setSessions(response);
+  //     }
+  //   };
+  //   fetchHistory();
+  // }, [progressSession]);
+
   useEffect(() => {
     const fetchHistory = async () => {
       const response = await getHistory(10, 0);
-      if (sessions.length == 0 && isOpen) {
-        setSessions(response);
-      }
+      // if (sessions.length == 0 || !progressSession) {
+      setSessions(response);
+      // }
     };
     fetchHistory();
-  }, [isOpen]);
+  }, [progressSession]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -115,6 +125,7 @@ const SessionsList = ({ enterAnotherSession }) => {
 
 SessionsList.propTypes = {
   enterAnotherSession: PropTypes.func,
+  progressSession: PropTypes.bool,
 };
 
 export default SessionsList;
