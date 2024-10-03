@@ -116,6 +116,7 @@ const Collecting = () => {
       />
       <TagsComponent articles={articles} />
       <SessionsList
+        progressSession={progressSession}
         enterAnotherSession={(sessionId) => enterAnotherSession(sessionId)}
       />
       {/* Отображать таблицу в 2 случаях: 

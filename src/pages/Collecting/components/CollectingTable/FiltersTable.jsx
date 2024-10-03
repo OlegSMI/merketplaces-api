@@ -33,25 +33,29 @@ const FiltersTable = ({ sessionId, handleInputChange }) => {
   };
 
   const downloadExcel = async () => {
-    const response = await createExcel(sessionId);
-    // const byteArray = new Uint8Array(response);
-    const byteArray = stringToByteArray(response);
+    try {
+      const response = await createExcel(sessionId);
+      // const byteArray = new Uint8Array(response);
+      const contentDisposition = response.headers["content-disposition"];
+      const filename = contentDisposition
+        ? contentDisposition.split("filename=")[1].replace(/"/g, "")
+        : "downloaded_file.xlsx";
 
-    console.log(byteArray);
-    console.log(response);
+      const blob = new Blob([response.data], {
+        type: response.headers["content-type"],
+      }); // Создаем Blob из ответа
+      const downloadUrl = URL.createObjectURL(blob); // Создаем URL для Blob
 
-    const blob = new Blob([response], {
-      type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-    });
-
-    const downloadUrl = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = downloadUrl;
-    link.download = `downloaded_file_${currentDateFormat()}.xlsx`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(downloadUrl);
+      const link = document.createElement("a"); // Создаем элемент <a>
+      link.href = downloadUrl;
+      link.download = filename; // Устанавливаем имя файла для скачивания
+      document.body.appendChild(link);
+      link.click(); // Имитируем клик для скачивания
+      document.body.removeChild(link); // Удаляем элемент <a> после скачивания
+      URL.revokeObjectURL(downloadUrl); // Освобождаем память
+    } catch (error) {
+      console.error("Ошибка при скачивании файла:", error);
+    }
   };
 
   return (
