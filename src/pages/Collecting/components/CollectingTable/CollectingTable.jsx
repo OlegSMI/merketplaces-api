@@ -8,7 +8,7 @@ import styles from "./Table.module.scss";
 import TableContent from "./TableContent";
 import TableHeader from "./TableHeader";
 
-const CollectingTable = ({ products }) => {
+const CollectingTable = ({ sessionId, products }) => {
   const [sortedProducts, setSortedProducts] = useState([]);
 
   useEffect(() => {
@@ -29,7 +29,10 @@ const CollectingTable = ({ products }) => {
 
   return (
     <div className={styles.table}>
-      {/* <FiltersTable handleInputChange={(e) => handleInputChange(e)} /> */}
+      <FiltersTable
+        sessionId={sessionId}
+        handleInputChange={(e) => handleInputChange(e)}
+      />
       <TableContainer
         component={Paper}
         elevation={0}
@@ -53,6 +56,7 @@ const CollectingTable = ({ products }) => {
 };
 
 CollectingTable.propTypes = {
+  sessionId: PropTypes.string,
   products: PropTypes.array,
 };
 

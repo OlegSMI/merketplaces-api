@@ -30,3 +30,30 @@ export const getWbProducts = async (limit, offset, sessionId) => {
   );
   return response.data.result.products;
 };
+
+export const getAlibabaProducts = async (wbProductId) => {
+  const response = await api.get(
+    `/storage/alibaba/session/products?WBProductId=${wbProductId}`
+  );
+  return response.data.result.products;
+};
+
+export const createExcel = async (sessionId) => {
+  const response = await api.post(`/serviceSession/${sessionId}/export_excel`);
+  console.log(response);
+  return response.data;
+};
+
+export const rejectAlibabaProduct = async (productId) => {
+  const response = await api.post(
+    `/storage/alibaba/product/${productId}/reject`
+  );
+  return response.data;
+};
+
+export const approveAlibabaProduct = async (productId) => {
+  const response = await api.post(
+    `/storage/alibaba/product/${productId}/approve`
+  );
+  return response.data;
+};

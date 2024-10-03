@@ -8,8 +8,6 @@ const PaginationCustom = ({ paginateHandler }) => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const clickPaginate = (cnt) => {
-    console.log(currentPage);
-
     if (currentPage + cnt < 0) {
       return;
     } else {
@@ -20,8 +18,8 @@ const PaginationCustom = ({ paginateHandler }) => {
 
   return (
     <div>
-      <img src={left} onClick={() => clickPaginate(-1)} />
-      <img src={right} onClick={() => clickPaginate(1)} />
+      <img src={left} onClick={() => clickPaginate(-10)} />
+      <img src={right} onClick={() => clickPaginate(10)} />
     </div>
   );
 };
