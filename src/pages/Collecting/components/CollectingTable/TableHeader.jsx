@@ -18,20 +18,8 @@ const headerContent = [
     direction: "asc",
   },
   {
-    key: "category",
-    name: "Категория",
-    sortable: true,
-    direction: "asc",
-  },
-  {
-    key: "price",
-    name: "Цена",
-    sortable: true,
-    direction: "asc",
-  },
-  {
-    key: "weight",
-    name: "Вес",
+    key: "url",
+    name: "Ссылка",
     sortable: true,
     direction: "asc",
   },

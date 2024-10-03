@@ -18,6 +18,7 @@ import {
   getHistory,
   getSessionStatus,
   startSession,
+  getWbProducts,
 } from "@api/operator/useCollectGoodsAPI";
 
 const Collecting = () => {
@@ -55,35 +56,58 @@ const Collecting = () => {
       });
     } else {
       const sessionID = await createSession();
-      startSession(articles);
-
-      // запуск сбора данных возвращается статус сессии и ее id
       localStorage.setItem("sessionId", sessionID);
       setCurrentSession(sessionID);
       setProgressSession(true);
+
+      startSession(articles);
+      setHistory([
+        ...history,
+        {
+          id: sessionID,
+          status: "started",
+          doneAt: null,
+        },
+      ]);
+      // запуск сбора данных возвращается статус сессии и ее id
     }
   };
 
   useEffect(() => {
     if (progressSession) {
-      window.longPool = customSetInterval(longPoolTimer, 5000);
+      window.longPool = customSetInterval(longPoolTimer, 1000);
     }
     return () => clearTimeout(window.longPool);
   }, [progressSession]);
 
   const longPoolTimer = async () => {
-    const data = await getSessionStatus(history[0].sessionId);
+    const data = await getSessionStatus(localStorage.getItem("sessionId"));
 
     if (data.status == "successed") {
       setProgressSession(false);
+      setHistory((prevHistory) =>
+        prevHistory.map(
+          (item) =>
+            item.id === localStorage.getItem("sessionId")
+              ? { ...item, status: "successed", doneAt: new Date() } // Заменяем элемент
+              : item // Возвращаем элемент без изменений
+        )
+      );
 
       // TODO: Запрос на получение статуса сессии
       // После того как получили что данные готовы нужен запрос на их получение
       // Можно прям от сюда отправлять
+      const products = await getWbProducts(
+        10,
+        0,
+        localStorage.getItem("sessionId")
+      );
+      setProducts(products);
 
       localStorage.removeItem("sessionId");
     }
 
+    // TODO: После получения товаров почему все равно продолжает стучать на статус хотя стоит проверка
     if (data.status == "pending") {
       // TODO: Это для процентов загрузки, всего артикулов делить на redyProducts
       setRedyProducts(data.productsIds.length);
@@ -124,7 +148,7 @@ const Collecting = () => {
   return (
     <div className={styles.container}>
       <CollectingHeader
-        progressSession
+        progressSession={progressSession}
         setArticles={(articles) => setArticles(articles)}
         startCollectGoods={startCollectGoods}
       />
@@ -138,7 +162,7 @@ const Collecting = () => {
       progressSession == true, currentSession != localStorage.getItem() и products.length > 0 */}
       {((progressSession == false && products.length > 0) ||
         (progressSession == true &&
-          // currentSession != localStorage.getItem("sessionId") &&
+          currentSession != localStorage.getItem("sessionId") &&
           products.length > 0)) && <CollectingTable products={products} />}
 
       {/* <CollectingTable products={products} /> */}

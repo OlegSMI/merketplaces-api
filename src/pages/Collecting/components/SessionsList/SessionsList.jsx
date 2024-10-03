@@ -26,7 +26,7 @@ const SessionsList = ({ enterAnotherSession }) => {
 
   useEffect(() => {
     const fetchHistory = async () => {
-      const response = await getHistory(2, 0);
+      const response = await getHistory(10, 0);
       if (sessions.length == 0 && isOpen) {
         setSessions(response);
       }
@@ -51,9 +51,10 @@ const SessionsList = ({ enterAnotherSession }) => {
   };
 
   const paginateHandler = async (page) => {
-    const response = await getHistory(2, page);
-    console.log(response);
-    setSessions(response);
+    const response = await getHistory(10, page);
+    if (response.length > 0) {
+      setSessions(response);
+    }
   };
 
   return (
