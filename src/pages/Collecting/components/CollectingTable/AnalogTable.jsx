@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import {
   CircularProgress,
   Table,
@@ -7,14 +9,13 @@ import {
   TableRow,
 } from "@mui/material";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
 
-import { getAlibabaProducts } from "../../../../api/operator/useCollectGoodsAPI";
+import { getAlibabaProducts } from "@api/operator/useCollectGoodsAPI";
 import AnalogRow from "./AnalogRow";
+
 import styles from "./Table.module.scss";
 
 const AnalogTable = ({ itemId }) => {
-  // const [currentPage, setCurrentPage] = useState(1);
   const [products, setProducts] = useState([]);
 
   const headerContent = [
@@ -71,22 +72,8 @@ const AnalogTable = ({ itemId }) => {
     fetchData();
   }, []);
 
-  // const handlePageChange = (e, value) => {
-  //   setCurrentPage(value);
-  // };
-
-  // const changeDirectionHandle = (key, direction) => {
-  //   setSortedProducts(sortedData(products, key, direction));
-  // };
-
   return (
     <>
-      {/* {(products === null && (
-        <CircularProgress color="white"></CircularProgress>
-      )) ||
-        (products.length === 0 ? (
-          <div className={styles.emptyAnalogs}>Нет аналогов</div>
-        ) : ( */}
       <Table sx={{ minWidth: 650 }} size="small" aria-label="collapsible table">
         <TableHead>
           <TableRow className={styles.tableHead}>
@@ -101,11 +88,6 @@ const AnalogTable = ({ itemId }) => {
             ))}
           </TableRow>
         </TableHead>
-        {/* <TableHeader
-          changeDirection={(key, direction) =>
-            changeDirectionHandle(key, direction)
-          }
-        /> */}
 
         <TableBody
           sx={{
@@ -125,15 +107,6 @@ const AnalogTable = ({ itemId }) => {
           )}
         </TableBody>
       </Table>
-      {/* <Stack className={styles.pagination}>
-        <Pagination
-          count={3}
-          shape="rounded"
-          page={currentPage}
-          onChange={handlePageChange}
-        />
-      </Stack> */}
-      {/* ))} */}
     </>
   );
 };

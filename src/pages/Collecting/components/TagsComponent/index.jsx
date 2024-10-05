@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+
 import TagsInput from "./TagsInput";
 import styles from "./TagsInput.module.scss";
 

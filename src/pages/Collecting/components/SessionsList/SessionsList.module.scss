@@ -70,7 +70,7 @@
         margin: 5px 10px;
         color: $textColor;
         font-size: 12px;
-        transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для фона и цвета */
+        transition: background-color 0.3s ease, color 0.3s ease;
 
         &:hover {
           // background-color: #f2f4f7;

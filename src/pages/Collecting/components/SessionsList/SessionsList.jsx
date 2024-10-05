@@ -1,12 +1,14 @@
-import { Tooltip } from "@mui/material";
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
 
+import { Tooltip } from "@mui/material";
+import PropTypes from "prop-types";
+
 import { getHistory } from "@api/operator/useCollectGoodsAPI";
-import historyIcon from "@assets/collecting/history.svg";
-import check from "@assets/table/check.svg";
 import PaginationCustom from "@components/Pagination/Pagination";
 import { formateDate, formateTime } from "@utils/currentDateFormat";
+import historyIcon from "@assets/collecting/history.svg";
+import check from "@assets/table/check.svg";
+
 import styles from "./SessionsList.module.scss";
 
 const SessionsList = ({ enterAnotherSession, progressSession }) => {

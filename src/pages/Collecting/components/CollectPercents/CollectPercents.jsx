@@ -1,5 +1,6 @@
-import { currentDateFormat } from "@utils/currentDateFormat";
 import PropTypes from "prop-types";
+import { currentDateFormat } from "@utils/currentDateFormat";
+
 import styles from "./CollectPercents.module.scss";
 
 const CollectPercents = ({ sessionId, percents }) => {

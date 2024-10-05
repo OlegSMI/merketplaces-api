@@ -1,8 +1,9 @@
-import { Chip, TextField } from "@mui/material";
-import PropTypes from "prop-types";
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+
+import { Chip } from "@mui/material";
+
 import styles from "./TagsInput.module.scss";
-import CloseIcon from "@mui/icons-material/Close"; // Импортируйте иконку удаления или создайте свою
 
 export default function TagsInput({ ...props }) {
   const { tags } = props;
@@ -20,11 +21,6 @@ export default function TagsInput({ ...props }) {
 
   return (
     <React.Fragment>
-      {/* <div className={styles.textFieldWrapper}>
-        <TextField
-          className={styles.textField}
-          InputProps={{ */}
-      {/* startAdornment: ( */}
       <div className={styles.chipsContainer}>
         {selectedItem.map((item) => (
           <Chip
@@ -37,10 +33,6 @@ export default function TagsInput({ ...props }) {
           />
         ))}
       </div>
-      {/* ),
-          }}
-        />
-      </div> */}
     </React.Fragment>
   );
 }

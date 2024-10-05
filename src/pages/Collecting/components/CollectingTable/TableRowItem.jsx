@@ -1,10 +1,11 @@
+import React, { useCallback } from "react";
+
+import PropTypes from "prop-types";
 import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Avatar, Collapse, TableCell, TableRow } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import PropTypes from "prop-types";
-import React, { useCallback } from "react";
-import AnalogTable from "./AnalogTable";
 
+import AnalogTable from "./AnalogTable";
 import styles from "./Table.module.scss";
 
 const theme = createTheme({
@@ -16,14 +17,7 @@ const theme = createTheme({
 });
 
 const TableRowItem = ({ item }) => {
-  // const [rowStatus, setRowStatus] = useState("CREATED");
   const [open, setOpen] = React.useState(false);
-
-  const status = {
-    CREATED: "Создан",
-    APPROVED: "Подтвержден",
-    DELETED: "Удален",
-  };
 
   const handleOpenPanel = useCallback(
     (e) => {
@@ -32,16 +26,6 @@ const TableRowItem = ({ item }) => {
     },
     [open]
   );
-
-  // const approveHandler = useCallback((itemId) => {
-  //   setRowStatus("APPROVED");
-  //   approvedProductById(itemId);
-  // }, []);
-
-  // const hideHandler = useCallback((itemId) => {
-  //   setRowStatus("DELETED");
-  //   hideProductById(itemId);
-  // }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -72,17 +56,6 @@ const TableRowItem = ({ item }) => {
               {item.productUrl}
             </a>
           </TableCell>
-
-          {/* <TableCell className={styles.statusCell}>
-            <div
-              className={`${styles.statusWrapper} ${
-                styles[rowStatus.toLowerCase()]
-              }`}
-            >
-              {status[rowStatus]}
-            </div>
-          </TableCell> */}
-
           <TableCell align="center" sx={{ width: "max-content" }}>
             <div
               style={{
@@ -99,22 +72,6 @@ const TableRowItem = ({ item }) => {
                 Товары с 1688
                 {open ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
               </button>
-
-              {/* <Tooltip title="Подтвердить">
-                <IconButton onClick={() => approveHandler(item.id)}>
-                  <img src={check} width={20} />
-                </IconButton>
-              </Tooltip>
-
-              <Tooltip title="Не отображать">
-                <IconButton
-                  aria-label="delete"
-                  size="small"
-                  onClick={() => hideHandler(item.id)}
-                >
-                  <img src={deleteIcon} width={20} />
-                </IconButton>
-              </Tooltip> */}
             </div>
           </TableCell>
         </TableRow>
@@ -129,23 +86,7 @@ const TableRowItem = ({ item }) => {
             colSpan={7}
           >
             <Collapse in={open} timeout="auto" unmountOnExit>
-              {/* TODO: После отправки запроса и до момента ответа отображаем Loader */}
               <AnalogTable itemId={item.id} />
-              {/* {[...Array(5)].map((item) => (
-                <ContentLoader
-                  speed={2}
-                  width={1100}
-                  height={50}
-                  viewBox="0 0 850 50"
-                  backgroundColor="#f3f3f3"
-                  foregroundColor="#ecebeb"
-                  key={item}
-                >
-                  <rect x="1" y="NaN" rx="0" ry="0" width="180" height="NaN" />
-                  <rect x="12" y="NaN" rx="0" ry="0" width="131" height="NaN" />
-                  <rect x="25" y="5" rx="10" ry="10" width="800" height="30" />
-                </ContentLoader>
-              ))} */}
             </Collapse>
           </TableCell>
         </TableRow>

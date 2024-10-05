@@ -1,19 +1,13 @@
+import React, { useCallback, useEffect, useState } from "react";
+
 import check from "@assets/table/check.svg";
 import deleteIcon from "@assets/table/delete.svg";
-import React, { useCallback, useEffect, useState } from "react";
 
 import {
   approveAlibabaProduct,
   rejectAlibabaProduct,
 } from "@api/operator/useCollectGoodsAPI";
-import {
-  IconButton,
-  // Avatar,
-  // IconButton,
-  TableCell,
-  TableRow,
-  Tooltip,
-} from "@mui/material";
+import { IconButton, TableCell, TableRow, Tooltip } from "@mui/material";
 import { Avatar } from "antd";
 import PropTypes from "prop-types";
 import styles from "./Table.module.scss";

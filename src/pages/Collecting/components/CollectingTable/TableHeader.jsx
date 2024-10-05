@@ -1,7 +1,9 @@
-import sortImg from "@assets/table/sort.svg";
-import { TableCell, TableHead, TableRow } from "@mui/material";
-import PropTypes from "prop-types";
 import { useState } from "react";
+
+import PropTypes from "prop-types";
+import { TableCell, TableHead, TableRow } from "@mui/material";
+
+import sortImg from "@assets/table/sort.svg";
 import styles from "./Table.module.scss";
 
 const headerContent = [
@@ -23,12 +25,6 @@ const headerContent = [
     sortable: true,
     direction: "asc",
   },
-  // {
-  //   key: "status",
-  //   name: "Статус",
-  //   sortable: true,
-  //   direction: "asc",
-  // },
   {
     key: "action",
     name: "Действие",

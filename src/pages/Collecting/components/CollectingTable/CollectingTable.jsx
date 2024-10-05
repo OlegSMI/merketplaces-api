@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react";
+
 import { Paper, Table, TableContainer } from "@mui/material";
+import PropTypes from "prop-types";
 
 import sortedData from "@utils/sortedData";
-import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
 import FiltersTable from "./FiltersTable";
-import styles from "./Table.module.scss";
 import TableContent from "./TableContent";
 import TableHeader from "./TableHeader";
+
+import styles from "./Table.module.scss";
 
 const CollectingTable = ({ sessionId, products }) => {
   const [sortedProducts, setSortedProducts] = useState([]);

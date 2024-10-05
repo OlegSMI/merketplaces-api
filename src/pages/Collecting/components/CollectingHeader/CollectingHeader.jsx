@@ -1,15 +1,15 @@
-import replaceInput from "@utils/replaceInput";
-import PropTypes from "prop-types";
 import { useEffect, useRef, useState } from "react";
-import styles from "./CollectingHeader.module.scss";
+import PropTypes from "prop-types";
 
 import { Button } from "@components";
+import replaceInput from "@utils/replaceInput";
+
+import styles from "./CollectingHeader.module.scss";
 
 const CollectingHeader = ({
   setArticles,
   startCollectGoods,
   progressSession,
-  currentSession,
 }) => {
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
@@ -59,7 +59,6 @@ CollectingHeader.propTypes = {
   setArticles: PropTypes.func,
   startCollectGoods: PropTypes.func,
   progressSession: PropTypes.bool,
-  currentSession: PropTypes.string,
 };
 
 export default CollectingHeader;

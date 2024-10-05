@@ -1,10 +1,8 @@
-import { Combobox } from "@components";
 import PropTypes from "prop-types";
 
+import { Combobox } from "@components";
 import { createExcel } from "@api/operator/useCollectGoodsAPI";
 import download from "@assets/collecting/xlsx.svg";
-import { stringToByteArray } from "../../../../utils/byteArray";
-import { currentDateFormat } from "../../../../utils/currentDateFormat";
 import styles from "../CollectingHeader/CollectingHeader.module.scss";
 
 const customFilterStyle = {
@@ -35,7 +33,6 @@ const FiltersTable = ({ sessionId, handleInputChange }) => {
   const downloadExcel = async () => {
     try {
       const response = await createExcel(sessionId);
-      // const byteArray = new Uint8Array(response);
       const contentDisposition = response.headers["content-disposition"];
       const filename = contentDisposition
         ? contentDisposition.split("filename=")[1].replace(/"/g, "")
@@ -43,16 +40,16 @@ const FiltersTable = ({ sessionId, handleInputChange }) => {
 
       const blob = new Blob([response.data], {
         type: response.headers["content-type"],
-      }); // Создаем Blob из ответа
-      const downloadUrl = URL.createObjectURL(blob); // Создаем URL для Blob
+      });
+      const downloadUrl = URL.createObjectURL(blob);
 
-      const link = document.createElement("a"); // Создаем элемент <a>
+      const link = document.createElement("a");
       link.href = downloadUrl;
-      link.download = filename; // Устанавливаем имя файла для скачивания
+      link.download = filename;
       document.body.appendChild(link);
-      link.click(); // Имитируем клик для скачивания
-      document.body.removeChild(link); // Удаляем элемент <a> после скачивания
-      URL.revokeObjectURL(downloadUrl); // Освобождаем память
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(downloadUrl);
     } catch (error) {
       console.error("Ошибка при скачивании файла:", error);
     }

@@ -13,8 +13,16 @@
 
 .container {
   position: relative;
+  height: 100vh;
   animation: slideIn 1s ease forwards;
   color: $textColor;
+}
+
+.progress {
+  position: absolute;
+  top: 50%; /* Смещение по вертикали */
+  left: 50%; /* Смещение по горизонтали */
+  transform: translate(-50%, -50%);
 }
 
 .emptyState {
@@ -22,7 +30,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 60vh;
+  height: 80vh;
   animation: slideIn 1s ease forwards;
 
   img {

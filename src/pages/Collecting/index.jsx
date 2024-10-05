@@ -1,16 +1,4 @@
-import { useEffect, useState } from "react";
-
-import CollectingHeader from "./components/CollectingHeader/CollectingHeader";
-import CollectingTable from "./components/CollectingTable/CollectingTable";
-import SessionsList from "./components/SessionsList/SessionsList";
-import TagsComponent from "./components/TagsComponent";
-
-import { useSnackbar } from "notistack";
-import customSetInterval from "../../utils/customSetInterval";
-
-import styles from "./Collecting.module.scss";
-
-import emptyState from "@assets/table/emptyState.svg";
+import { useEffect, useState, useCallback } from "react";
 
 import {
   createSession,
@@ -19,30 +7,73 @@ import {
   startSession,
 } from "@api/operator/useCollectGoodsAPI";
 import { CircularProgress } from "@mui/material";
-import PaginationCustom from "../../components/Pagination/Pagination";
+import { useSnackbar } from "notistack";
+
+import emptyState from "@assets/table/emptyState.svg";
+import PaginationCustom from "@components/Pagination/Pagination";
+
+import CollectingHeader from "./components/CollectingHeader/CollectingHeader";
+import CollectingTable from "./components/CollectingTable/CollectingTable";
+import SessionsList from "./components/SessionsList/SessionsList";
+import TagsComponent from "./components/TagsComponent";
+import styles from "./Collecting.module.scss";
 
 const Collecting = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [articles, setArticles] = useState([]);
-
+  const [products, setProducts] = useState([]);
   const [currentSession, setCurrentSession] = useState("");
   const [progressSession, setProgressSession] = useState(false);
 
-  const [products, setProducts] = useState([]);
-  const [redyProducts, setRedyProducts] = useState(0);
-
   useEffect(() => {
     if (localStorage.getItem("sessionId")) {
-      console.log("has token in storage");
       setProgressSession(true);
       setCurrentSession(localStorage.getItem("sessionId"));
     }
   }, []);
 
+  useEffect(() => {
+    let intervalId;
+
+    if (progressSession) {
+      intervalId = setInterval(longPoolTimer, 1000);
+    } else if (intervalId) {
+      clearInterval(intervalId);
+    }
+    return () => clearInterval(intervalId);
+  }, [progressSession]);
+
+  const longPoolTimer = useCallback(async () => {
+    const sessionId = localStorage.getItem("sessionId");
+
+    if (!sessionId) return;
+
+    try {
+      const data = await getSessionStatus(sessionId);
+
+      if (data.status === "successed") {
+        setProgressSession(false);
+
+        if (currentSession === sessionId) {
+          await getSessionProducts(sessionId);
+        }
+
+        localStorage.removeItem("sessionId");
+      } else {
+        console.warn(`Unexpected status: ${data.status}`);
+      }
+    } catch (error) {
+      enqueueSnackbar("Ошибка при получении статуса сессии", {
+        variant: "error",
+      });
+      console.error("Ошибка:", error);
+    }
+  }, [currentSession, enqueueSnackbar]);
+
   const startCollectGoods = async () => {
     setProducts([]);
-    if (articles.length == 0) {
+    if (!articles.length) {
       enqueueSnackbar("Артикулы не найдены", {
         variant: "error",
         anchorOrigin: { vertical: "top", horizontal: "right" },
@@ -54,38 +85,6 @@ const Collecting = () => {
       setProgressSession(true);
 
       startSession(articles);
-    }
-  };
-
-  useEffect(() => {
-    if (progressSession) {
-      window.longPool = customSetInterval(longPoolTimer, 1000);
-    }
-    return () => clearTimeout(window.longPool);
-  }, [progressSession]);
-
-  const longPoolTimer = async () => {
-    const data = await getSessionStatus(localStorage.getItem("sessionId"));
-
-    if (data.status == "successed") {
-      clearTimeout(window.longPool);
-
-      setProgressSession(false);
-      if (currentSession === localStorage.getItem("sessionId")) {
-        const products = await getWbProducts(
-          100,
-          0,
-          localStorage.getItem("sessionId")
-        );
-        setProducts(products);
-      }
-
-      localStorage.removeItem("sessionId");
-    }
-
-    if (data.status == "pending") {
-      console.log("in process");
-      setRedyProducts(data.productsIds.length);
     }
   };
 
@@ -133,7 +132,6 @@ const Collecting = () => {
         </>
       )}
 
-      {/* <CollectingTable products={products} /> */}
       {progressSession == false && products.length == 0 && (
         <div className={styles.emptyState}>
           <img src={emptyState} alt="Empty State" />
@@ -147,9 +145,8 @@ const Collecting = () => {
       {progressSession == true &&
         products.length == 0 &&
         currentSession == localStorage.getItem("sessionId") && (
-          <CircularProgress />
+          <CircularProgress className={styles.progress} />
         )}
-      {/* <CollectPercents percents={redyProducts / articles.length} /> */}
 
       {/* Сделай скелетон */}
       {progressSession == true &&
