@@ -9,11 +9,12 @@ import userPhoto from "@assets/UserPhoto.png";
 import logoutImg from "@assets/auth/logout.png";
 import categories from "@assets/sidebar/categories.png";
 import collecting from "@assets/sidebar/collecting.png";
-import logo from "@assets/sidebar/logo.png";
+import logo from "@assets/sidebar/rocketseller-logo.png";
 import main from "@assets/sidebar/main.svg";
 
 const SideBar = () => {
-  const [active, setActive] = useState("/main");
+  // И тут вернуть на главную когда будут остальные страницы
+  const [active, setActive] = useState("/collecting");
 
   const navigate = useNavigate();
 
@@ -29,13 +30,13 @@ const SideBar = () => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.logo}>
-        <img src={logo} alt="logo" />
-        <Link to={"/admin/main/table"} onClick={() => menuLinkClick("/main")}>
-          <span>UStats</span>
+        {/* Вернуть путь на главную обратно  */}
+        <Link to={"/admin/collecting"} onClick={() => menuLinkClick("/main")}>
+          <img src={logo} alt="logo" />
         </Link>
       </div>
       <ul>
-        <li className={active === "/main" ? styles.active : ""}>
+        {/* <li className={active === "/main" ? styles.active : ""}>
           <Link
             to="/admin/main/table"
             className={styles.link}
@@ -44,8 +45,8 @@ const SideBar = () => {
             <img src={main} />
             <span>Главная</span>
           </Link>
-        </li>
-        <li className={active === "/categories" ? styles.active : ""}>
+        </li> */}
+        {/* <li className={active === "/categories" ? styles.active : ""}>
           <Link
             to="/admin/categories"
             className={styles.link}
@@ -54,7 +55,7 @@ const SideBar = () => {
             <img src={categories} />
             Категории
           </Link>
-        </li>
+        </li> */}
 
         <li className={active === "/collecting" ? styles.active : ""}>
           <Link

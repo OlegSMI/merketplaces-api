@@ -50,7 +50,7 @@ const CollectingTable = ({ sessionId, products }) => {
               changeDirectionHandle(key, direction)
             }
           />
-          <TableContent products={sortedProducts} />
+          <TableContent products={sortedProducts} sessionId={sessionId} />
         </Table>
       </TableContainer>
     </div>

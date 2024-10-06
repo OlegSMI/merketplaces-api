@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 
 import TableRowItem from "./TableRowItem";
 
-const TableContent = ({ products }) => {
+const TableContent = ({ products, sessionId }) => {
   return (
     <TableBody>
       {products?.map((item) => (
-        <TableRowItem key={item.id} item={item} />
+        <TableRowItem key={item.id} item={item} sessionId={sessionId} />
       ))}
     </TableBody>
   );
@@ -15,6 +15,7 @@ const TableContent = ({ products }) => {
 
 TableContent.propTypes = {
   products: PropTypes.array,
+  sessionId: PropTypes.string,
 };
 
 export default TableContent;

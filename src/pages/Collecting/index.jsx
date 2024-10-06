@@ -11,6 +11,7 @@ import { useSnackbar } from "notistack";
 
 import emptyState from "@assets/table/emptyState.svg";
 import PaginationCustom from "@components/Pagination/Pagination";
+import { getHistory } from "@api/operator/useCollectGoodsAPI";
 
 import CollectingHeader from "./components/CollectingHeader/CollectingHeader";
 import CollectingTable from "./components/CollectingTable/CollectingTable";
@@ -25,6 +26,7 @@ const Collecting = () => {
   const [products, setProducts] = useState([]);
   const [currentSession, setCurrentSession] = useState("");
   const [progressSession, setProgressSession] = useState(false);
+  const [sessions, setSessions] = useState([]);
 
   useEffect(() => {
     if (localStorage.getItem("sessionId")) {
@@ -34,14 +36,25 @@ const Collecting = () => {
   }, []);
 
   useEffect(() => {
-    let intervalId;
+    let intervalId = null;
+
+    const fetchHistory = async () => {
+      const response = await getHistory(10, 0);
+      // if (sessions.length == 0 || !progressSession) {
+      setSessions(response);
+      // }
+    };
+    fetchHistory();
 
     if (progressSession) {
       intervalId = setInterval(longPoolTimer, 1000);
-    } else if (intervalId) {
-      clearInterval(intervalId);
     }
-    return () => clearInterval(intervalId);
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
   }, [progressSession]);
 
   const longPoolTimer = useCallback(async () => {
@@ -90,6 +103,7 @@ const Collecting = () => {
 
   const getSessionProducts = async (sessionId) => {
     const products = await getWbProducts(100, 0, sessionId);
+    console.log(products);
     setProducts(products);
   };
 
@@ -115,7 +129,8 @@ const Collecting = () => {
       />
       <TagsComponent articles={articles} />
       <SessionsList
-        progressSession={progressSession}
+        sessions={sessions}
+        setSessions={setSessions}
         enterAnotherSession={(sessionId) => enterAnotherSession(sessionId)}
       />
       {/* Отображать таблицу в 2 случаях: 
@@ -131,6 +146,7 @@ const Collecting = () => {
           <PaginationCustom paginateHandler={paginateHandler} />
         </>
       )}
+      {/* <CollectingTable sessionId={currentSession} products={products} /> */}
 
       {progressSession == false && products.length == 0 && (
         <div className={styles.emptyState}>

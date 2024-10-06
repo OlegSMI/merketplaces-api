@@ -11,7 +11,7 @@ const User = () => {
 
       <div className={styles.content}>
         <Routes>
-          <Route
+          {/* <Route
             path="/main/*"
             element={
               <ProtectedRoute>
@@ -27,16 +27,16 @@ const User = () => {
                 <ProdInfo />
               </ProtectedRoute>
             }
-          />
+          /> */}
           {/* <Route path="/categories" element={<FinPlan />} /> */}
-          <Route
+          {/* <Route
             path="/categories"
             element={
               <ProtectedRoute>
                 <Categories />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/collecting"
             element={

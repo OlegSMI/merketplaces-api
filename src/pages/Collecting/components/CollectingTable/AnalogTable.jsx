@@ -15,7 +15,7 @@ import AnalogRow from "./AnalogRow";
 
 import styles from "./Table.module.scss";
 
-const AnalogTable = ({ itemId }) => {
+const AnalogTable = ({ itemId, weight }) => {
   const [products, setProducts] = useState([]);
 
   const headerContent = [
@@ -72,6 +72,17 @@ const AnalogTable = ({ itemId }) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (products.length !== 0) {
+      console.log("change");
+      setProducts((prevProducts) =>
+        prevProducts.map((product) =>
+          product.weight === 0 ? { ...product, weight } : product
+        )
+      );
+    }
+  }, [weight]);
+
   return (
     <>
       <Table sx={{ minWidth: 650 }} size="small" aria-label="collapsible table">
@@ -99,7 +110,7 @@ const AnalogTable = ({ itemId }) => {
           {products.length > 0 ? (
             <>
               {products.map((item) => (
-                <AnalogRow key={item} item={item} />
+                <AnalogRow key={item.id} item={item} />
               ))}
             </>
           ) : (
@@ -115,4 +126,5 @@ export default AnalogTable;
 
 AnalogTable.propTypes = {
   itemId: PropTypes.number,
+  weight: PropTypes.number,
 };

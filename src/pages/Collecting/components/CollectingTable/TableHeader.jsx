@@ -26,6 +26,12 @@ const headerContent = [
     direction: "asc",
   },
   {
+    key: "fild",
+    name: "Вес",
+    sortable: true,
+    direction: "asc",
+  },
+  {
     key: "action",
     name: "Действие",
     sortable: false,

@@ -11,22 +11,22 @@ function App() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    navigate("/admin/main/table");
+    // navigate("/admin/main/table"); Вернуть когда будут остальные страницы
+    navigate("/admin/collecting");
   }, []);
 
   return (
     <SnackbarProvider maxSnack={3}>
       <LoadingContext.Provider value={{ loading, setLoading }}>
         <Routes>
-          <Route
+          {/* <Route
             path="/user/*"
             element={
-              // <User />
               <ProtectedRoute>
                 <User />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/admin/*"
             element={

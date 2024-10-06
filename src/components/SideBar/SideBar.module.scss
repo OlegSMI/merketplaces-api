@@ -12,14 +12,13 @@
   .logo {
     display: flex;
     align-items: center;
+    justify-content: center;
     padding-bottom: 10px;
     border-bottom: $borderColor 2px solid;
 
-    span {
-      margin-left: 7px;
-      font-size: 18px;
-      font-weight: 700;
-      color: $textColor;
+    img {
+      width: auto;
+      height: 60px;
     }
   }
 

@@ -8,13 +8,13 @@ import PaginationCustom from "@components/Pagination/Pagination";
 import { formateDate, formateTime } from "@utils/currentDateFormat";
 import historyIcon from "@assets/collecting/history.svg";
 import check from "@assets/table/check.svg";
+import bookIcon from "@assets/collecting/book.png";
 
 import styles from "./SessionsList.module.scss";
 
-const SessionsList = ({ enterAnotherSession, progressSession }) => {
+const SessionsList = ({ enterAnotherSession, sessions, setSessions }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedSession, setSelectedSession] = useState(null);
-  const [sessions, setSessions] = useState([]);
 
   const clickRef = useRef(null);
 
@@ -25,26 +25,6 @@ const SessionsList = ({ enterAnotherSession, progressSession }) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  // useEffect(() => {
-  //   const fetchHistory = async () => {
-  //     if (!progressSession) {
-  //       const response = await getHistory(10, 0);
-  //       setSessions(response);
-  //     }
-  //   };
-  //   fetchHistory();
-  // }, [progressSession]);
-
-  useEffect(() => {
-    const fetchHistory = async () => {
-      const response = await getHistory(10, 0);
-      // if (sessions.length == 0 || !progressSession) {
-      setSessions(response);
-      // }
-    };
-    fetchHistory();
-  }, [progressSession]);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -84,7 +64,10 @@ const SessionsList = ({ enterAnotherSession, progressSession }) => {
         {isOpen && (
           <ul className={styles.content}>
             {sessions.length === 0 ? (
-              <div>Грузим</div>
+              <div className={styles.emptyHistory}>
+                <img src={bookIcon} alt="emptyHistory" />
+                <p>Нет записей в истории</p>
+              </div>
             ) : (
               <>
                 {sessions.map((item) => (
@@ -127,7 +110,8 @@ const SessionsList = ({ enterAnotherSession, progressSession }) => {
 
 SessionsList.propTypes = {
   enterAnotherSession: PropTypes.func,
-  progressSession: PropTypes.bool,
+  sessions: PropTypes.array,
+  setSessions: PropTypes.func,
 };
 
 export default SessionsList;

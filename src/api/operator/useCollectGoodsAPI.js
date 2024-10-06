@@ -63,3 +63,16 @@ export const approveAlibabaProduct = async (productId) => {
   );
   return response.data;
 };
+
+export const setWeightProduct = async (sessionId, productId, weight) => {
+  console.log("startZapros", sessionId, productId, weight);
+  const response = await api.post(
+    `/serviceSession/${sessionId}/setDefaultWeight`,
+    {
+      wbId: productId,
+      defaultWeight: weight,
+    }
+  );
+
+  return response.data;
+};
