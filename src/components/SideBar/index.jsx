@@ -8,18 +8,24 @@ import styles from "./SideBar.module.scss";
 import userPhoto from "@assets/UserPhoto.png";
 import logoutImg from "@assets/auth/logout.png";
 import categories from "@assets/sidebar/categories.png";
+import main from "@assets/sidebar/main.svg";
 import collecting from "@assets/sidebar/collecting.png";
 import logo from "@assets/sidebar/rocketseller-logo.png";
-import main from "@assets/sidebar/main.svg";
 
 const SideBar = () => {
+  const [isOpen, setIsOpen] = useState(true);
   // И тут вернуть на главную когда будут остальные страницы
   const [active, setActive] = useState("/collecting");
 
   const navigate = useNavigate();
 
   const menuLinkClick = (path) => {
-    setActive(path);
+    console.log("path", path, active);
+    if (active === path) {
+      setIsOpen(!isOpen);
+    } else {
+      setActive(path);
+    }
   };
 
   const logoutHandler = async () => {
@@ -28,8 +34,10 @@ const SideBar = () => {
   };
 
   return (
-    <div className={styles.sidebar}>
-      <div className={styles.logo}>
+    <div
+      className={`${styles.sidebar} ${isOpen ? styles.open : styles.closed}`}
+    >
+      <div className={`${isOpen ? styles.logoOpen : styles.logoClose}`}>
         {/* Вернуть путь на главную обратно  */}
         <Link to={"/admin/collecting"} onClick={() => menuLinkClick("/main")}>
           <img src={logo} alt="logo" />
@@ -64,7 +72,7 @@ const SideBar = () => {
             onClick={() => menuLinkClick("/collecting")}
           >
             <img src={collecting} />
-            Сбор товаров
+            <p className={`${!isOpen && styles.closeText}`}>Сбор товаров</p>
           </Link>
         </li>
         {/* <li className={active === "/profile" ? styles.active : ""}>
@@ -78,7 +86,7 @@ const SideBar = () => {
           </Link>
         </li> */}
       </ul>
-      <div className={styles.userInfo}>
+      <div className={`${isOpen ? styles.userInfo : styles.userInfoClose}`}>
         <img src={userPhoto} alt="User" className={styles.userPhoto} />
         <div>
           <p className={styles.title}>Пользователь</p>
