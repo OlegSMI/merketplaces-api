@@ -9,6 +9,15 @@
   align-items: center;
 }
 
+.avatar {
+  transition: width 0.3s ease, height 0.3s ease; /* Добавляем анимацию */
+
+  &:hover {
+    width: 100px;
+    height: 100px;
+  }
+}
+
 .emptyState {
   display: flex;
   justify-content: center;

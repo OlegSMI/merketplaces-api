@@ -53,6 +53,7 @@ const AnalogRow = ({ item }) => {
               src={item.img}
               variant="square"
               sx={{ mr: 1 }}
+              className={styles.avatar}
             />
             {item.title}
           </div>

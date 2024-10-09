@@ -76,6 +76,7 @@ const TableRowItem = ({ item, sessionId }) => {
                 src={item.photoPath}
                 variant="square"
                 sx={{ mr: 1 }}
+                className={styles.avatar}
               />
               {item.name}
             </div>
