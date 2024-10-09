@@ -24,9 +24,9 @@ export const refresh = async () => {
     const response = await api.post("/token/refresh", {
       refresh: Cookies.get("refreshToken"),
     });
-    axios.defaults.headers.common[
-      "Authorization"
-    ] = `Bearer ${response.access}`;
+
+    api.defaults.headers.common["Authorization"] = `Bearer ${response.access}`;
+
     Cookies.set("token", response.access);
     Cookies.set("refreshToken", response.refresh);
   } catch (error) {
@@ -38,5 +38,5 @@ export const refresh = async () => {
 export const logout = () => {
   Cookies.remove("token");
   Cookies.remove("refreshToken");
-  delete axios.defaults.headers.common["Authorization"];
+  delete api.defaults.headers.common["Authorization"];
 };

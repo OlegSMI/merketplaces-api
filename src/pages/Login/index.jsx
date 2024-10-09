@@ -1,23 +1,21 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CircularProgress } from "@mui/material";
 import { useSnackbar } from "notistack";
 
-import { login } from "../../api/auth";
-import img from "../../assets/auth/Login.png";
+import { login } from "@api/auth";
+import img from "@assets/auth/Login.png";
 import { SignHeader } from "@components";
-import { LoadingContext } from "../../context";
 import styles from "./Login.module.scss";
 
 const Login = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const [name, setName] = useState("");
-  // const [error, setError] = useState("");
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
-  const { loading, setLoading } = useContext(LoadingContext);
+  const [loading, setLoading] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();

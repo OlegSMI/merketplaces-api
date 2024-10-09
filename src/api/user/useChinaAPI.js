@@ -1,10 +1,6 @@
 import axios from "axios";
-// import { useContext } from "react";
-// import { ErrorContext, LoadingContext } from "../context";
 
 const useSearch = () => {
-  //   const { setLoading } = useContext(LoadingContext);
-  //   const { setError } = useContext(ErrorContext);
   const url = "http://51.250.20.233:8090/stand/";
 
   const getProductsByImage = async (token, image) => {

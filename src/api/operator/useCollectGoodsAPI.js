@@ -18,7 +18,7 @@ export const createSession = async () => {
 };
 
 export const startSession = async (articles) => {
-  const response = await api.post(`/serviceSessionstart/`, {
+  const response = await api.post(`/serviceSessionstart`, {
     wildberriesIds: articles,
   });
   return response.data.result;
